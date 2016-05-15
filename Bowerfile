@@ -1,0 +1,24 @@
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+# asset 'bootstrap'# >>> wob template
+asset 'bootstrap-sass'
+asset 'datatables' do
+  main_files [
+    "./media/js/dataTables.bootstrap.js"
+  ]
+end
+asset 'datatables-buttons', github: "DataTables/Buttons" do
+  main_files [
+    "./js/buttons.bootstrap.js",
+    "./js/buttons.colVis.js",
+    "./js/buttons.flash.js",
+    "./js/buttons.html5.js",
+    "./js/buttons.print.js"
+  ]
+end
+
+# -- datatables dependencies
+asset 'jszip'
+asset 'pdfmake'
+# <<< wob template end

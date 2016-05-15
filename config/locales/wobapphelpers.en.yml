@@ -1,0 +1,9 @@
+en:
+  wobapphelpers:
+    helpers:
+      back: Back
+      cancel: Cancel
+    controller:
+      new:  "create %{name}"
+      edit:  "update %{name}"
+      update:  "update %{name}"
