@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       user: User
+      event: Event
 
   attributes:
     description: Beschreibung
@@ -13,3 +14,4 @@ de:
 
   controller:
     users: Benutzer
+    events: Events
