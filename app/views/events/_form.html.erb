@@ -1,0 +1,88 @@
+<%= simple_form_for(@event,
+  html: { class: 'form-horizontal well' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
+
+  <fieldset>
+    <%= form_legend %>
+
+    <div class="form-inputs">
+      <%= f.input :when
+       %>
+      <%= f.input :flow_id
+       %>
+      <%= f.input :in_iface
+       %>
+      <%= f.input :event_type
+       %>
+      <%= f.input :src_ip
+       %>
+      <%= f.input :src_port
+       %>
+      <%= f.input :dst_ip
+       %>
+      <%= f.input :dst_port
+       %>
+      <%= f.input :proto
+       %>
+      <%= f.input :alert_action
+       %>
+      <%= f.input :alert_gid
+       %>
+      <%= f.input :alert_signature_id
+       %>
+      <%= f.input :alert_rev
+       %>
+      <%= f.input :alert_signature
+       %>
+      <%= f.input :alert_category
+       %>
+      <%= f.input :alert_severity
+       %>
+      <%= f.input :http_hostname
+       %>
+      <%= f.input :http_xff
+       %>
+      <%= f.input :http_url
+       %>
+      <%= f.input :http_user_agent
+       %>
+      <%= f.input :http_content_type
+       %>
+      <%= f.input :http_cookie
+       %>
+      <%= f.input :http_length
+       %>
+      <%= f.input :http_status
+       %>
+      <%= f.input :http_protocol
+       %>
+      <%= f.input :http_method
+       %>
+      <%= f.input :http_refer
+       %>
+      <%= f.input :payload
+       %>
+      <%= f.input :packet
+       %>
+      <%= f.input :stream
+       %>
+      <%= f.input :done
+       %>
+      <%= f.input :ignore
+       %>
+      <%= f.input :severity
+       %>
+    </div>
+
+    <div class="form-actions col-sm-9 col-sm-offset-3">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  </fieldset>
+<% end %>

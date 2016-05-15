@@ -1,0 +1,41 @@
+Models for lackmus
+=================
+
+Event:
+------
+
+```
+bin/rails g scaffold Event \
+  'when:datetime' \
+  'flow_id:integer{8}' \
+  'in_iface:string{20}' \
+  'event_type:string{20}' \
+  'src_ip:inet' \
+  'src_port:integer{2}' \
+  'dst_ip:inet' \
+  'dst_port:integer{2}' \
+  'proto:string{20}' \
+  'alert_action:string{20}' \
+  'alert_gid:integer{2}' \
+  'alert_signature_id:integer' \
+  'alert_rev:integer{2}' \
+  'alert_signature:string' \
+  'alert_category:string' \
+  'alert_severity:integer{1}' \
+  'http_hostname:string' \
+  'http_xff:inet' \
+  'http_url:string' \
+  'http_user_agent:string' \
+  'http_content_type:string' \
+  'http_cookie:text' \
+  'http_length:integer' \
+  'http_status:integer{2}' \
+  'http_protocol:string{20}' \
+  'http_method:string{10}' \
+  'http_refer:string' \
+  'payload:text' \
+  'packet:text' \
+  'stream:integer{2}' \
+  'done:boolean' \
+  'ignore:boolean' \
+  'severity:integer{1}'

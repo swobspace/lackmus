@@ -1,0 +1,141 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.when')%>:</th>
+    <td><%= @event.when %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.flow_id')%>:</th>
+    <td><%= @event.flow_id %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.in_iface')%>:</th>
+    <td><%= @event.in_iface %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.event_type')%>:</th>
+    <td><%= @event.event_type %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.src_ip')%>:</th>
+    <td><%= @event.src_ip %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.src_port')%>:</th>
+    <td><%= @event.src_port %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.dst_ip')%>:</th>
+    <td><%= @event.dst_ip %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.dst_port')%>:</th>
+    <td><%= @event.dst_port %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.proto')%>:</th>
+    <td><%= @event.proto %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_action')%>:</th>
+    <td><%= @event.alert_action %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_gid')%>:</th>
+    <td><%= @event.alert_gid %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_signature_id')%>:</th>
+    <td><%= @event.alert_signature_id %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_rev')%>:</th>
+    <td><%= @event.alert_rev %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_signature')%>:</th>
+    <td><%= @event.alert_signature %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_category')%>:</th>
+    <td><%= @event.alert_category %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.alert_severity')%>:</th>
+    <td><%= @event.alert_severity %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_hostname')%>:</th>
+    <td><%= @event.http_hostname %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_xff')%>:</th>
+    <td><%= @event.http_xff %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_url')%>:</th>
+    <td><%= @event.http_url %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_user_agent')%>:</th>
+    <td><%= @event.http_user_agent %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_content_type')%>:</th>
+    <td><%= @event.http_content_type %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_cookie')%>:</th>
+    <td><%= @event.http_cookie %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_length')%>:</th>
+    <td><%= @event.http_length %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_status')%>:</th>
+    <td><%= @event.http_status %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_protocol')%>:</th>
+    <td><%= @event.http_protocol %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_method')%>:</th>
+    <td><%= @event.http_method %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.http_refer')%>:</th>
+    <td><%= @event.http_refer %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.payload')%>:</th>
+    <td><%= @event.payload %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.packet')%>:</th>
+    <td><%= @event.packet %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.stream')%>:</th>
+    <td><%= @event.stream %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.done')%>:</th>
+    <td><%= @event.done %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ignore')%>:</th>
+    <td><%= @event.ignore %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.severity')%>:</th>
+    <td><%= @event.severity %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@event) %>
+  <%= delete_link(@event) %>
+  <%= new_link Event %>
+</div>

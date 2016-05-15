@@ -1,0 +1,92 @@
+<h1><%= t('controller.events') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.when') %></th>
+    <th><%= t('attributes.flow_id') %></th>
+    <th><%= t('attributes.in_iface') %></th>
+    <th><%= t('attributes.event_type') %></th>
+    <th><%= t('attributes.src_ip') %></th>
+    <th><%= t('attributes.src_port') %></th>
+    <th><%= t('attributes.dst_ip') %></th>
+    <th><%= t('attributes.dst_port') %></th>
+    <th><%= t('attributes.proto') %></th>
+    <th><%= t('attributes.alert_action') %></th>
+    <th><%= t('attributes.alert_gid') %></th>
+    <th><%= t('attributes.alert_signature_id') %></th>
+    <th><%= t('attributes.alert_rev') %></th>
+    <th><%= t('attributes.alert_signature') %></th>
+    <th><%= t('attributes.alert_category') %></th>
+    <th><%= t('attributes.alert_severity') %></th>
+    <th><%= t('attributes.http_hostname') %></th>
+    <th><%= t('attributes.http_xff') %></th>
+    <th><%= t('attributes.http_url') %></th>
+    <th><%= t('attributes.http_user_agent') %></th>
+    <th><%= t('attributes.http_content_type') %></th>
+    <th><%= t('attributes.http_cookie') %></th>
+    <th><%= t('attributes.http_length') %></th>
+    <th><%= t('attributes.http_status') %></th>
+    <th><%= t('attributes.http_protocol') %></th>
+    <th><%= t('attributes.http_method') %></th>
+    <th><%= t('attributes.http_refer') %></th>
+    <th><%= t('attributes.payload') %></th>
+    <th><%= t('attributes.packet') %></th>
+    <th><%= t('attributes.stream') %></th>
+    <th><%= t('attributes.done') %></th>
+    <th><%= t('attributes.ignore') %></th>
+    <th><%= t('attributes.severity') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @events.each do |event| %>
+  <%= content_tag_for(:tr, event) do %>
+    <td><%= event.when %></td>
+    <td><%= event.flow_id %></td>
+    <td><%= event.in_iface %></td>
+    <td><%= event.event_type %></td>
+    <td><%= event.src_ip %></td>
+    <td><%= event.src_port %></td>
+    <td><%= event.dst_ip %></td>
+    <td><%= event.dst_port %></td>
+    <td><%= event.proto %></td>
+    <td><%= event.alert_action %></td>
+    <td><%= event.alert_gid %></td>
+    <td><%= event.alert_signature_id %></td>
+    <td><%= event.alert_rev %></td>
+    <td><%= event.alert_signature %></td>
+    <td><%= event.alert_category %></td>
+    <td><%= event.alert_severity %></td>
+    <td><%= event.http_hostname %></td>
+    <td><%= event.http_xff %></td>
+    <td><%= event.http_url %></td>
+    <td><%= event.http_user_agent %></td>
+    <td><%= event.http_content_type %></td>
+    <td><%= event.http_cookie %></td>
+    <td><%= event.http_length %></td>
+    <td><%= event.http_status %></td>
+    <td><%= event.http_protocol %></td>
+    <td><%= event.http_method %></td>
+    <td><%= event.http_refer %></td>
+    <td><%= event.payload %></td>
+    <td><%= event.packet %></td>
+    <td><%= event.stream %></td>
+    <td><%= event.done %></td>
+    <td><%= event.ignore %></td>
+    <td><%= event.severity %></td>
+    <td class="nowrap">
+      <%= show_link event %>
+      <%= edit_link event %>
+      <%= delete_link event %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Event %>
