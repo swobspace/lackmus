@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: a2018ab8893cdeeeffaae407368ed1a20ea72b30
+  specs:
+    data-confirm-modal (1.1.0)
+      railties (>= 3.0)
+
+GIT
   remote: https://github.com/swobspace/wobapphelpers
   revision: c6df6c2c2a54a07d2ea0c5285a703fb0dd87fd88
   branch: master
@@ -336,6 +343,7 @@ DEPENDENCIES
   capistrano-rails
   capybara
   coffee-rails (~> 4.1.0)
+  data-confirm-modal!
   database_rewinder
   dotenv
   factory_girl_rails
