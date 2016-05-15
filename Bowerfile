@@ -22,3 +22,7 @@ end
 asset 'jszip'
 asset 'pdfmake'
 # <<< wob template end
+
+asset 'select2'
+asset 'select2-bootstrap-css'
+
