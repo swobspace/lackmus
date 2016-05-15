@@ -10,6 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require wobapphelpers/breadcrumbs
+ *= require jquery-ui/datepicker
+ *= require datatables/media/css/dataTables.bootstrap
+ *= require datatables-buttons/css/buttons.bootstrap
+ *= require select2
+ *= require select2-bootstrap-css
+ *= require lackmus
  *= require_self
  */
