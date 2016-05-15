@@ -14,6 +14,7 @@
 /// require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
+//= require data-confirm-modal
 //= require jquery-ui/datepicker
 //= require jquery-ui/datepicker-de
 //= require datatables
@@ -26,6 +27,5 @@
 //= require datatables-buttons/js/buttons.print
 //= require select2
 //= require select2/select2_locale_de
-/// require modernizr.touch.2.8.3
-//= require bootstrap
+//= require modernizr.touch.2.8.3
 //= require lackmus
