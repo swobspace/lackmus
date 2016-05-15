@@ -27,6 +27,8 @@ group :development do
   gem 'guard-bundler'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
 end
 
 group :test, :development do
