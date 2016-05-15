@@ -20,11 +20,11 @@
        %>
       <%= f.input :event_type
        %>
-      <%= f.input :src_ip
+      <%= f.input :src_ip, as: :string
        %>
       <%= f.input :src_port
        %>
-      <%= f.input :dst_ip
+      <%= f.input :dst_ip, as: :string
        %>
       <%= f.input :dst_port
        %>
@@ -46,7 +46,7 @@
        %>
       <%= f.input :http_hostname
        %>
-      <%= f.input :http_xff
+      <%= f.input :http_xff, as: :string
        %>
       <%= f.input :http_url
        %>
