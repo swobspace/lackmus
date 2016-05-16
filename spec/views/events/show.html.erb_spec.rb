@@ -13,29 +13,29 @@ RSpec.describe "events/show", type: :view do
     @event = assign(:event, Event.create!(
       :sensor => 'Sensor',
       :event_time => ts,
-      :flow_id => 1,
+      :flow_id => 1234,
       :in_iface => "In Iface",
       :event_type => "Event Type",
-      :src_ip => "",
-      :src_port => 2,
-      :dst_ip => "",
-      :dst_port => 3,
-      :proto => "Proto",
+      :src_ip => "1.2.3.4",
+      :src_port => 5678,
+      :dst_ip => "1.2.3.9",
+      :dst_port => 3128,
+      :proto => "TCP",
       :alert_action => "MyAlert",
       :alert_gid => "1",
-      :alert_signature_id => 4,
+      :alert_signature_id => 44444,
       :alert_rev => 5,
       :alert_signature => "Alert Signature",
       :alert_category => "Alert Category",
-      :alert_severity => 6,
+      :alert_severity => 3,
       :http_hostname => "Http Hostname",
-      :http_xff => "",
+      :http_xff => "10.0.0.1",
       :http_url => "Http Url",
       :http_user_agent => "Http User Agent",
       :http_content_type => "Http Content Type",
       :http_cookie => "MyText",
       :http_length => 7,
-      :http_status => 8,
+      :http_status => 206,
       :http_protocol => "Http Protocol",
       :http_method => "GET",
       :http_refer => "Http Refer",
@@ -50,29 +50,29 @@ RSpec.describe "events/show", type: :view do
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/1/)
+    expect(rendered).to match(/1234/)
     expect(rendered).to match(/In Iface/)
     expect(rendered).to match(/Event Type/)
-    expect(rendered).to match(//)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(//)
-    expect(rendered).to match(/3/)
-    expect(rendered).to match(/Proto/)
+    expect(rendered).to match(/1.2.3.4/)
+    expect(rendered).to match(/5678/)
+    expect(rendered).to match(/1.2.3.9/)
+    expect(rendered).to match(/3128/)
+    expect(rendered).to match(/TCP/)
     expect(rendered).to match(/MyAlert/)
     expect(rendered).to match(/1/)
-    expect(rendered).to match(/4/)
+    expect(rendered).to match(/44444/)
     expect(rendered).to match(/5/)
     expect(rendered).to match(/Alert Signature/)
     expect(rendered).to match(/Alert Category/)
-    expect(rendered).to match(/6/)
+    expect(rendered).to match(/3/)
     expect(rendered).to match(/Http Hostname/)
-    expect(rendered).to match(//)
+    expect(rendered).to match(/10.0.0.1/)
     expect(rendered).to match(/Http Url/)
     expect(rendered).to match(/Http User Agent/)
     expect(rendered).to match(/Http Content Type/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/7/)
-    expect(rendered).to match(/8/)
+    expect(rendered).to match(/206/)
     expect(rendered).to match(/Http Protocol/)
     expect(rendered).to match(/GET/)
     expect(rendered).to match(/Http Refer/)
