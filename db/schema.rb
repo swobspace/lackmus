@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160515173115) do
 
   create_table "events", force: :cascade do |t|
     t.string   "sensor",                                                   null: false
-    t.datetime "when",                          precision: 6,              null: false
+    t.datetime "event_time",                    precision: 6,              null: false
     t.integer  "flow_id",            limit: 8
     t.string   "in_iface",           limit: 20,               default: ""
     t.string   "event_type",         limit: 20,               default: ""

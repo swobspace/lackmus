@@ -13,7 +13,7 @@ RSpec.describe "events/index", type: :view do
     assign(:events, [
       Event.create!(
         :sensor => 'Sensor',
-        :when => ts,
+        :event_time => ts,
         :flow_id => 1234,
         :in_iface => "In Iface",
         :event_type => "Event Type",
@@ -49,7 +49,7 @@ RSpec.describe "events/index", type: :view do
       ),
       Event.create!(
         :sensor => 'Sensor',
-        :when => ts,
+        :event_time => ts,
         :flow_id => 1234,
         :in_iface => "In Iface",
         :event_type => "Event Type",

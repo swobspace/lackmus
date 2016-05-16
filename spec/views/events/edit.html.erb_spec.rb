@@ -12,7 +12,7 @@ RSpec.describe "events/edit", type: :view do
 
     @event = assign(:event, Event.create!(
       :sensor => 'Sensor',
-      :when => ts,
+      :event_time => ts,
       :flow_id => 1,
       :in_iface => "MyString",
       :event_type => "MyString",

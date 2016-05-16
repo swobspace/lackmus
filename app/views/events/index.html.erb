@@ -3,7 +3,7 @@
 <table id="dataTable" class="table table-bordered table-striped dataTable">
 <thead>
   <tr>
-    <th><%= t('attributes.when') %></th>
+    <th><%= t('attributes.event_time') %></th>
     <th><%= t('attributes.flow_id') %></th>
     <th><%= t('attributes.in_iface') %></th>
     <th><%= t('attributes.event_type') %></th>
@@ -43,7 +43,7 @@
 
 <% @events.each do |event| %>
   <%= content_tag_for(:tr, event) do %>
-    <td><%= event.when %></td>
+    <td><%= event.event_time %></td>
     <td><%= event.flow_id %></td>
     <td><%= event.in_iface %></td>
     <td><%= event.event_type %></td>

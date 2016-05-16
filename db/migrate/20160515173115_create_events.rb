@@ -2,7 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string   :sensor, null: false
-      t.datetime :when, null: false, limit: 6
+      t.datetime :event_time, null: false, limit: 6
       t.integer  :flow_id, limit: 8
       t.string   :in_iface, limit: 20, default: ''
       t.string   :event_type, limit: 20, default: ''
