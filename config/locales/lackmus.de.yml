@@ -1,12 +1,28 @@
 de:
+  lackmus:
+    overview: Übersicht
+    configuration: Konfiguration
+    change_columns: Spalten ändern
+    show_all: Alles anzeigen
+
+  actions:
+    destroy: Datensatz löschen
+    mandantory: Pflichtfelder
+    optional: Optional
+    search: Suche
+    cancel: abbrechen
+    reset_table: Tabelle zurücksetzen
+
   activerecord:
     models:
       user: User
       event: Event
 
   attributes:
+    when: Wann
     description: Beschreibung
     displayname: Anzeigename
+    event: Ereignis
     givenname: Vorname
     name: Name
     sn: Nachname
@@ -14,4 +30,4 @@ de:
 
   controller:
     users: Benutzer
-    events: Events
+    events: Ereignisse
