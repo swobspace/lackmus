@@ -1,8 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "events/show", type: :view do
+  let(:ts) { DateTime.parse('2016-05-15T11:07:23.293237+0200') }
+
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "events" }
+    allow(controller).to receive(:action_name) { "show" }
+
     @event = assign(:event, Event.create!(
+      :sensor => 'Sensor',
+      :when => ts,
       :flow_id => 1,
       :in_iface => "In Iface",
       :event_type => "Event Type",
@@ -11,8 +21,8 @@ RSpec.describe "events/show", type: :view do
       :dst_ip => "",
       :dst_port => 3,
       :proto => "Proto",
-      :alert_action => "Alert Action",
-      :alert_gid => "Alert Gid",
+      :alert_action => "MyAlert",
+      :alert_gid => "1",
       :alert_signature_id => 4,
       :alert_rev => 5,
       :alert_signature => "Alert Signature",
@@ -27,7 +37,7 @@ RSpec.describe "events/show", type: :view do
       :http_length => 7,
       :http_status => 8,
       :http_protocol => "Http Protocol",
-      :http_method => "Http Method",
+      :http_method => "GET",
       :http_refer => "Http Refer",
       :payload => "MyText",
       :packet => "MyText",
@@ -48,8 +58,8 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(//)
     expect(rendered).to match(/3/)
     expect(rendered).to match(/Proto/)
-    expect(rendered).to match(/Alert Action/)
-    expect(rendered).to match(/Alert Gid/)
+    expect(rendered).to match(/MyAlert/)
+    expect(rendered).to match(/1/)
     expect(rendered).to match(/4/)
     expect(rendered).to match(/5/)
     expect(rendered).to match(/Alert Signature/)
@@ -64,7 +74,7 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(/7/)
     expect(rendered).to match(/8/)
     expect(rendered).to match(/Http Protocol/)
-    expect(rendered).to match(/Http Method/)
+    expect(rendered).to match(/GET/)
     expect(rendered).to match(/Http Refer/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/MyText/)

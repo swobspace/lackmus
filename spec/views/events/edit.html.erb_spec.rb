@@ -1,8 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "events/edit", type: :view do
+  let(:ts) { DateTime.parse('2016-05-15T11:07:23.293237+0200') }
+
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "events" }
+    allow(controller).to receive(:action_name) { "edit" }
+
     @event = assign(:event, Event.create!(
+      :sensor => 'Sensor',
+      :when => ts,
       :flow_id => 1,
       :in_iface => "MyString",
       :event_type => "MyString",
