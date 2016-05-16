@@ -25,11 +25,11 @@ RSpec.describe EventsController, type: :controller do
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:event)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {src_ip: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -104,14 +104,14 @@ RSpec.describe EventsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { src_ip: "3.3.3.4" }
       }
 
       it "updates the requested event" do
         event = Event.create! valid_attributes
         put :update, {:id => event.to_param, :event => new_attributes}, valid_session
         event.reload
-        skip("Add assertions for updated state")
+        event.src_ip = "3.3.3.4"
       end
 
       it "assigns the requested event as @event" do
