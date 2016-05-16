@@ -6,7 +6,8 @@ Event:
 
 ```
 bin/rails g scaffold Event \
-  'when:datetime' \
+  'sensor:string' \
+  'when:datetime{6}' \
   'flow_id:integer{8}' \
   'in_iface:string{20}' \
   'event_type:string{20}' \
