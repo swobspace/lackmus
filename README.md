@@ -65,7 +65,7 @@ Configuration
 Developing
 ----------
 
-If you like the idea and you have suggests please send me an email (wob at swobspace dot net).
+If you like the idea and you have suggestions please send me an email (wob at swobspace dot net).
 
 Licence
 -------
