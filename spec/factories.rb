@@ -16,5 +16,9 @@ FactoryGirl.define do
     proto "TCP"
   end
 
+  factory :systemevent, class: Syslog::Systemevent do
+    fromhost "FromHost"
+  end
+
 end
 
