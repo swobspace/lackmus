@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include EventConcerns
   # -- associations
   # -- configuration
   # -- validations and callbacks
