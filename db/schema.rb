@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(version: 20160515173115) do
     t.string   "in_iface",           limit: 20,               default: ""
     t.string   "event_type",         limit: 20,               default: ""
     t.inet     "src_ip"
-    t.integer  "src_port",           limit: 2
+    t.integer  "src_port"
     t.inet     "dst_ip"
-    t.integer  "dst_port",           limit: 2
+    t.integer  "dst_port"
     t.string   "proto",              limit: 20,               default: ""
     t.string   "alert_action",       limit: 20,               default: ""
-    t.integer  "alert_gid",          limit: 2
+    t.integer  "alert_gid"
     t.integer  "alert_signature_id"
-    t.integer  "alert_rev",          limit: 2
+    t.integer  "alert_rev"
     t.string   "alert_signature",                             default: ""
     t.string   "alert_category",                              default: ""
     t.integer  "alert_severity",     limit: 2
