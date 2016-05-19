@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-/// require jquery_ujs
+//= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require data-confirm-modal
