@@ -10,6 +10,7 @@ class ImportSystemEventJob < ActiveJob::Base
         event = Event.new(sysevent.event_attributes)
         if event.save
           sysevent.destroy
+          LogEvent.log(event) if Rails.env.development?
         end
       rescue
       end
