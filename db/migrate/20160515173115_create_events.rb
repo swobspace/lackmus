@@ -34,6 +34,7 @@ class CreateEvents < ActiveRecord::Migration
       t.integer  :stream, limit: 2
       t.boolean  :done
       t.boolean  :ignore
+      t.boolean  :has_http, default: false
       t.integer  :severity, limit: 1
 
       t.timestamps null: false

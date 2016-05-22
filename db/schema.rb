@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20160515173115) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string   "sensor",                                                   null: false
-    t.datetime "event_time",                    precision: 6,              null: false
+    t.string   "sensor",                                                      null: false
+    t.datetime "event_time",                    precision: 6,                 null: false
     t.integer  "flow_id",            limit: 8
     t.string   "in_iface",           limit: 20,               default: ""
     t.string   "event_type",         limit: 20,               default: ""
@@ -50,9 +50,10 @@ ActiveRecord::Schema.define(version: 20160515173115) do
     t.integer  "stream",             limit: 2
     t.boolean  "done"
     t.boolean  "ignore"
+    t.boolean  "has_http",                                    default: false
     t.integer  "severity",           limit: 2
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
   end
 
   create_table "wobauth_authorities", force: :cascade do |t|

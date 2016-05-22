@@ -30,6 +30,7 @@ RSpec.describe Syslog::Systemevent, type: :model do
       it { expect(systemevent.event_attributes["payload"]).to eq("ABCDEFGHIJKLMNOPQRST") }
       it { expect(systemevent.event_attributes["stream"]).to eq(0) }
       it { expect(systemevent.event_attributes["packet"]).to eq("1234567890") }
+      it { expect(systemevent.event_attributes["has_http"]).to eq(false) }
 
     end
 
@@ -52,6 +53,7 @@ RSpec.describe Syslog::Systemevent, type: :model do
       it { expect(systemevent.event_attributes["http_status"]).to eq("206") }
       it { expect(systemevent.event_attributes["http_protocol"]).to eq("HTTP/1.1") }
       it { expect(systemevent.event_attributes["http_refer"]).to eq("google-weiss-alles-dot.com") }
+      it { expect(systemevent.event_attributes["has_http"]).to eq(true) }
     end
   end
  

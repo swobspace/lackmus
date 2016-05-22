@@ -39,4 +39,5 @@ bin/rails g scaffold Event \
   'stream:integer{2}' \
   'done:boolean' \
   'ignore:boolean' \
+  'has_http:boolean' \
   'severity:integer{1}'
