@@ -14,7 +14,6 @@ class ImportSystemEventJob < ActiveJob::Base
         end
       rescue
       end
-      break
     end
   end
 end
