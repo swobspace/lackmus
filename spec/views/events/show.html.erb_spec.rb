@@ -50,15 +50,12 @@ RSpec.describe "events/show", type: :view do
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/1234/)
-    expect(rendered).to match(/In Iface/)
-    expect(rendered).to match(/Event Type/)
-    expect(rendered).to match(/1.2.3.4/)
-    expect(rendered).to match(/5678/)
-    expect(rendered).to match(/1.2.3.9/)
-    expect(rendered).to match(/3128/)
-    expect(rendered).to match(/TCP/)
-    expect(rendered).to match(/MyAlert/)
+    expect(rendered).to match(/#{ts.to_s(:precision)}/)
+    expect(rendered).to match(/Sensor:In Iface/)
+    expect(rendered).not_to match(/1234/)
+    expect(rendered).not_to match(/Event Type/)
+    expect(rendered).to match(/TCP 1.2.3.4:5678 -&gt; 1.2.3.9:3128/)
+    expect(rendered).not_to match(/MyAlert/)
     expect(rendered).to match(/1/)
     expect(rendered).to match(/44444/)
     expect(rendered).to match(/5/)

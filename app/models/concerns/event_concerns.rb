@@ -4,7 +4,8 @@ module EventConcerns
   included do
   end
 
-  # def some_method
-  # end
+  def connection
+    "#{proto.upcase} #{src_ip}:#{src_port} -> #{dst_ip}:#{dst_port}"
+  end
 end
 
