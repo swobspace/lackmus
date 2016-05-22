@@ -7,16 +7,54 @@
     <th><%= t('attributes.sensor')%>:</th>
     <td><%= "#{@event.sensor}:#{@event.in_iface}" %></td>
   </tr>
+
   <tr>
     <th><%= t('attributes.connection')%>:</th>
     <td><%= @event.connection %></td>
   </tr>
+
+  <tr>
+    <th><%= t('attributes.hosts')%>:</th>
+    <td>
+
+      <!-- ip addresses -->
+      <div class="row"> 
+        <div class="col-md-6">
+          <%= @event.src_ip %> /
+          <%= IpLookup.hostname(@event.src_ip) %>
+        </div>
+        <div class="col-md-6">
+          <%= @event.dst_ip %> /
+          <%= IpLookup.hostname(@event.dst_ip) %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th><%= t('attributes.whois')%>:</th>
+    <td>
+      <!-- whois -->
+      <div class="row"> 
+        <div class="col-md-6 whois">
+          <pre><%= IpLookup.whois(@event.src_ip) %></pre>
+          
+        </div>
+        <div class="col-md-6 whois">
+          <pre><%= IpLookup.whois(@event.dst_ip) %></pre>
+        </div>
+      </div>
+
+    </td>
+  </tr>
+
   <tr>
     <th><%= t('attributes.alert_signature_id')%>:</th>
     <td>[<%= @event.alert_gid %>:<%= @event.alert_signature_id%>:<%= @event.alert_rev %>]
         <%= @event.alert_signature %> / <%= @event.alert_category %> / 
         Severity: <%= @event.alert_severity %></td>
   </tr>
+ <% if @event.has_http %>
   <tr>
     <th><%= t('attributes.http_hostname')%>:</th>
     <td><%= @event.http_hostname %></td>
@@ -61,14 +99,7 @@
     <th><%= t('attributes.http_refer')%>:</th>
     <td><%= @event.http_refer %></td>
   </tr>
-  <tr>
-    <th><%= t('attributes.payload')%>:</th>
-    <td><%= @event.payload %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.packet')%>:</th>
-    <td><%= @event.packet %></td>
-  </tr>
+ <% end %>
   <tr>
     <th><%= t('attributes.stream')%>:</th>
     <td><%= @event.stream %></td>
@@ -86,6 +117,9 @@
     <td><%= @event.severity %></td>
   </tr>
 </table>
+
+<h3><%= t('attributes.payload')%>:</h3>
+<pre><%= @event.payload_printable %></pre>
 
 <div class="btn-toolbar" role="toolbar">
   <%= back_link %>
