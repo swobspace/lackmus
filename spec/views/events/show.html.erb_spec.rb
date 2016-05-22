@@ -1,7 +1,29 @@
 require 'rails_helper'
 
+RSpec.shared_examples "common event fields" do
+  it { expect(rendered).to match(/#{ts.to_s(:precision)}/) }
+  it { expect(rendered).to match(/Sensor:In Iface/) }
+  it { expect(rendered).not_to match(/1234/) }
+  it { expect(rendered).not_to match(/Event Type/) }
+  it { expect(rendered).to match(/TCP 1.2.3.4:5678 -&gt; 1.2.3.9:3128/) }
+  it { expect(rendered).not_to match(/MyAlert/) }
+  it { expect(rendered).to match(/1/) }
+  it { expect(rendered).to match(/44444/) }
+  it { expect(rendered).to match(/5/) }
+  it { expect(rendered).to match(/Alert Signature/) }
+  it { expect(rendered).to match(/Alert Category/) }
+  it { expect(rendered).to match(/3/) }
+  it { expect(rendered).to match(/#{klartext.gsub("ü", "..")}/) }
+  it { expect(rendered).not_to match(/MyPacket/) }
+  it { expect(rendered).to match(/9/) }
+  it { expect(rendered).to match(/false/) }
+  it { expect(rendered).to match(/10/) }
+end
+
 RSpec.describe "events/show", type: :view do
   let(:ts) { DateTime.parse('2016-05-15T11:07:23.293237+0200') }
+  let(:klartext) { "Unverschlüsselter Klartext" }
+  let(:payload)  { Base64.encode64(klartext) }
 
   before(:each) do
     @ability = Object.new
@@ -33,14 +55,14 @@ RSpec.describe "events/show", type: :view do
       :http_url => "Http Url",
       :http_user_agent => "Http User Agent",
       :http_content_type => "Http Content Type",
-      :http_cookie => "MyText",
-      :http_length => 7,
+      :http_cookie => "HTTP Cookie",
+      :http_length => 77777,
       :http_status => 206,
       :http_protocol => "Http Protocol",
       :http_method => "GET",
       :http_refer => "Http Refer",
-      :payload => "MyText",
-      :packet => "MyText",
+      :payload => payload,
+      :packet => "MyPacket",
       :stream => 9,
       :done => false,
       :ignore => false,
@@ -48,36 +70,46 @@ RSpec.describe "events/show", type: :view do
     ))
   end
 
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/#{ts.to_s(:precision)}/)
-    expect(rendered).to match(/Sensor:In Iface/)
-    expect(rendered).not_to match(/1234/)
-    expect(rendered).not_to match(/Event Type/)
-    expect(rendered).to match(/TCP 1.2.3.4:5678 -&gt; 1.2.3.9:3128/)
-    expect(rendered).not_to match(/MyAlert/)
-    expect(rendered).to match(/1/)
-    expect(rendered).to match(/44444/)
-    expect(rendered).to match(/5/)
-    expect(rendered).to match(/Alert Signature/)
-    expect(rendered).to match(/Alert Category/)
-    expect(rendered).to match(/3/)
-    expect(rendered).to match(/Http Hostname/)
-    expect(rendered).to match(/10.0.0.1/)
-    expect(rendered).to match(/Http Url/)
-    expect(rendered).to match(/Http User Agent/)
-    expect(rendered).to match(/Http Content Type/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/7/)
-    expect(rendered).to match(/206/)
-    expect(rendered).to match(/Http Protocol/)
-    expect(rendered).to match(/GET/)
-    expect(rendered).to match(/Http Refer/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/9/)
-    expect(rendered).to match(/false/)
-    expect(rendered).to match(/false/)
-    expect(rendered).to match(/10/)
+  context "with has_http = true" do
+    before(:each) do
+      @event.has_http = true
+      render
+    end
+
+    include_examples "common event fields"
+
+    it { expect(rendered).to match(/Http Hostname/) }
+    it { expect(rendered).to match(/10.0.0.1/) }
+    it { expect(rendered).to match(/Http Url/) }
+    it { expect(rendered).to match(/Http User Agent/) }
+    it { expect(rendered).to match(/Http Content Type/) }
+    it { expect(rendered).to match(/HTTP Cookie/) }
+    it { expect(rendered).to match(/77777/) }
+    it { expect(rendered).to match(/206/) }
+    it { expect(rendered).to match(/Http Protocol/) }
+    it { expect(rendered).to match(/GET/) }
+    it { expect(rendered).to match(/Http Refer/) }
   end
+
+  context "with has_http = false" do
+    before(:each) do
+      @event.has_http = false
+      render
+    end
+
+    include_examples "common event fields"
+
+    it { expect(rendered).not_to match(/Http Hostname/) }
+    it { expect(rendered).not_to match(/10.0.0.1/) }
+    it { expect(rendered).not_to match(/Http Url/) }
+    it { expect(rendered).not_to match(/Http User Agent/) }
+    it { expect(rendered).not_to match(/Http Content Type/) }
+    it { expect(rendered).not_to match(/HTTP Cookie/) }
+    it { expect(rendered).not_to match(/77777/) }
+    it { expect(rendered).not_to match(/206/) }
+    it { expect(rendered).not_to match(/Http Protocol/) }
+    it { expect(rendered).not_to match(/GET/) }
+    it { expect(rendered).not_to match(/Http Refer/) }
+  end
+
 end
