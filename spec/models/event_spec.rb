@@ -13,5 +13,11 @@ RSpec.describe Event, type: :model do
     expect(f).to be_valid
     expect(g).to be_valid
   end
+
+  it "prints printable chars" do
+    clear = "Unverschüsselter \x06\x7F Text\x01"
+    e = FactoryGirl.build_stubbed(:event, payload: Base64.encode64(clear))
+    expect(e.payload_printable).to eq("Unversch..sselter .. Text.")
+  end
  
 end
