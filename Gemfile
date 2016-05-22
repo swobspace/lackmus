@@ -20,6 +20,8 @@ gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 
 gem 'bower-rails', '~> 0.10.0'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
+gem 'whois'
+
 group :development do
   gem 'thin'
   gem 'guard'
