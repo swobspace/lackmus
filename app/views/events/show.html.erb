@@ -37,11 +37,11 @@
       <!-- whois -->
       <div class="row"> 
         <div class="col-md-6 whois">
-          <pre><%= IpLookup.whois(@event.src_ip) %></pre>
+          <pre><%= clean_whois(IpLookup.whois(@event.src_ip)) %></pre>
           
         </div>
         <div class="col-md-6 whois">
-          <pre><%= IpLookup.whois(@event.dst_ip) %></pre>
+          <pre><%= clean_whois(IpLookup.whois(@event.dst_ip)) %></pre>
         </div>
       </div>
 
