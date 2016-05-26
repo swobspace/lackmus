@@ -43,6 +43,14 @@ class EventsController < ApplicationController
     respond_with(@event)
   end
 
+  # send packet data for download
+  def packet
+    send_data Base64.decode64(@event.packet),
+      filename: "event_#{@event.id}.pcap",
+      disposition: 'attachment',
+      type: 'Application/vnd.tcpdump.pcap'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
