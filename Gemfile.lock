@@ -193,12 +193,17 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
+    network_interface (0.0.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.1.0)
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    packetfu (1.1.11)
+      network_interface (~> 0.0)
+      pcaprub (~> 0.12)
+    pcaprub (0.12.4)
     pg (0.18.4)
     pg_array_parser (0.0.9)
     poltergeist (1.9.0)
@@ -356,6 +361,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  packetfu
   pg
   poltergeist
   postgres_ext
