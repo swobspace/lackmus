@@ -45,7 +45,7 @@ class EventsController < ApplicationController
 
   # send packet data for download
   def packet
-    send_data Base64.decode64(@event.packet),
+    send_data @event.to_pcap,
       filename: "event_#{@event.id}.pcap",
       disposition: 'attachment',
       type: 'Application/vnd.tcpdump.pcap'

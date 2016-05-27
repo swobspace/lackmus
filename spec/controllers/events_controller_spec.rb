@@ -55,7 +55,9 @@ RSpec.describe EventsController, type: :controller do
 
   describe "GET #packet" do
     it "downloads a pcap packet" do
-      event = Event.create! valid_attributes.merge(packet: Base64.encode64("abcde"))
+      event = Event.create! valid_attributes.
+                merge(packet: Base64.encode64("abcde")).
+                merge(payload: Base64.encode64("brubbelbrutzelplapperfix"))
       get :packet, {:id => event.to_param}, valid_session
       expect(response.header["Content-Type"]).to eq("Application/vnd.tcpdump.pcap")
       expect(response.header["Content-Disposition"]).to match /event_#{assigns(:event).to_param}.pcap/
