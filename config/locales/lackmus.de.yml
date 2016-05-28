@@ -17,17 +17,25 @@ de:
     models:
       user: User
       event: Event
+      signature: Signature
 
   attributes:
-    when: Wann
+    action: Aktion
     description: Beschreibung
     displayname: Anzeigename
     event: Ereignis
     givenname: Vorname
     name: Name
+    packet: Paket
+    payload: Payload
+    references: Referenzen
+    signature_id: SignaturID
+    signature_info: Signatur
     sn: Nachname
     username: Username
+    when: Wann
 
   controller:
     users: Benutzer
     events: Ereignisse
+    signatures: Signaturen
