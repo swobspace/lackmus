@@ -41,3 +41,15 @@ bin/rails g scaffold Event \
   'ignore:boolean' \
   'has_http:boolean' \
   'severity:integer{1}'
+```
+
+Signature:
+---------
+
+```
+bin/rails g scaffold Signature \
+  signature_id:integer:index \
+  signature_info:string \
+  references:text \
+  'action:string{20}'
+```

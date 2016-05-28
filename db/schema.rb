@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515173115) do
+ActiveRecord::Schema.define(version: 20160528140035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 20160515173115) do
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
   end
+
+  create_table "signatures", force: :cascade do |t|
+    t.integer  "signature_id"
+    t.string   "signature_info",            default: ""
+    t.text     "references"
+    t.string   "action",         limit: 20
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "signatures", ["signature_id"], name: "index_signatures_on_signature_id", using: :btree
 
   create_table "wobauth_authorities", force: :cascade do |t|
     t.integer  "authorizable_id"

@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.signature_id')%>:</th>
+    <td><%= @signature.signature_id %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.signature_info')%>:</th>
+    <td><%= @signature.signature_info %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.references')%>:</th>
+    <td><%= @signature.references %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.action')%>:</th>
+    <td><%= @signature.action %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@signature) %>
+  <%= delete_link(@signature) %>
+  <%= new_link Signature %>
+</div>
