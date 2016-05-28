@@ -21,8 +21,14 @@ module EventConcerns
     pkt = PacketFu::Packet.parse(raw_packet)
     pkt.payload = raw_payload
     pkt.recalc
-    pcap_packet = PacketFu::PcapPacket.new(incl_len: pkt.size,
-                                           orig_len: pkt.size, data: pkt)
+
+    packetfutimestamp = PacketFu::Timestamp.new(
+                          sec: timestamp.to_i,
+                          usec: ((timestamp.to_f - timestamp.to_i) * 10**6).to_i
+                        ).to_s
+
+    pcap_packet = PacketFu::PcapPacket.new(incl_len: pkt.size, orig_len: pkt.size,
+                                           data: pkt, timestamp: packetfutimestamp)
     pcap_packet.to_s
   end
 
