@@ -13,12 +13,13 @@
 require 'json'
 require 'base64'
 require 'packetfu'
+require 'time'
 
 # parse a syslog line
 # parse_syslog(line) # => (packet, payload)
 # * packet: raw packet in binary format (always Base64 decoded)
 # * payload: raw payload in binary format (always Base64 decoded)
-def parse(line)
+def parse_syslog(line)
   return [] unless line =~ /suricata.*"timestamp"/
   m = line.match(/\A([A-Za-z]{3} [ 0-9]{2} \d\d:\d\d:\d\d) (\w+) suricata.*\[\d+\]: (\{.+\})/)
   begin
@@ -26,7 +27,7 @@ def parse(line)
   rescue
     return []
   end
-  [ Base64.decode64(hash["packet"]), Base64.decode64(hash["payload"]) ]
+  [ Time.parse(hash["timestamp"]), Base64.decode64(hash["packet"]), Base64.decode64(hash["payload"]) ]
 end
 
 # process suricata eve logs in syslog files
@@ -45,13 +46,21 @@ File.open(pcapfile, 'wb') do |pcap|
   pcap.write header
   open(logfile, 'r') do |file|
     file.each_line do |line|
-      (packet, payload) = parse(line)
+      (timestamp, packet, payload) = parse_syslog(line)
       next if packet.nil?
+      # to be replace later by logging method
+      puts timestamp
+
+      packetfutimestamp = PacketFu::Timestamp.new(
+                            sec: timestamp.to_i, 
+                            usec: ((timestamp.to_f - timestamp.to_i) * 10**6).to_i
+                          )
 
       pkt = PacketFu::Packet.parse(packet)
       pkt.payload = payload
       pkt.recalc
-      packet = PacketFu::PcapPacket.new(incl_len: pkt.size, orig_len: pkt.size, data: pkt)
+      packet = PacketFu::PcapPacket.new(incl_len: pkt.size, orig_len: pkt.size, 
+                                        data: pkt, timestamp: packetfutimestamp.to_s)
       pcap.write packet
     end
   end
