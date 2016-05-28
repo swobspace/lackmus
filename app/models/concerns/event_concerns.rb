@@ -13,13 +13,17 @@ module EventConcerns
   end
 
   def to_pcap
+    pcap_header = PacketFu::PcapHeader.new.to_s
+    pcap_header + pcap_packet
+  end
+
+  def pcap_packet
     pkt = PacketFu::Packet.parse(raw_packet)
     pkt.payload = raw_payload
     pkt.recalc
-    pcap_header = PacketFu::PcapHeader.new
     pcap_packet = PacketFu::PcapPacket.new(incl_len: pkt.size,
                                            orig_len: pkt.size, data: pkt)
-    pcap_header.to_s + pcap_packet.to_s
+    pcap_packet.to_s
   end
 
   def raw_packet
