@@ -61,10 +61,12 @@ ActiveRecord::Schema.define(version: 20160528140035) do
     t.string   "signature_info",            default: ""
     t.text     "references"
     t.string   "action",         limit: 20
+    t.integer  "events_count"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
 
+  add_index "signatures", ["action"], name: "index_signatures_on_action", using: :btree
   add_index "signatures", ["signature_id"], name: "index_signatures_on_signature_id", using: :btree
 
   create_table "wobauth_authorities", force: :cascade do |t|
