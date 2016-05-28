@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
+  it { is_expected.to belong_to(:signature) }
+
   it { is_expected.to validate_presence_of(:sensor) }
   it { is_expected.to validate_presence_of(:event_time) }
   it { is_expected.to validate_presence_of(:src_ip) }
@@ -12,6 +14,14 @@ RSpec.describe Event, type: :model do
     g = FactoryGirl.create(:event)
     expect(f).to be_valid
     expect(g).to be_valid
+  end
+
+  it "should create the corresponding signature" do
+    event = FactoryGirl.build(:event, alert_signature_id: 999999,
+                              alert_signature: "Lorem Ipsum")
+    expect {
+      event.save
+    }.to change{ Signature.count }.by(1)
   end
 
   it "prints printable chars" do
