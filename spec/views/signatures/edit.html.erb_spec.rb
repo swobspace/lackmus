@@ -2,11 +2,17 @@ require 'rails_helper'
 
 RSpec.describe "signatures/edit", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "signature" }
+    allow(controller).to receive(:action_name) { "edit" }
+
     @signature = assign(:signature, Signature.create!(
       :signature_id => 1,
       :signature_info => "MyString",
       :references => "MyText",
-      :action => "MyString"
+      :action => "normal"
     ))
   end
 
