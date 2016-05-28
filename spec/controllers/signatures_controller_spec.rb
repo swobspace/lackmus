@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe SignaturesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # Signature. As you add validations to Signature, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:signature)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {signature_id: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe SignaturesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { signature_info: "abcdefghijklmnop" }
       }
 
       it "updates the requested signature" do
         signature = Signature.create! valid_attributes
         put :update, {:id => signature.to_param, :signature => new_attributes}, valid_session
         signature.reload
-        skip("Add assertions for updated state")
+        expect(signature.signature_info).to eq("abcdefghijklmnop")
       end
 
       it "assigns the requested signature as @signature" do
