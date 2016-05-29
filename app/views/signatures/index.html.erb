@@ -5,7 +5,8 @@
   <tr>
     <th><%= t('attributes.signature_id') %></th>
     <th><%= t('attributes.signature_info') %></th>
-    <th><%= t('attributes.references') %></th>
+    <th><%= t('attributes.category') %></th>
+    <th><%= t('attributes.severity') %></th>
     <th><%= t('attributes.action') %></th>
     <th></th>
   </tr>
@@ -16,7 +17,8 @@
   <%= content_tag_for(:tr, signature) do %>
     <td><%= signature.signature_id %></td>
     <td><%= signature.signature_info %></td>
-    <td><%= signature.references %></td>
+    <td><%= signature.category %></td>
+    <td><%= signature.severity %></td>
     <td><%= signature.action %></td>
     <td class="nowrap">
       <%= show_link signature %>

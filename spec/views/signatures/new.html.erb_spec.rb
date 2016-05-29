@@ -22,8 +22,9 @@ RSpec.describe "signatures/new", type: :view do
     assert_select "form[action=?][method=?]", signatures_path, "post" do
 
       assert_select "input#signature_signature_id[name=?]", "signature[signature_id]"
-
       assert_select "input#signature_signature_info[name=?]", "signature[signature_info]"
+      assert_select "input#signature_category[name=?]", "signature[category]"
+      assert_select "input#signature_severity[name=?]", "signature[severity]"
 
       assert_select "textarea#signature_references[name=?]", "signature[references]"
 

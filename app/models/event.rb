@@ -12,6 +12,7 @@ class Event < ActiveRecord::Base
 
   # -- validations and callbacks
   before_save :import_signature
+
   validates :sensor, :event_time, :src_ip, :dst_ip, :proto, presence: true
 
   # create a new signature from event data
@@ -22,6 +23,11 @@ class Event < ActiveRecord::Base
     sig = Signature.find_or_create_by(signature_id: alert_signature_id) do |sig|
       sig.signature_info = alert_signature
       sig.action         = 'normal'
+      sig.category	 = alert_category
+      sig.severity	 = alert_severity
+    end
+    unless sig.category.blank?
+      sig.update_attributes(category: alert_category, severity: alert_severity)
     end
     if sig.persisted?
       true

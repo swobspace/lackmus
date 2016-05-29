@@ -2,6 +2,7 @@ module EventConcerns
   extend ActiveSupport::Concern
 
   included do
+    scope :most_current, ->(count) { order('event_time desc').last(count) }
   end
 
   def connection

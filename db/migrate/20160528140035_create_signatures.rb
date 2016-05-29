@@ -6,6 +6,8 @@ class CreateSignatures < ActiveRecord::Migration
       t.text :references
       t.string :action, limit: 20
       t.integer :events_count
+      t.string :category, default: ''
+      t.integer :severity, limit: 1
 
       t.timestamps null: false
     end

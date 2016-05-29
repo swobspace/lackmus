@@ -8,6 +8,14 @@
     <td><%= @signature.signature_info %></td>
   </tr>
   <tr>
+    <th><%= t('attributes.category')%>:</th>
+    <td><%= @signature.category %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.severity')%>:</th>
+    <td><%= @signature.severity %></td>
+  </tr>
+  <tr>
     <th><%= t('attributes.references')%>:</th>
     <td><%= @signature.references %></td>
   </tr>
@@ -23,3 +31,10 @@
   <%= delete_link(@signature) %>
   <%= new_link Signature %>
 </div>
+
+<% if can? :read, Event %>
+  <br />  
+  <h2><%= t('controller.events') %></h2>
+  <%= render partial: 'events', locals: { events: @signature.events.most_current(50) } %>
+<% end %>
+

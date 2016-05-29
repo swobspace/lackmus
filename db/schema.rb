@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20160528140035) do
     t.text     "references"
     t.string   "action",         limit: 20
     t.integer  "events_count"
+    t.string   "category",                  default: ""
+    t.integer  "severity",       limit: 2
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end

@@ -12,6 +12,8 @@ RSpec.describe "signatures/show", type: :view do
       :signature_id => 1,
       :signature_info => "Signature Info",
       :references => "MyText",
+      :category => "Trojan detected",
+      :severity => "99",
       :action => "normal"
     ))
   end
@@ -21,6 +23,8 @@ RSpec.describe "signatures/show", type: :view do
     expect(rendered).to match(/1/)
     expect(rendered).to match(/Signature Info/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/Trojan detected/)
+    expect(rendered).to match(/99/)
     expect(rendered).to match(/normal/)
   end
 end

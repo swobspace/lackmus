@@ -13,12 +13,16 @@ RSpec.describe "signatures/index", type: :view do
         :signature_id => 1111,
         :signature_info => "Signature Info",
         :references => "MyText",
+        :category => "Trojan detected",
+        :severity => 99,
         :action => "normal"
       ),
       Signature.create!(
         :signature_id => 2222,
         :signature_info => "Signature Info",
         :references => "MyText",
+        :category => "Trojan detected",
+        :severity => 99,
         :action => "normal"
       )
     ])
@@ -29,7 +33,9 @@ RSpec.describe "signatures/index", type: :view do
     assert_select "tr>td", :text => 1111.to_s, :count => 1
     assert_select "tr>td", :text => 2222.to_s, :count => 1
     assert_select "tr>td", :text => "Signature Info".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "MyText".to_s, :count => 0
+    assert_select "tr>td", :text => "Trojan detected".to_s, :count => 2
+    assert_select "tr>td", :text => 99.to_s, :count => 2
     assert_select "tr>td", :text => "normal".to_s, :count => 2
   end
 end

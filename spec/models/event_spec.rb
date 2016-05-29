@@ -29,5 +29,19 @@ RSpec.describe Event, type: :model do
     e = FactoryGirl.build_stubbed(:event, payload: Base64.encode64(clear))
     expect(e.payload_printable).to eq("Unversch..sselter .. Text.")
   end
+
+  describe "using scopes" do
+    let(:first_event) { FactoryGirl.build(:event) }
+    let(:last_event)  { FactoryGirl.build(:event) }
+
+    describe "#most_current" do
+      before(:each) do
+        events = [first_event.save]
+        events << last_event.save
+      end
+      it {expect(Event.most_current(1)).to contain_exactly(last_event)}
+    end
+
+  end
  
 end

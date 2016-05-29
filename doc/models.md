@@ -52,5 +52,7 @@ bin/rails g scaffold Signature \
   signature_info:string \
   references:text \
   'action:string{20}:index' \
-  events_count:integer
+  events_count:integer \
+  category:string \
+  severity:integer{1}
 ```
