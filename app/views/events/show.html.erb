@@ -1,4 +1,13 @@
-<table class="table table-bordered table-condensed table-hover autowidth">
+<div class="signature_header">
+    <%= @event.alert_signature_id %>
+    <%= @event.alert_signature %>
+</div>
+<div class="signature_subtitle">
+  <%= @event.alert_category %> / Severity: <%= @event.alert_severity %>
+</div>
+
+
+<table class="table table-bordered table-condensed table-hover">
   <tr>
     <th><%= t('attributes.event_time')%>:</th>
     <td><%= @event.event_time.to_s(:precision) %></td>
