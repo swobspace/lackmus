@@ -19,11 +19,11 @@ RSpec.describe Signature, type: :model do
 
   describe "using scopes" do
     let!(:sig)          { FactoryGirl.create(:signature, signature_id: 44444) }
-    let!(:ignore_sig)   { FactoryGirl.create(:signature, signature_id: 66666, 
+    let!(:ignore_sig)   { FactoryGirl.create(:signature, signature_id: 66666,
                                             action: 'ignore') }
-    let!(:active_event) { FactoryGirl.create(:event, alert_signature_id: 55555, 
+    let!(:active_event) { FactoryGirl.create(:event, alert_signature_id: 55555,
                                         alert_signature: "Lorem Ipsum") }
-    let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 66666, 
+    let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 66666,
                                         alert_signature: "Lorem Ipsum") }
 
     describe "#active" do
@@ -36,6 +36,13 @@ RSpec.describe Signature, type: :model do
     describe "#ignored" do
       it { expect(Signature.ignored).to contain_exactly(ignore_event.signature) }
     end
+  end
+
+  describe "#last_seen" do
+    let(:event_time) { Time.now }
+    let!(:event) { FactoryGirl.create(:event, alert_signature_id: 55555,
+                                             alert_signature: "Lorem Ipsum", event_time: event_time) }
+    it { expect(event.signature.last_seen).to eq("#{event_time.to_s(:precision)} [#{event.sensor}] (0d)") }
   end
 
 end

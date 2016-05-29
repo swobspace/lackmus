@@ -9,5 +9,11 @@ module SignatureConcerns
     scope :ignored, -> { where(["action IN (?)", ['drop', 'ignore']]) }
   end
 
+  def last_seen
+    event = events.order('event_time desc').first
+    days  = (Time.now - event.event_time).to_i / 86400
+    "#{event.event_time.to_s(:precision)} [#{event.sensor}] (#{days}d)"
+  end
+
 end
 
