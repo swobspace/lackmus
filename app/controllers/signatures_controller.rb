@@ -46,7 +46,7 @@ class SignaturesController < ApplicationController
   # send packet data for download
   def pcap
     send_data @signature.to_pcap,
-      filename: "signature_#{@signature.id}.pcap",
+      filename: "signature_#{@signature.signature_id}.pcap",
       disposition: 'attachment',
       type: 'Application/vnd.tcpdump.pcap'
   end

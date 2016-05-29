@@ -83,7 +83,7 @@ RSpec.describe SignaturesController, type: :controller do
       event = FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  alert_signature_id: 5656567, alert_signature: "Exploit")
-      get :pcap, {:id => 5656567}, valid_session
+      get :pcap, {:id => event.signature.id.to_param}, valid_session
       expect(response.header["Content-Type"]).to eq("Application/vnd.tcpdump.pcap")
       expect(response.header["Content-Disposition"]).to match /signature_5656567.pcap/
       expect(response.header["Content-Disposition"]).to match /attachment/
