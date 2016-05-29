@@ -54,6 +54,8 @@ class SignaturesController < ApplicationController
         @signatures = Signature.ignored
       elsif params[:filter] == 'current'
         @signatures = Signature.current
+      elsif params[:filter] == 'all'
+        @signatures = Signature.all
       else
         @signatures = Signature.active
       end

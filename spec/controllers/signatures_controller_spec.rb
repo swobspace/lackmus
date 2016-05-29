@@ -46,15 +46,27 @@ RSpec.describe SignaturesController, type: :controller do
     end
     it "uses scope #active" do
       expect(Signature).to receive(:active)
+      expect(Signature).not_to receive(:ignored)
+      expect(Signature).not_to receive(:current)
       get :index, {}, valid_session
     end
     it "uses scope #ingored" do
       expect(Signature).to receive(:ignored)
+      expect(Signature).not_to receive(:active)
+      expect(Signature).not_to receive(:current)
       get :index, {filter: 'ignored'}, valid_session
     end
     it "uses scope #current" do
       expect(Signature).to receive(:current)
+      expect(Signature).not_to receive(:active)
+      expect(Signature).not_to receive(:ignored)
       get :index, {filter: 'current'}, valid_session
+    end
+    it "shows all signatures with filter: all" do
+      expect(Signature).not_to receive(:current)
+      expect(Signature).not_to receive(:ignored)
+      expect(Signature).not_to receive(:active)
+      get :index, {filter: 'all'}, valid_session
     end
   end
 
