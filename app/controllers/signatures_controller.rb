@@ -1,10 +1,10 @@
 class SignaturesController < ApplicationController
   before_action :set_signature, only: [:show, :edit, :update, :destroy]
+  before_action :get_signatures, only: [:index]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /signatures
   def index
-    @signatures = Signature.all
     respond_with(@signatures)
   end
 
@@ -47,6 +47,16 @@ class SignaturesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_signature
       @signature = Signature.find(params[:id])
+    end
+
+    def get_signatures
+      if params[:filter] == 'ignored'
+        @signatures = Signature.ignored
+      elsif params[:filter] == 'current'
+        @signatures = Signature.current
+      else
+        @signatures = Signature.active
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

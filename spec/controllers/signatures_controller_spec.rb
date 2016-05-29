@@ -40,8 +40,21 @@ RSpec.describe SignaturesController, type: :controller do
   describe "GET #index" do
     it "assigns all signatures as @signatures" do
       signature = Signature.create! valid_attributes
+      event = FactoryGirl.create(:event, signature: signature)
       get :index, {}, valid_session
       expect(assigns(:signatures)).to eq([signature])
+    end
+    it "uses scope #active" do
+      expect(Signature).to receive(:active)
+      get :index, {}, valid_session
+    end
+    it "uses scope #ingored" do
+      expect(Signature).to receive(:ignored)
+      get :index, {filter: 'ignored'}, valid_session
+    end
+    it "uses scope #current" do
+      expect(Signature).to receive(:current)
+      get :index, {filter: 'current'}, valid_session
     end
   end
 

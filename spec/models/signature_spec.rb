@@ -17,4 +17,25 @@ RSpec.describe Signature, type: :model do
     expect(g).to be_valid
   end
 
+  describe "using scopes" do
+    let!(:sig)          { FactoryGirl.create(:signature, signature_id: 44444) }
+    let!(:ignore_sig)   { FactoryGirl.create(:signature, signature_id: 66666, 
+                                            action: 'ignore') }
+    let!(:active_event) { FactoryGirl.create(:event, alert_signature_id: 55555, 
+                                        alert_signature: "Lorem Ipsum") }
+    let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 66666, 
+                                        alert_signature: "Lorem Ipsum") }
+
+    describe "#active" do
+      it {expect(Signature.active).to contain_exactly(active_event.signature)}
+    end
+    describe "#current" do
+      it { expect(Signature.current).to contain_exactly(active_event.signature,
+                                                        ignore_event.signature) }
+    end
+    describe "#ignored" do
+      it { expect(Signature.ignored).to contain_exactly(ignore_event.signature) }
+    end
+  end
+
 end

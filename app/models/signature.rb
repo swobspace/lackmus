@@ -1,4 +1,5 @@
 class Signature < ActiveRecord::Base
+  include SignatureConcerns
   # -- associations
   has_many :events, foreign_key: :alert_signature_id
 
