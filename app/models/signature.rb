@@ -1,7 +1,7 @@
 class Signature < ActiveRecord::Base
   include SignatureConcerns
   # -- associations
-  has_many :events, foreign_key: :alert_signature_id
+  has_many :events, foreign_key: :alert_signature_id, primary_key: :signature_id
 
   # -- configuration
   ACTIONS = ['drop', 'ignore', 'normal', 'alert']
