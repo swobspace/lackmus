@@ -26,14 +26,18 @@ de:
 
   attributes:
     action: Aktion
+    category: Kategorie
+    count: Anzahl
     description: Beschreibung
     displayname: Anzeigename
     event: Ereignis
     givenname: Vorname
+    last_seen: Neuestes Ereignis
     name: Name
     packet: Paket
     payload: Payload
     references: Referenzen
+    severity: Schweregrad (1=hoch, 3=niedrig)
     signature_id: SignaturID
     signature_info: Signatur
     sn: Nachname
