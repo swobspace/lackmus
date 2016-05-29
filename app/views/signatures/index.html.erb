@@ -6,7 +6,8 @@
     <th><%= t('attributes.signature_id') %></th>
     <th><%= t('attributes.signature_info') %></th>
     <th><%= t('attributes.category') %></th>
-    <th><%= t('attributes.severity') %></th>
+    <th>Sev.</th>
+    <th><%= t('attributes.last_seen') %></th>
     <th><%= t('attributes.action') %></th>
     <th></th>
   </tr>
@@ -19,11 +20,15 @@
     <td><%= signature.signature_info %></td>
     <td><%= signature.category %></td>
     <td><%= signature.severity %></td>
+    <td><%= signature.last_seen %></td>
     <td><%= signature.action %></td>
     <td class="nowrap">
       <%= show_link signature %>
       <%= edit_link signature %>
       <%= delete_link signature %>
+      <%= link_to image_tag("wireshark.png"), pcap_signature_path(signature), class: 'btn btn-default',
+            title: "Download pcap file" %>
+
     </td>
   <% end %>
 <% end %>

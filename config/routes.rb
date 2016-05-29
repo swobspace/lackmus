@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :signatures
+  resources :signatures do
+    member do
+      get 'pcap'
+    end
+  end
   resources :events do
     member do
       get 'packet'

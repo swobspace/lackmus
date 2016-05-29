@@ -78,6 +78,19 @@ RSpec.describe SignaturesController, type: :controller do
     end
   end
 
+  describe "GET #pcap" do
+    it "downloads corresponding events pcap in one file" do
+      event = FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
+                                 payload: Base64.encode64("brubbelbrutzelplapperfix"),
+                                 alert_signature_id: 5656567, alert_signature: "Exploit")
+      get :pcap, {:id => 5656567}, valid_session
+      expect(response.header["Content-Type"]).to eq("Application/vnd.tcpdump.pcap")
+      expect(response.header["Content-Disposition"]).to match /signature_5656567.pcap/
+      expect(response.header["Content-Disposition"]).to match /attachment/
+    end
+  end
+
+
   describe "GET #new" do
     it "assigns a new signature as @signature" do
       get :new, {}, valid_session

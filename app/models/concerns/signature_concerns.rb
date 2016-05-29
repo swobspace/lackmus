@@ -10,9 +10,15 @@ module SignatureConcerns
   end
 
   def last_seen
-    event = events.order('event_time desc').first
-    days  = (Time.now - event.event_time).to_i / 86400
-    "#{event.event_time.to_s(:precision)} [#{event.sensor}] (#{days}d)"
+    evnt  = events.order('event_time desc').first
+    return nil unless evnt.present?
+    days  = (Time.now - evnt.event_time).to_i / 86400
+    "#{evnt.event_time.to_s(:precision)} [#{evnt.sensor}] (#{days}d)"
+  end
+
+  def to_pcap
+    pcap_header = PacketFu::PcapHeader.new.to_s
+    pcap_header + events.map(&:pcap_packet).join('')
   end
 
 end

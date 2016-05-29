@@ -29,7 +29,7 @@
   <%= back_link %>
   <%= edit_link(@signature) %>
   <%= delete_link(@signature) %>
-  <%= new_link Signature %>
+  <%= link_to "Download PCAP", pcap_signature_path(@signature), class: 'btn btn-default' %>
 </div>
 
 <% if can? :read, Event %>

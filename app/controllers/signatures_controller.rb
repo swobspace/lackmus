@@ -43,6 +43,14 @@ class SignaturesController < ApplicationController
     respond_with(@signature)
   end
 
+  # send packet data for download
+  def pcap
+    send_data @signature.to_pcap,
+      filename: "signature_#{@signature.id}.pcap",
+      disposition: 'attachment',
+      type: 'Application/vnd.tcpdump.pcap'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_signature
