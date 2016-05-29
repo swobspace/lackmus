@@ -24,7 +24,11 @@ class IpLookup
 
   def get_whois
     Rails.cache.fetch("ip/#{ip_addr}/whois") do
-      Whois.whois(ip_addr)
+      begin
+        Whois::Client.new(timeout: 2).lookup(ip_addr)
+      rescue Timeout::Error => e
+        nil
+      end
     end
   end
 
