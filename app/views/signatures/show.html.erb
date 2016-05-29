@@ -1,19 +1,19 @@
-<table class="table table-bordered table-hover autowidth">
+<div class="signature_header">
+    <%= @signature.signature_id %>
+    <%= @signature.signature_info %>
+</div>
+<div class="signature_subtitle">
+  <%= @signature.category %> / Severity: <%= @signature.severity %>
+</div>
+
+<table class="table table-condensed table-hover autowidth">
   <tr>
-    <th><%= t('attributes.signature_id')%>:</th>
-    <td><%= @signature.signature_id %></td>
+    <th><%= t('attributes.last_seen')%>:</th>
+    <td><%= @signature.last_seen %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.signature_info')%>:</th>
-    <td><%= @signature.signature_info %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.category')%>:</th>
-    <td><%= @signature.category %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.severity')%>:</th>
-    <td><%= @signature.severity %></td>
+    <th><%= t('attributes.count')%>:</th>
+    <td><%= @signature.events.count %></td>
   </tr>
   <tr>
     <th><%= t('attributes.references')%>:</th>
