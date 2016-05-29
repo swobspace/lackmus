@@ -4,6 +4,11 @@ de:
     configuration: Konfiguration
     change_columns: Spalten ändern
     show_all: Alles anzeigen
+    signatures:
+      active: Aktive Signaturen
+      ingored: Ingorierte Signaturen
+      current: Signaturen mit Events
+      all: Alle Signaturen
 
   actions:
     destroy: Datensatz löschen

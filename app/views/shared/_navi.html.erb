@@ -8,6 +8,18 @@
       </ul>
     </li>
   <% end %>
+  <% if can? :navigate, :signatures %>
+    <li class="dropdown <%= active_class('signatures') %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('controller.signatures') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to t('lackmus.signatures.active'), main_app.signatures_path %></li>
+        <li> <%=link_to t('lackmus.signatures.ingored'), main_app.signatures_path(filter: 'ignored') %></li>
+        <li> <%=link_to t('lackmus.signatures.current'), main_app.signatures_path(filter: 'current') %></li>
+        <li> <%=link_to t('lackmus.signatures.all'), main_app.signatures_path(filter: 'all') %></li>
+      </ul>
+    </li>
+  <% end %>
   <% if can? :navigate, :configuration %>
     <li class="dropdown <%= configuration_active_class %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
