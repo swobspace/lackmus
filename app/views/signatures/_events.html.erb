@@ -1,4 +1,4 @@
-<table id="linesTable" class="table table-bordered table-striped dataTable">
+<table id="eventsTable" class="table table-bordered table-striped dataTable">
 <thead>
   <tr>
     <th><%= t('attributes.sensor') %></th>
@@ -16,16 +16,20 @@
 
 <% events.each do |event| %>
   <%= content_tag_for(:tr, event) do %>
-    <td class="nowrap">
     <td><%= event.sensor %></td>
     <td><%= event.event_time.to_s(:precision) %></td>
-    <td><%= event.src_ip %></td>
+    <td><%= event.src_ip %> / 
+        <%= IpLookup.hostname(event.src_ip) %>
+    </td>
     <td><%= event.src_port %></td>
-    <td><%= event.dst_ip %></td>
+    <td><%= event.dst_ip %> / 
+        <%= IpLookup.hostname(event.dst_ip) %>
+    </td>
     <td><%= event.dst_port %></td>
     <td><%= event.proto %></td>
+    <td><%= event.http_hostname %></td>
     <td class="nowrap">
-      <%= show_link line %>
+      <%= show_link event %>
       <%= link_to image_tag("wireshark.png"), packet_event_path(event), 
             class: 'btn btn-default', title: "Download pcap file" %>
 
