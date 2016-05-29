@@ -9,9 +9,13 @@ de:
       ingored: Ingorierte Signaturen
       current: Signaturen mit Events
       all: Alle Signaturen
+    really: wirklich
+    truly: Echt jetzt?
 
   actions:
     destroy: Datensatz löschen
+    destroy_marked: markierte Datensätze löschen
+    destroy_all: ALLE Datensätze löschen
     mandantory: Pflichtfelder
     optional: Optional
     search: Suche

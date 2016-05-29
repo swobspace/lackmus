@@ -195,4 +195,27 @@ RSpec.describe SignaturesController, type: :controller do
     end
   end
 
+  describe "DELETE #destroy_event" do
+    let!(:event) { FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
+                                 payload: Base64.encode64("brubbelbrutzelplapperfix"),
+                                 alert_signature_id: 5656567, alert_signature: "Exploit") }
+    it "destroys marked events" do
+      expect {
+      delete :destroy_events, {id: event.signature.to_param, event_ids: [event.id]}, valid_session
+      }.to change(Event, :count).by(-1)
+    end
+
+    it "destroys ALL events" do
+      expect {
+      delete :destroy_events, {id: event.signature.to_param, 
+                               commit: I18n.t('actions.destroy_all')}, valid_session
+      }.to change(Event, :count).by(-1)
+    end
+
+    it "redirects to signature # how" do
+      delete :destroy_events, {id: event.signature.to_param, event_ids: [event.id]}, valid_session
+      expect(response).to redirect_to(signature_url(event.signature))
+    end
+  end
+
 end

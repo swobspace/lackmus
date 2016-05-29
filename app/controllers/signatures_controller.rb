@@ -43,6 +43,15 @@ class SignaturesController < ApplicationController
     respond_with(@signature)
   end
 
+  def destroy_events
+    if params[:commit] == t('actions.destroy_all')
+      @signature.events.destroy_all
+    else
+      @signature.events.where(['id IN (?)', event_ids]).destroy_all
+    end
+    redirect_to signature_path(@signature)
+  end
+
   # send packet data for download
   def pcap
     send_data @signature.to_pcap,
@@ -67,6 +76,10 @@ class SignaturesController < ApplicationController
       else
         @signatures = Signature.active
       end
+    end
+
+    def event_ids
+      params[:event_ids] || []
     end
 
     # Only allow a trusted parameter "white list" through.

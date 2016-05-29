@@ -28,7 +28,7 @@ RSpec.describe "signatures/new", type: :view do
 
       assert_select "textarea#signature_references[name=?]", "signature[references]"
 
-      assert_select "input#signature_action[name=?]", "signature[action]"
+      assert_select "select#signature_action[name=?]", "signature[action]"
     end
   end
 end

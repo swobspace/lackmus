@@ -22,7 +22,7 @@
        %>
       <%= f.input :references
        %>
-      <%= f.input :action
+      <%= f.input :action, collection: Signature::ACTIONS, include_blank: false
        %>
     </div>
 
