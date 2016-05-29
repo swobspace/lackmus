@@ -41,6 +41,7 @@ RSpec.describe "signatures/index", type: :view do
     assert_select "tr>td", :text => "MyText".to_s, :count => 0
     assert_select "tr>td", :text => "Trojan detected".to_s, :count => 2
     assert_select "tr>td", :text => 99.to_s, :count => 2
+    assert_select "tr>td", :text => 1.to_s, :count => 1
     assert_select "tr>td", :text => "#{event.event_time.to_s(:precision)} [#{event.sensor}] (0d)".to_s, :count => 1
     assert_select "tr>td", :text => "normal".to_s, :count => 2
   end

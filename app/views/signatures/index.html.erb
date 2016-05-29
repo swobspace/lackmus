@@ -8,6 +8,7 @@
     <th><%= t('attributes.category') %></th>
     <th>Sev.</th>
     <th><%= t('attributes.last_seen') %></th>
+    <th><%= t('attributes.count') %></th>
     <th><%= t('attributes.action') %></th>
     <th></th>
   </tr>
@@ -21,6 +22,7 @@
     <td><%= signature.category %></td>
     <td><%= signature.severity %></td>
     <td><%= signature.last_seen %></td>
+    <td><%= signature.events.count %></td>
     <td><%= signature.action %></td>
     <td class="nowrap">
       <%= show_link signature %>
