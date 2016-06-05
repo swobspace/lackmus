@@ -19,6 +19,8 @@ de:
     destroy_marked: markierte Datensätze löschen
     destroy_all: ALLE Datensätze löschen
     mandantory: Pflichtfelder
+    marked_done: markierte erledigen
+    all_done: alle erledigen
     optional: Optional
     search: Suche
     cancel: abbrechen

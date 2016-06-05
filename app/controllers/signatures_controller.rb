@@ -46,8 +46,14 @@ class SignaturesController < ApplicationController
   def destroy_events
     if params[:commit] == t('actions.destroy_all')
       @signature.events.destroy_all
-    else
+    elsif params[:commit] == t('actions.destroy_marked')
       @signature.events.where(['id IN (?)', event_ids]).destroy_all
+    elsif params[:commit] == t('actions.all_done')
+      @signature.events.update_all(done: true)
+    elsif params[:commit] == t('actions.marked_done')
+      @signature.events.where(['id IN (?)', event_ids]).update_all(done: true)
+    else
+      @error = "unknown commit"
     end
     redirect_to signature_path(@signature)
   end
