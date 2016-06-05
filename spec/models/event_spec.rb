@@ -54,6 +54,16 @@ RSpec.describe Event, type: :model do
       it {expect(Event.by_network("198.51.100.0/29")).to contain_exactly(second_event)}
       it {expect(Event.by_network("192.0.2.64/26")).not_to include(first_event)}
     end
+
+    describe "#since" do
+      before(:each) do
+        first_event.event_time = (Time.now - 1.day)
+        second_event.event_time = (Time.now)
+        events = [first_event.save, second_event.save]
+      end
+      it {expect(Event.since(Date.yesterday)).to contain_exactly(first_event,second_event)}
+      it {expect(Event.since(Date.today)).to contain_exactly(second_event)}
+    end
   end
  
 end

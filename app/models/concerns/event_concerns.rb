@@ -6,6 +6,7 @@ module EventConcerns
     scope :by_network, ->(network) { 
        where(["src_ip <<= :ip or dst_ip <<= :ip", ip: network]) 
     }
+    scope :since, ->(timestamp) { where(["event_time >= ?", timestamp]) }
   end
 
   def connection
