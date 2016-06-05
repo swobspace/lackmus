@@ -32,16 +32,28 @@ RSpec.describe Event, type: :model do
 
   describe "using scopes" do
     let(:first_event) { FactoryGirl.build(:event, event_time: Time.now - 2.hours ) }
-    let(:last_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
+    let(:second_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
 
     describe "#most_current" do
       before(:each) do
         events = [first_event.save]
-        events << last_event.save
+        events << second_event.save
       end
-      it {expect(Event.most_current(1)).to contain_exactly(last_event)}
+      it {expect(Event.most_current(1)).to contain_exactly(second_event)}
     end
-
+ 
+    describe "#by_network" do
+      before(:each) do
+        first_event.src_ip = "192.0.2.1"
+        second_event.dst_ip = "198.51.100.1"
+        events = [first_event.save, second_event.save]
+      end
+      it {expect(Event.by_network("192.0.2.1")).to contain_exactly(first_event)}
+      it {expect(Event.by_network("192.0.2.0/24")).to contain_exactly(first_event)}
+      it {expect(Event.by_network("198.51.100.1")).to contain_exactly(second_event)}
+      it {expect(Event.by_network("198.51.100.0/29")).to contain_exactly(second_event)}
+      it {expect(Event.by_network("192.0.2.64/26")).not_to include(first_event)}
+    end
   end
  
 end

@@ -3,6 +3,7 @@ module EventConcerns
 
   included do
     scope :most_current, ->(count) { order('event_time desc').limit(count) }
+    scope :by_network, ->(network) { where(["src_ip <<= :ip or dst_ip <<= :ip", ip: network]) }
   end
 
   def connection
