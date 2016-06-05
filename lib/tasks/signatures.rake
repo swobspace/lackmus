@@ -20,6 +20,31 @@ namespace :signatures do
         end
       end
     end
-
   end
+
+  # usage: rake 'signatures:updateref[sid-msg.map]'
+  desc "update signatures with references from sid-msg.map"
+  task :updateref, [:file] => :environment do |t, args|
+    file = args[:file] || raise("*** please specify sid-msg.map ***")
+    puts "Import file is: #{file}"
+
+    File.open(file, 'r') do |f|
+      f.each_line do |line|
+        entries = line.strip.split(" || ")
+        sid = entries.shift
+        msg = entries.shift
+        next if msg =~ / DELETED /
+        Signature.where(signature_id: sid).each do |sig|
+          if sig.references.blank? and entries.present?
+            if sig.update_attributes(references: entries)
+              puts "signature #{sid} updated"
+            else
+              puts "update signature #{sid} failed"
+            end
+          end
+        end
+      end
+    end
+  end
+
 end
