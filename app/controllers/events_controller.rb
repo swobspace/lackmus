@@ -54,11 +54,14 @@ class EventsController < ApplicationController
   private
 
     def get_events
+      @events = Event.all
       if search_params[:ip]
-        @events = Event.by_network(search_params[:ip])
-      else
-        @events = Event.all
+        @events = @events.by_network(search_params[:ip])
       end
+      if search_params[:since].present? && search_params[:since] =~ /\A(yesterday|today)\z/
+        @events = @events.since(search_params[:since])
+      end
+      @events
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -67,7 +70,7 @@ class EventsController < ApplicationController
     end
 
     def search_params
-      params.permit(:ip) 
+      params.permit(:ip, :since)
     end
 
     # Only allow a trusted parameter "white list" through.

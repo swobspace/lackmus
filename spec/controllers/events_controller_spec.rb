@@ -68,8 +68,24 @@ RSpec.describe EventsController, type: :controller do
         get :index, {ip: "198.51.100.10"}, valid_session
         expect(assigns(:events)).to eq([])
       end
-
     end
+
+    describe "filtering by event time" do
+      let!(:past_event)   { FactoryGirl.create(:event, event_time: (Time.now - 1.month)) }
+      let!(:last_event)   { FactoryGirl.create(:event, event_time: (Time.now - 1.day)) }
+      let!(:current_event) { FactoryGirl.create(:event, event_time: Time.now) }
+
+      it "get current events" do
+        get :index, {since: "today"}, valid_session
+        expect(assigns(:events)).to contain_exactly(current_event)
+      end
+
+      it "get events since yesterday" do
+        get :index, {since: "yesterday"}, valid_session
+        expect(assigns(:events)).to contain_exactly(last_event, current_event)
+      end
+    end
+
   end
 
   describe "GET #show" do

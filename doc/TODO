@@ -1,0 +1,10 @@
+* search for events (search form):
+  - by IP
+  - by date
+  - generate PCAP for all results
+
+* create a report per IP as txt, pdf, ... 
+
+* mark (all|single) events as done 
+
+* events: datatable
