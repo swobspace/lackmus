@@ -11,6 +11,8 @@ de:
       all: Alle Signaturen
     really: wirklich
     truly: Echt jetzt?
+    since_today: seit heute
+    since_yesterday: seit gestern
 
   actions:
     destroy: Datensatz löschen
