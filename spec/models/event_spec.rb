@@ -64,6 +64,15 @@ RSpec.describe Event, type: :model do
       it {expect(Event.since(Date.yesterday)).to contain_exactly(first_event,second_event)}
       it {expect(Event.since(Date.today)).to contain_exactly(second_event)}
     end
+
+    describe "#not_done" do
+      before(:each) do
+        first_event.done = true
+        second_event.done = false
+        events = [first_event.save, second_event.save]
+      end
+      it {expect(Event.not_done).to contain_exactly(second_event)}
+    end
   end
  
 end
