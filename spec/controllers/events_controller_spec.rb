@@ -21,6 +21,7 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   login_admin
 
+
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
@@ -42,6 +43,32 @@ RSpec.describe EventsController, type: :controller do
       event = Event.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:events)).to eq([event])
+    end
+
+    describe "filtering networks" do
+      let!(:first_event)  { FactoryGirl.create(:event, src_ip: "192.0.2.1") }
+      let!(:second_event) { FactoryGirl.create(:event, dst_ip: "192.0.2.9") }
+
+      it "search by ip returns first event" do
+        get :index, {ip: "192.0.2.1"}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event)
+      end
+
+      it "search by /29 mask returns first event" do
+        get :index, {ip: "192.0.2.1/29"}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event)
+      end
+
+      it "search by /24 mask returns both events" do
+        get :index, {ip: "192.0.2.1/24"}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event, second_event)
+      end
+
+      it "search by other network empty list" do
+        get :index, {ip: "198.51.100.10"}, valid_session
+        expect(assigns(:events)).to eq([])
+      end
+
     end
   end
 

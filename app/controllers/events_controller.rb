@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumb_show, only: [:show]
+  before_action :get_events, only: [:index]
 
   # GET /events
   def index
-    @events = Event.all
     respond_with(@events)
   end
 
@@ -52,9 +52,22 @@ class EventsController < ApplicationController
   end
 
   private
+
+    def get_events
+      if search_params[:ip]
+        @events = Event.by_network(search_params[:ip])
+      else
+        @events = Event.all
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def search_params
+      params.permit(:ip) 
     end
 
     # Only allow a trusted parameter "white list" through.
