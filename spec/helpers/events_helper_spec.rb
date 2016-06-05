@@ -21,4 +21,11 @@ END_OF_WHOIS
       expect(clean_whois(whois)).to eq("        hier ist der eigentliche Text\n")
     end
   end
+
+  describe "#events_by_ip" do
+    it "returns link to events_path with filter by ip" do
+      expect(events_by_ip("192.0.2.1")).to match(/events\?ip=192.0.2.1/)
+    end
+
+  end
 end

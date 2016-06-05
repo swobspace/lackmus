@@ -29,11 +29,11 @@
       <!-- ip addresses -->
       <div class="row"> 
         <div class="col-md-6">
-          <%= @event.src_ip %> /
+          <%= events_by_ip(@event.src_ip) %> /
           <%= IpLookup.hostname(@event.src_ip) %>
         </div>
         <div class="col-md-6">
-          <%= @event.dst_ip %> /
+          <%= events_by_ip(@event.dst_ip) %> /
           <%= IpLookup.hostname(@event.dst_ip) %>
         </div>
       </div>
