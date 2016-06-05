@@ -45,6 +45,21 @@ RSpec.describe EventsController, type: :controller do
       expect(assigns(:events)).to eq([event])
     end
 
+    describe "#not_done" do
+      let!(:first_event)  { FactoryGirl.create(:event, done: false) }
+      let!(:second_event) { FactoryGirl.create(:event, done: true) }
+
+      it "get all events" do
+        get :index, {all: 1}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event, second_event)
+      end
+
+      it "get unprocessed events" do
+        get :index, {}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event)
+      end
+    end
+
     describe "filtering networks" do
       let!(:first_event)  { FactoryGirl.create(:event, src_ip: "192.0.2.1") }
       let!(:second_event) { FactoryGirl.create(:event, dst_ip: "192.0.2.9") }

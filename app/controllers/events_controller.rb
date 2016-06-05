@@ -54,7 +54,11 @@ class EventsController < ApplicationController
   private
 
     def get_events
-      @events = Event.all
+      if search_params[:all]
+        @events = Event.all
+      else
+        @events = Event.not_done
+      end
       if search_params[:ip]
         @events = @events.by_network(search_params[:ip])
       end
@@ -70,7 +74,7 @@ class EventsController < ApplicationController
     end
 
     def search_params
-      params.permit(:ip, :since)
+      params.permit(:ip, :since, :all)
     end
 
     # Only allow a trusted parameter "white list" through.
