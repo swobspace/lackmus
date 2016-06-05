@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528140035) do
+ActiveRecord::Schema.define(version: 20160605161039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20160528140035) do
     t.text     "payload"
     t.text     "packet"
     t.integer  "stream",             limit: 2
-    t.boolean  "done"
-    t.boolean  "ignore"
+    t.boolean  "done",                                        default: false
+    t.boolean  "ignore",                                      default: false
     t.boolean  "has_http",                                    default: false
     t.integer  "severity",           limit: 2
     t.datetime "created_at",                                                  null: false
