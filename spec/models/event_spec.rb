@@ -31,8 +31,8 @@ RSpec.describe Event, type: :model do
   end
 
   describe "using scopes" do
-    let(:first_event) { FactoryGirl.build(:event) }
-    let(:last_event)  { FactoryGirl.build(:event) }
+    let(:first_event) { FactoryGirl.build(:event, event_time: Time.now - 2.hours ) }
+    let(:last_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
 
     describe "#most_current" do
       before(:each) do
