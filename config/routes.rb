@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  mount Wobauth::Engine, at: '/auth'
+  mount Wobauth::Engine, at: '/'
 
   root 'events#index'
 end
