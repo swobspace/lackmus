@@ -18,23 +18,33 @@ RSpec.describe Signature, type: :model do
   end
 
   describe "using scopes" do
-    let!(:sig)          { FactoryGirl.create(:signature, signature_id: 44444) }
+    let!(:noevent_sig)  { FactoryGirl.create(:signature, signature_id: 44444) }
     let!(:ignore_sig)   { FactoryGirl.create(:signature, signature_id: 66666,
                                             action: 'ignore') }
+    let!(:done_events_sig) { FactoryGirl.create(:signature, signature_id: 99999) }
+
     let!(:active_event) { FactoryGirl.create(:event, alert_signature_id: 55555,
                                         alert_signature: "Lorem Ipsum") }
-    let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 66666,
+    let!(:active_event2) { FactoryGirl.create(:event, alert_signature_id: 55555,
                                         alert_signature: "Lorem Ipsum") }
+    let!(:some_event)   { FactoryGirl.create(:event, alert_signature_id: 66666,
+                                        alert_signature: "Lorem Ipsum") }
+    let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 77777,
+                                        alert_signature: "Lorem Ipsum",
+                                        ignore: true ) }
+    let!(:done_event)   { FactoryGirl.create(:event, alert_signature_id: 99999,
+                                        alert_signature: "Lorem Ipsum",
+                                        done: true) }
 
     describe "#active" do
       it {expect(Signature.active).to contain_exactly(active_event.signature)}
     end
     describe "#current" do
       it { expect(Signature.current).to contain_exactly(active_event.signature,
-                                                        ignore_event.signature) }
+							ignore_sig) }
     end
     describe "#ignored" do
-      it { expect(Signature.ignored).to contain_exactly(ignore_event.signature) }
+      it { expect(Signature.ignored).to contain_exactly(ignore_sig) }
     end
   end
 

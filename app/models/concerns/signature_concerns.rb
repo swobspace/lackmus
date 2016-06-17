@@ -3,9 +3,11 @@ module SignatureConcerns
 
   included do
     scope :active, -> { 
-      where(["events_count > 0 AND action NOT IN (?)", ['drop', 'ignore']])
+      where(["action NOT IN (?)", ['drop', 'ignore']]).current
     }
-    scope :current, -> { where("events_count > 0") }
+    scope :current, -> { 
+      joins(:events).where(["events.ignore = ? AND events.done = ?", false, false]).uniq 
+    }
     scope :ignored, -> { where(["action IN (?)", ['drop', 'ignore']]) }
   end
 
