@@ -39,4 +39,9 @@ shared_context "syslog_variables" do
       "refer": "google-weiss-alles-dot.com"
     }
   }]}
+  let(:syslog_invalid_message) {%Q[{
+    "timestamp":"2016-05-17T21:36:29.461639+0200",
+    "flow_id":4168971770,
+    "in_iface":"eth1
+    ]}
 end

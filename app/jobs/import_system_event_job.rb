@@ -11,8 +11,12 @@ class ImportSystemEventJob < ActiveJob::Base
         if event.save
           sysevent.destroy
           LogEvent.log(event) if Rails.env.development?
+        else
+          LogSyslogsysevent.log(sysevent)
         end
-      rescue
+      rescue => e
+         Rails.logger.debug("RESCUE: #{e.inspect}") 
+         LogSyslogsysevent.log(sysevent)
       end
     end
   end
