@@ -15,20 +15,21 @@ module SystemeventConcerns
 private
 
   def direct_attributes
-    Hash[ 
+    Hash[
       Syslog::Systemevent::DIRECT_ATTRIBUTES.collect {|x| [x, eve[x]]}
     ]
   end
 
   def alert_attributes
-    Hash[ 
+    return {} if eve["alert"].nil?
+    Hash[
       Syslog::Systemevent::ALERT_ATTRIBUTES.collect {|x| ["alert_#{x}", eve["alert"][x]]}
     ]
   end
 
   def http_attributes
     return { "has_http" => false } unless eve["http"].present?
-    Hash[ 
+    Hash[
       Syslog::Systemevent::HTTP_ATTRIBUTES.collect {|x| [http_attrib_name(x), eve["http"][x]]}
     ].merge("has_http" => true)
   end
