@@ -16,6 +16,7 @@ private
   def logentry
     "#{event.sensor}: #{event.event_time} " +
     "[#{event.alert_gid}:#{event.alert_signature_id}:#{event.alert_rev}] " +
-    "#{event.alert_signature}"
+    "#{event.alert_signature} " +
+    "packetsize: #{event.payload.size + event.packet.size}"
   end
 end
