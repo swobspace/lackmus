@@ -1,7 +1,7 @@
 class CreateEventRules < ActiveRecord::Migration
   def change
     create_table :event_rules do |t|
-      t.integer :position
+      t.integer :position, default: 0
       t.text :filter, default: ""
       t.string :action, limit: 20
       t.integer :severity, limit: 1

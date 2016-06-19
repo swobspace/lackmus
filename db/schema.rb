@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160619151951) do
   enable_extension "plpgsql"
 
   create_table "event_rules", force: :cascade do |t|
-    t.integer  "position"
+    t.integer  "position",               default: 0
     t.text     "filter",                 default: ""
     t.string   "action",      limit: 20
     t.integer  "severity",    limit: 2
