@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "EventRules", type: :request do
+RSpec.describe "EventRules", type: :feature do
   describe "GET /event_rules" do
-    it "works! (now write some real specs)" do
-      get event_rules_path
-      expect(response).to have_http_status(200)
+    it "visits event_rules#index" do
+      login_user
+      visit event_rules_path
+      expect(current_path).to eq(event_rules_path)
     end
   end
 end
