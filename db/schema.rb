@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605161039) do
+ActiveRecord::Schema.define(version: 20160619151951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_rules", force: :cascade do |t|
+    t.integer  "position"
+    t.text     "filter",                 default: ""
+    t.string   "action",      limit: 20
+    t.integer  "severity",    limit: 2
+    t.datetime "valid_until"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "event_rules", ["action"], name: "index_event_rules_on_action", using: :btree
+  add_index "event_rules", ["position"], name: "index_event_rules_on_position", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "sensor",                                                      null: false
