@@ -20,6 +20,12 @@ FactoryGirl.define do
     proto "TCP"
   end
 
+  factory :event_rule do
+    filter {{ src_ip: "1.2.3.4", signature: 1234 }}
+    action "investigate"
+  end
+
+
   factory :signature do
     signature_id { generate(:number) }
     signature_info "brabbelfaselblub"
