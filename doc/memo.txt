@@ -1,0 +1,3 @@
+Process filter on Events:
+
+  Event.where(EventRule.first.filter.slice(*EventRule::FILTER_ATTRIBUTES).symbolize_keys)
