@@ -8,3 +8,5 @@
 * mark (all|single) events as done 
 
 * events: datatable
+
+* events#show: include ipinfo data (http://ipinfo.io/<ip>/geo)
