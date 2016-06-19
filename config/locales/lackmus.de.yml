@@ -30,6 +30,7 @@ de:
     models:
       user: User
       event: Event
+      event_rule: Filterregel
       signature: Signature
 
   attributes:
@@ -44,6 +45,7 @@ de:
     name: Name
     packet: Paket
     payload: Payload
+    position: Position
     references: Referenzen
     severity: Schweregrad (1=hoch, 3=niedrig)
     signature_id: SignaturID
@@ -55,4 +57,5 @@ de:
   controller:
     users: Benutzer
     events: Ereignisse
+    event_rules: Filterregeln
     signatures: Signaturen
