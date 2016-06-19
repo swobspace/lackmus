@@ -56,3 +56,15 @@ bin/rails g scaffold Signature \
   category:string \
   severity:integer{1}
 ```
+
+EventRule:
+------
+
+```
+bin/rails g scaffold EventRule \
+  'position:integer:index' \
+  'filter:text' \
+  'action:string{20}:index' \
+  'severity:integer{1}' \
+  'valid_until:datetime'
+```

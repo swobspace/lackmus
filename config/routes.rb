@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_rules
   resources :signatures do
     member do
       get 'pcap'

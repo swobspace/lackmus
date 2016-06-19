@@ -1,0 +1,36 @@
+<h1><%= t('controller.event_rules') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.position') %></th>
+    <th><%= t('attributes.filter') %></th>
+    <th><%= t('attributes.action') %></th>
+    <th><%= t('attributes.severity') %></th>
+    <th><%= t('attributes.valid_until') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @event_rules.each do |event_rule| %>
+  <%= content_tag_for(:tr, event_rule) do %>
+    <td><%= event_rule.position %></td>
+    <td><%= event_rule.filter %></td>
+    <td><%= event_rule.action %></td>
+    <td><%= event_rule.severity %></td>
+    <td><%= event_rule.valid_until %></td>
+    <td class="nowrap">
+      <%= show_link event_rule %>
+      <%= edit_link event_rule %>
+      <%= delete_link event_rule %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link EventRule %>

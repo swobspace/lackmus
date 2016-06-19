@@ -1,0 +1,29 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.position')%>:</th>
+    <td><%= @event_rule.position %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.filter')%>:</th>
+    <td><%= @event_rule.filter %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.action')%>:</th>
+    <td><%= @event_rule.action %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.severity')%>:</th>
+    <td><%= @event_rule.severity %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.valid_until')%>:</th>
+    <td><%= @event_rule.valid_until %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@event_rule) %>
+  <%= delete_link(@event_rule) %>
+  <%= new_link EventRule %>
+</div>
