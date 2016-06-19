@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe EventRulesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # EventRule. As you add validations to EventRule, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:event_rule)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { action: 'invalid' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe EventRulesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { severity: 99 }
       }
 
       it "updates the requested event_rule" do
         event_rule = EventRule.create! valid_attributes
         put :update, {:id => event_rule.to_param, :event_rule => new_attributes}, valid_session
         event_rule.reload
-        skip("Add assertions for updated state")
+        expect(event_rule.severity).to eq 99
       end
 
       it "assigns the requested event_rule as @event_rule" do

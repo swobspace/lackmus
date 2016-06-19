@@ -25,7 +25,7 @@ class EventRulesController < ApplicationController
 
   # POST /event_rules
   def create
-    @event_rule = EventRule.new(event_rule_params)
+    @event_rule = EventRule.new(event_rule_params.merge(filter: filter_params))
 
     @event_rule.save
     respond_with(@event_rule)
@@ -33,7 +33,12 @@ class EventRulesController < ApplicationController
 
   # PATCH/PUT /event_rules/1
   def update
-    @event_rule.update(event_rule_params)
+    update_params = if filter_params.present? 
+                      event_rule_params.merge(filter: filter_params)
+                    else
+                      event_rule_params
+                    end
+    @event_rule.update(update_params)
     respond_with(@event_rule)
   end
 
@@ -51,6 +56,10 @@ class EventRulesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_rule_params
-      params.require(:event_rule).permit(:position, :filter, :action, :severity, :valid_until)
+      params.require(:event_rule).permit(:position, :action, :severity, :valid_until)
+    end
+
+    def filter_params
+      params.require(:event_rule).fetch(:filter, nil)
     end
 end
