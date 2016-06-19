@@ -60,6 +60,7 @@ class EventRulesController < ApplicationController
     end
 
     def filter_params
-      params.require(:event_rule).fetch(:filter, {}).reject{|_, v| v.blank?}
+      params.require(:event_rule).permit(filter: EventRule::FILTER_ATTRIBUTES).
+        fetch(:filter, {}).reject{|_, v| v.blank?}
     end
 end
