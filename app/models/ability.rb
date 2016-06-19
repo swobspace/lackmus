@@ -11,9 +11,9 @@ class Ability
       can :manage, :all
       cannot [:update, :destroy], :roles, :ro => :true
     else
-      can :navigate, [:events, :signatures]
+      can :navigate, [:events, :event_rules, :signatures]
       can :manage, [Event]
-      can :read, [Signature]
+      can :read, [Signature, EventRule]
     end
 
   end
