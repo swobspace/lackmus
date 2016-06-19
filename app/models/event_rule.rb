@@ -5,6 +5,9 @@ class EventRule < ActiveRecord::Base
   serialize :filter, Hash
   ACTIONS = ['drop', 'ignore', 'investigate', 'alert']
 
+  FILTER_ATTRIBUTES = [ 'src_ip', 'src_port', 'dst_ip', 'dst_port',
+                        'signature_id' ]
+
   acts_as_list
 
   # -- validations and callbacks
