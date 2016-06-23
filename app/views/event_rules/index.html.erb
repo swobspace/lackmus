@@ -19,7 +19,7 @@
     <td><%= event_rule.filter %></td>
     <td><%= event_rule.action %></td>
     <td><%= event_rule.severity %></td>
-    <td><%= event_rule.valid_until %></td>
+    <td><%= event_rule.valid_until.to_s %></td>
     <td class="nowrap">
       <%= show_link event_rule %>
       <%= edit_link event_rule %>
