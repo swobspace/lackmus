@@ -1,6 +1,7 @@
 class EventRule < ActiveRecord::Base
   # include EventRuleConcerns
   # -- associations
+  has_many :events, dependent: :nullify
   # -- configuration
   serialize :filter, Hash
   ACTIONS = [

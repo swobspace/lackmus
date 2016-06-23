@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   it { is_expected.to belong_to(:signature) }
+  it { is_expected.to belong_to(:event_rule) }
 
   it { is_expected.to validate_presence_of(:sensor) }
   it { is_expected.to validate_presence_of(:event_time) }

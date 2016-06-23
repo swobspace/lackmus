@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :signature, counter_cache: true,
              foreign_key: :alert_signature_id,
              primary_key: :signature_id
+  belongs_to :event_rule
 
   # -- configuration
   alias_attribute :dest_ip, :dst_ip

@@ -1,5 +1,6 @@
 * search for events (search form):
   - by IP
+    -- grouped by signature
   - by date
   - generate PCAP for all results
 
@@ -9,4 +10,24 @@
 
 * events: datatable
 
-* events#show: include ipinfo data (http://ipinfo.io/<ip>/geo)
+* events#index: 
+  - link to signature
+
+* events#show: 
+
+  - whois frame lower height
+  - include ipinfo data (http://ipinfo.io/<ip>/geo)
+  - include firehol.org blocklist info
+  - include www.threatcrowd.org info (ip + domain)
+  - link to signature
+  - link to all sigs with this ip
+
+* process ip or signature:
+
+  - i.e. search for IP
+  - create PCAP and summary mail
+  - mark events as done
+
+* bootstrap: responsive -> full page
+
+* 

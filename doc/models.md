@@ -40,7 +40,8 @@ bin/rails g scaffold Event \
   'done:boolean' \
   'ignore:boolean' \
   'has_http:boolean' \
-  'severity:integer{1}'
+  'severity:integer{1}' \
+  'event_rule:references'
 ```
 
 Signature:
