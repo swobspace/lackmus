@@ -8,6 +8,8 @@ module EventConcerns
     }
     scope :since, ->(timestamp) { where(["event_time >= ?", timestamp]) }
     scope :not_done, -> { where(done: false) }
+
+    scope :assign_filter, -> {}
   end
 
   def connection

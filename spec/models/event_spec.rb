@@ -76,4 +76,24 @@ RSpec.describe Event, type: :model do
     end
   end
  
+  describe "#assign_filter" do
+    let(:event1) { FactoryGirl.create(:event, src_ip: "1.2.3.4") }
+    let(:event2) { FactoryGirl.create(:event, alert_signature_id: 44444) }
+    let(:event3) { FactoryGirl.create(:event, dst_ip: "5.6.7.8") }
+
+    let!(:event_rule1) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
+    let!(:event_rule2) {FactoryGirl.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
+    let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 4, filter: {"dst_ip"=>"5.6.7.8"})}
+
+    before(:each) do
+      events = [event1, event2, event3]
+      events.assign_filter
+    end
+
+    it {expect(event_rule1.events).to contain_exactly(event1)}
+    it {expect(event_rule2.events).to contain_exactly(event2)}
+    it {expect(event_rule3.events).to contain_exactly(event3)}
+
+  end
+ 
 end
