@@ -22,7 +22,7 @@ class EventRule < ActiveRecord::Base
   validates :action, :allow_blank => false,
             :inclusion => {
               in: EventRule::ACTIONS,
-              message: "Select one of #{Signature::ACTIONS.join(", ")}"
+              message: "Select one of #{EventRule::ACTIONS.join(", ")}"
             }
 
 end
