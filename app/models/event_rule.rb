@@ -1,5 +1,5 @@
 class EventRule < ActiveRecord::Base
-  # include EventRuleConcerns
+  include EventRuleConcerns
   # -- associations
   has_many :events, dependent: :nullify
   # -- configuration

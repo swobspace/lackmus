@@ -17,4 +17,13 @@ RSpec.describe EventRule, type: :model do
     expect(g).to be_valid
   end
 
+  describe "#ar_filter" do
+    let(:event_rule) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4", "brabbel" => "fasel"})}
+
+    it {expect(event_rule.ar_filter).to include(src_ip: "1.2.3.4")}
+    it {expect(event_rule.ar_filter).not_to include("src_ip")}
+    it {expect(event_rule.ar_filter).not_to include(:brabbel)}
+    it {expect(event_rule.ar_filter).not_to include("brabbel")}
+
+  end
 end
