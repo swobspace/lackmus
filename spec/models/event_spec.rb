@@ -50,7 +50,7 @@ RSpec.describe Event, type: :model do
         events = [first_event.save, second_event.save]
       end
       it {expect(Event.by_network("192.0.2.1")).to contain_exactly(first_event)}
-      it {expect(Event.by_network("192.0.2.0/24")).to contain_exactly(first_event)}
+      it {expect(Event.by_network("192.0.2.0/25")).to contain_exactly(first_event)}
       it {expect(Event.by_network("198.51.100.1")).to contain_exactly(second_event)}
       it {expect(Event.by_network("198.51.100.0/29")).to contain_exactly(second_event)}
       it {expect(Event.by_network("192.0.2.64/26")).not_to include(first_event)}
@@ -76,23 +76,31 @@ RSpec.describe Event, type: :model do
     end
   end
  
-  describe "#assign_filter" do
-    let(:event1) { FactoryGirl.create(:event, src_ip: "1.2.3.4") }
-    let(:event2) { FactoryGirl.create(:event, alert_signature_id: 44444) }
-    let(:event3) { FactoryGirl.create(:event, dst_ip: "5.6.7.8") }
+  describe "#unassigned" do
+    let!(:event1) { FactoryGirl.create(:event, event_rule_id: 999) }
+    let!(:event2) { FactoryGirl.create(:event) }
+
+    it { expect(Event.unassigned).to contain_exactly(event2) }
+  
+  end
+
+  describe "#assign_filters" do
+    let!(:event1) { FactoryGirl.create(:event, src_ip: "1.2.3.4") }
+    let!(:event2) { FactoryGirl.create(:event, alert_signature_id: 44444) }
+    let!(:event3) { FactoryGirl.create(:event, dst_ip: "5.6.7.8") }
 
     let!(:event_rule1) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
     let!(:event_rule2) {FactoryGirl.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
     let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 4, filter: {"dst_ip"=>"5.6.7.8"})}
 
     before(:each) do
-      events = [event1, event2, event3]
-      events.assign_filter
+      Event.unassigned.assign_filters(event_rule1)
+      Event.unassigned.assign_filters(event_rule2)
     end
 
     it {expect(event_rule1.events).to contain_exactly(event1)}
     it {expect(event_rule2.events).to contain_exactly(event2)}
-    it {expect(event_rule3.events).to contain_exactly(event3)}
+    it {expect(event_rule3.events).to contain_exactly()}
 
   end
  

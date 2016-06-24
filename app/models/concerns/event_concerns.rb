@@ -8,8 +8,13 @@ module EventConcerns
     }
     scope :since, ->(timestamp) { where(["event_time >= ?", timestamp]) }
     scope :not_done, -> { where(done: false) }
+    scope :unassigned, -> { where(event_rule_id: nil) }
+  end
 
-    scope :assign_filter, -> {}
+  class_methods do
+    def assign_filters(event_rule)
+      where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
+    end
   end
 
   def connection
