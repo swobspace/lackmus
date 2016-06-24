@@ -1,4 +1,16 @@
+* start_page:
+
+  - Signature.most_current(24hours)
+
+* navigation:
+
+  - Signature
+    x active: not done, not ignored
+    x current: last 24, 48, 72 hours
+    x unassigned (not filter/event_rule assigned)
+
 * search for events (search form):
+
   - by IP
     -- grouped by signature
   - by date
@@ -11,6 +23,7 @@
 * events: datatable
 
 * events#index: 
+
   - link to signature
 
 * events#show: 
@@ -21,6 +34,15 @@
   - include www.threatcrowd.org info (ip + domain)
   - link to signature
   - link to all sigs with this ip
+  - button mark done
+
+* event_rules#index:
+
+  - event count
+
+* event_rules#show:
+
+  - list of events (see signatures#show)
 
 * process ip or signature:
 
@@ -30,4 +52,6 @@
 
 * bootstrap: responsive -> full page
 
-* 
+* IpLookup.whois:
+
+  - catch 255.255.255.255 and others 
