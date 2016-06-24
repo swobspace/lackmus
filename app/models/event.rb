@@ -12,7 +12,8 @@ class Event < ActiveRecord::Base
   alias_attribute :timestamp, :event_time
 
   # -- validations and callbacks
-  before_save :import_signature
+  before_save   :import_signature
+  before_create :assign_filter
 
   validates :sensor, :event_time, :src_ip, :dst_ip, :proto, presence: true
 

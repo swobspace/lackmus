@@ -35,7 +35,7 @@ RSpec.describe Event, type: :model do
     let(:first_event) { FactoryGirl.build(:event, event_time: Time.now - 2.hours ) }
     let(:second_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
 
-    describe "#most_current" do
+    describe "::most_current" do
       before(:each) do
         events = [first_event.save]
         events << second_event.save
@@ -43,7 +43,7 @@ RSpec.describe Event, type: :model do
       it {expect(Event.most_current(1)).to contain_exactly(second_event)}
     end
  
-    describe "#by_network" do
+    describe "::by_network" do
       before(:each) do
         first_event.src_ip = "192.0.2.1"
         second_event.dst_ip = "198.51.100.1"
@@ -56,7 +56,7 @@ RSpec.describe Event, type: :model do
       it {expect(Event.by_network("192.0.2.64/26")).not_to include(first_event)}
     end
 
-    describe "#since" do
+    describe "::since" do
       before(:each) do
         first_event.event_time = (Time.now - 1.day)
         second_event.event_time = (Time.now)
@@ -66,7 +66,7 @@ RSpec.describe Event, type: :model do
       it {expect(Event.since(Date.today)).to contain_exactly(second_event)}
     end
 
-    describe "#not_done" do
+    describe "::not_done" do
       before(:each) do
         first_event.done = true
         second_event.done = false
@@ -76,7 +76,7 @@ RSpec.describe Event, type: :model do
     end
   end
  
-  describe "#unassigned" do
+  describe "::unassigned" do
     let!(:event1) { FactoryGirl.create(:event, event_rule_id: 999) }
     let!(:event2) { FactoryGirl.create(:event) }
 
@@ -84,23 +84,49 @@ RSpec.describe Event, type: :model do
   
   end
 
-  describe "#assign_filters" do
+  describe "assigning filters" do
     let!(:event1) { FactoryGirl.create(:event, src_ip: "1.2.3.4") }
     let!(:event2) { FactoryGirl.create(:event, alert_signature_id: 44444) }
     let!(:event3) { FactoryGirl.create(:event, dst_ip: "5.6.7.8") }
 
     let!(:event_rule1) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
     let!(:event_rule2) {FactoryGirl.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
-    let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 4, filter: {"dst_ip"=>"5.6.7.8"})}
+    let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 3, filter: {"dst_ip"=>"5.6.7.8"})}
 
-    before(:each) do
-      Event.unassigned.assign_filters(event_rule1)
-      Event.unassigned.assign_filters(event_rule2)
+    context "::assign_filter(filter)" do
+      before(:each) do
+        Event.unassigned.assign_filter(event_rule1)
+        Event.unassigned.assign_filter(event_rule2)
+      end
+
+      it {expect(event_rule1.events).to contain_exactly(event1)}
+      it {expect(event_rule2.events).to contain_exactly(event2)}
+      it {expect(event_rule3.events).to contain_exactly()}
     end
 
-    it {expect(event_rule1.events).to contain_exactly(event1)}
-    it {expect(event_rule2.events).to contain_exactly(event2)}
-    it {expect(event_rule3.events).to contain_exactly()}
+    context "::assign_filters" do
+      before(:each) do
+        Event.assign_filters
+      end
+
+      it {expect(event_rule1.events).to contain_exactly(event1)}
+      it {expect(event_rule2.events).to contain_exactly(event2)}
+      it {expect(event_rule3.events).to contain_exactly(event3)}
+    end
+  end
+ 
+  describe "#assign_filter" do
+    let!(:event) { FactoryGirl.create(:event, alert_signature_id: "44444") }
+
+    let!(:event_rule1) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
+    let!(:event_rule2) {FactoryGirl.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
+    let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 3, filter: {"dst_ip"=>"5.6.7.8"})}
+
+    before(:each) do
+      event.assign_filter
+    end
+
+    it { expect(event.event_rule).to eq(event_rule2) }
 
   end
  

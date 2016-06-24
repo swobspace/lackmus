@@ -12,7 +12,13 @@ module EventConcerns
   end
 
   class_methods do
-    def assign_filters(event_rule)
+    def assign_filters
+      EventRule.all.each do |event_rule|
+        unassigned.assign_filter(event_rule)
+      end
+    end
+    
+    def assign_filter(event_rule)
       where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
     end
   end
@@ -51,6 +57,22 @@ module EventConcerns
 
   def raw_payload
     @raw_payload ||= Base64.decode64(payload)
+  end
+
+
+  def assign_filter
+    EventRule.order(:position).each do |event_rule|
+      if Hash[event_rule.filter] == strattributes.slice(*event_rule.filter.keys)
+        update_attributes(event_rule_id: event_rule.id)
+        break
+      end
+    end
+  end
+
+private
+
+  def strattributes
+    @strattributes ||= attributes.map{|k,v| [k, v.to_s]}.to_h
   end
 
 end
