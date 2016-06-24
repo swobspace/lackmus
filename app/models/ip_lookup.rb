@@ -23,6 +23,7 @@ class IpLookup
   end
 
   def get_whois
+    return nil if @ip_addr =~ /(0.0.0.0|255.255.255.255)/
     Rails.cache.fetch("ip/#{ip_addr}/whois") do
       begin
         Whois::Client.new(timeout: 2).lookup(ip_addr)
