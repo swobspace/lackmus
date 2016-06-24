@@ -15,13 +15,13 @@ FactoryGirl.define do
   factory :event do
     event_time Time.now
     sensor "bordergate"
-    src_ip "1.2.3.4"
-    dst_ip "5.6.7.8"
+    src_ip "192.0.2.199"
+    dst_ip "192.0.2.201"
     proto "TCP"
   end
 
   factory :event_rule do
-    filter {{ src_ip: "1.2.3.4", signature: 1234 }}
+    filter {{ src_ip: "192.0.2.199", signature: 1234 }}
     action "investigate"
   end
 
