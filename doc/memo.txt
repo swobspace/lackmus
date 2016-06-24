@@ -1,3 +1,26 @@
-Process filter on Events:
+# Process filter on Events:
 
   Event.where(EventRule.first.filter.slice(*EventRule::FILTER_ATTRIBUTES).symbolize_keys)
+
+
+# Check filter <-> event match:
+
+  h1 = event.attributes.slice(*f.keys).map{|k,v| [k, v.to_s]}.to_h
+  h2 = Hash[event_rule.filter]
+  h1 == h2
+
+  possible strategie:
+
+  attributes = event.attributes.map{|k,v| [k, v.to_s]}.to_h
+
+  EventRule.order(:position).each do |event_rule|
+    if Hash[event_rule.filter] == attributes.slice(*event_rule.filter.keys)
+      event.update_attributes(event_rule_id: event_rule.id)
+      break
+    end
+  end
+
+# Signatures with current events
+
+  Signature.where(signature_id: Event.where(['event_time > ?', Time.now - 1.day]).
+    group(:alert_signature_id).pluck(:alert_signature_id))
