@@ -37,11 +37,12 @@ RSpec.describe Signature, type: :model do
                                         done: true) }
 
     describe "#active" do
-      it {expect(Signature.active).to contain_exactly(active_event.signature)}
+      it {expect(Signature.active).to contain_exactly(active_event.signature, 
+            done_event.signature, noevent_sig, ignore_event.signature)}
     end
     describe "#current" do
-      it { expect(Signature.current).to contain_exactly(active_event.signature,
-							ignore_sig) }
+      it { expect(Signature.active.joins(:events).merge(Event.active).uniq).
+             to contain_exactly(active_event.signature) }
     end
     describe "#ignored" do
       it { expect(Signature.ignored).to contain_exactly(ignore_sig) }

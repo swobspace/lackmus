@@ -24,3 +24,6 @@
 
   Signature.where(signature_id: Event.where(['event_time > ?', Time.now - 1.day]).
     group(:alert_signature_id).pluck(:alert_signature_id))
+
+  Signature.joins(:events).merge(Event.since(Time.now - 1.day))
+

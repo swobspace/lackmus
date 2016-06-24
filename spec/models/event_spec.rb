@@ -31,7 +31,7 @@ RSpec.describe Event, type: :model do
     expect(e.payload_printable).to eq("Unversch..sselter .. Text.")
   end
 
-  describe "using scopes" do
+  describe "with scope" do
     let(:first_event) { FactoryGirl.build(:event, event_time: Time.now - 2.hours ) }
     let(:second_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
 
@@ -74,6 +74,14 @@ RSpec.describe Event, type: :model do
       end
       it {expect(Event.not_done).to contain_exactly(second_event)}
     end
+  end
+ 
+  describe "with scope ::active" do
+    let!(:active_event) { FactoryGirl.create(:event) }
+    let!(:ignore_event) { FactoryGirl.create(:event, ignore: true) }
+    let!(:done_event)   { FactoryGirl.create(:event, done: true) }
+
+    it { expect(Event.active).to contain_exactly(active_event) }
   end
  
   describe "::unassigned" do
