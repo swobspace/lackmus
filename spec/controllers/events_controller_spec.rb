@@ -101,6 +101,26 @@ RSpec.describe EventsController, type: :controller do
       end
     end
 
+    describe "filter by sensor" do
+      let!(:first_event)  { FactoryGirl.create(:event, sensor: "lukcy") }
+      let!(:second_event) { FactoryGirl.create(:event, sensor: "luuke") }
+
+      it "search by sensor returns first event" do
+        get :index, {sensor: "lukcy"}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event)
+      end
+    end
+
+    describe "filter by httphost" do
+      let!(:first_event)  { FactoryGirl.create(:event, http_hostname: "castor", has_http: true) }
+      let!(:second_event) { FactoryGirl.create(:event, http_hostname: "pollux", has_http: false) }
+
+      it "search by httphost returns first event" do
+        get :index, {httphost: "castor"}, valid_session
+        expect(assigns(:events)).to contain_exactly(first_event)
+      end
+    end
+
   end
 
   describe "GET #show" do
