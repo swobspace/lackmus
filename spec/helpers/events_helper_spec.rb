@@ -26,6 +26,5 @@ END_OF_WHOIS
     it "returns link to events_path with filter by ip" do
       expect(events_by_ip("192.0.2.1")).to match(/events\?ip=192.0.2.1/)
     end
-
   end
 end

@@ -29,11 +29,11 @@
 	<td class="center"><%= check_box_tag "event_ids[]", event.id %></td>
         <td><%= link_to(event.sensor, events_path(sensor: event.sensor)) %></td>
 	<td><%= event.event_time.to_s(:precision) %></td>
-	<td><%= events_by_ip(event.src_ip) %> / 
+	<td><%= signatures_by_ip(event.src_ip) %> / 
 	    <%= IpLookup.hostname(event.src_ip) %>
 	</td>
 	<td><%= event.src_port %></td>
-	<td><%= events_by_ip(event.dst_ip) %> / 
+	<td><%= signatures_by_ip(event.dst_ip) %> / 
 	    <%= IpLookup.hostname(event.dst_ip) %>
 	</td>
 	<td><%= event.dst_port %></td>

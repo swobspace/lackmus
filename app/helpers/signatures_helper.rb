@@ -31,4 +31,8 @@ module SignaturesHelper
       "#{signature}"
     end
   end
+
+  def signatures_by_ip(ip)
+    link_to "#{ip}", signatures_path(ip: ip)
+  end
 end

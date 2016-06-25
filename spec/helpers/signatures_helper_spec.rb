@@ -15,4 +15,9 @@ RSpec.describe SignaturesHelper, type: :helper do
       end
     end
   end
+  describe "#signatures_by_ip" do
+    it "returns link to signatures_path with filter by ip" do
+      expect(signatures_by_ip("192.0.2.1")).to match(/signatures\?ip=192.0.2.1/)
+    end
+  end
 end

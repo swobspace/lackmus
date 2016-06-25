@@ -73,6 +73,7 @@ class SignaturesController < ApplicationController
     end
 
     # how to use the parameter :filter
+    # /signatures?by_network=<ip>
     # /signatures?filter=current : active sigs with events within 24h
     # /signatures?filter=current&since=48 : active sigs with events within 48h
     # /signatures?filter=ignored : ignored signatures
@@ -80,7 +81,12 @@ class SignaturesController < ApplicationController
     # a signature is active if signature.drop=false and signature.ignore=false
 
     def get_signatures
-        @filter_info = t('lackmus.signatures.choosen_filter') + ": "
+      @filter_info = t('lackmus.signatures.choosen_filter') + ": "
+      @signatures  = Signature.active.joins(:events)
+
+      if params[:ip]
+        @signatures = @signatures.merge(Event.by_network(params[:ip]))
+      end
       if params[:filter] == 'ignored'
         @signatures   = Signature.ignored.includes(:events)
         @filter_info += t('lackmus.signatures.ignored')
@@ -92,16 +98,15 @@ class SignaturesController < ApplicationController
         end
         since = Time.now - hours
         @filter_info += t('lackmus.signatures.since') + " " + since.to_s
-        @signatures = Signature.active.joins(:events).
-                        merge(Event.active).merge(Event.since(since)).uniq
+        @signatures = @signatures.merge(Event.active).merge(Event.since(since)).uniq
       elsif params[:filter] == 'all'
         @signatures = Signature.all
         @filter_info += t('lackmus.signatures.all')
       elsif params[:filter] == 'unassigned'
-        @signatures = Signature.joins(:events).merge(Event.unassigned).uniq
+        @signatures = @signatures.merge(Event.unassigned).uniq
         @filter_info += t('lackmus.signatures.unassigned')
       else
-        @signatures = Signature.active.joins(:events).merge(Event.active).uniq
+        @signatures = @signatures.merge(Event.active).uniq
         @filter_info += t('lackmus.signatures.active')
       end
     end

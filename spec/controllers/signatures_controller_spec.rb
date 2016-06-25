@@ -51,7 +51,6 @@ RSpec.describe SignaturesController, type: :controller do
     end
     it "with filter :ignored" do
       expect(Signature).to receive(:ignored).and_return(Signature.none)
-      expect(Signature).not_to receive(:active)
       get :index, {filter: 'ignored'}, valid_session
     end
     it "with filter :current" do
@@ -64,9 +63,12 @@ RSpec.describe SignaturesController, type: :controller do
       expect(Event).to receive(:unassigned).and_return(Event.none)
       get :index, {filter: 'unassigned'}, valid_session
     end
+    it "with filter :ip" do
+      expect(Event).to receive(:by_network).and_return(Event.none)
+      get :index, {ip: '1.2.3.4'}, valid_session
+    end
     it "shows all signatures with filter: all" do
       expect(Signature).not_to receive(:ignored)
-      expect(Signature).not_to receive(:active)
       get :index, {filter: 'all'}, valid_session
     end
   end
