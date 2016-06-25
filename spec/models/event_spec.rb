@@ -56,6 +56,27 @@ RSpec.describe Event, type: :model do
       it {expect(Event.by_network("192.0.2.64/26")).not_to include(first_event)}
     end
 
+    describe "::by_sensor" do
+      before(:each) do
+        first_event.sensor = "gate1"
+        second_event.sensor = "gate2"
+        events = [first_event.save, second_event.save]
+      end
+      it {expect(Event.by_sensor("gate1")).to contain_exactly(first_event)}
+      it {expect(Event.by_sensor("gate3")).to contain_exactly()}
+    end
+
+    describe "::by_httphost" do
+      before(:each) do
+        first_event.http_hostname = "loriot"
+        first_event.has_http = true
+        second_event.http_hostname = "loriot"
+        second_event.has_http = false
+        events = [first_event.save, second_event.save]
+      end
+      it {expect(Event.by_httphost("loriot")).to contain_exactly(first_event)}
+    end
+
     describe "::since" do
       before(:each) do
         first_event.event_time = (Time.now - 1.day)

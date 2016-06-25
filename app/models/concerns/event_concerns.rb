@@ -6,6 +6,10 @@ module EventConcerns
     scope :by_network, ->(network) { 
        where(["src_ip <<= :ip or dst_ip <<= :ip", ip: network]) 
     }
+    scope :by_sensor, ->(sensor) { where(sensor: sensor) }
+    scope :by_httphost, ->(hostname) { 
+      where(has_http: true, http_hostname: hostname)
+    }
     scope :since, ->(timestamp) { where(["event_time >= ?", timestamp]) }
     scope :not_done, -> { where(done: false) }
     scope :active, -> { where(done: false, ignore: false) }
