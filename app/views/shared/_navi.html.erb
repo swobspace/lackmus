@@ -19,8 +19,9 @@
         <li> <%=link_to t('lackmus.signatures.current48'), main_app.signatures_path(filter: 'current', since: '48') %></li>
         <li> <%=link_to t('lackmus.signatures.current_week'), main_app.signatures_path(filter: 'current', since: '168') %></li>
         <li> <%=link_to t('lackmus.signatures.active'), main_app.signatures_path %></li>
+        <li> <%=link_to t('lackmus.signatures.unassigned'), main_app.signatures_path(filter: 'unassigned') %></li>
         <li role="separator" class="divider"></li>
-        <li> <%=link_to t('lackmus.signatures.ingored'), main_app.signatures_path(filter: 'ignored') %></li>
+        <li> <%=link_to t('lackmus.signatures.ignored'), main_app.signatures_path(filter: 'ignored') %></li>
         <li> <%=link_to t('lackmus.signatures.all'), main_app.signatures_path(filter: 'all') %></li>
       </ul>
     </li>

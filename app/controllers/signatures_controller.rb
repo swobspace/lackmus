@@ -95,8 +95,11 @@ class SignaturesController < ApplicationController
         @signatures = Signature.active.joins(:events).
                         merge(Event.active).merge(Event.since(since)).uniq
       elsif params[:filter] == 'all'
-        @signatures = Signature.includes(:events).all
+        @signatures = Signature.all
         @filter_info += t('lackmus.signatures.all')
+      elsif params[:filter] == 'unassigned'
+        @signatures = Signature.joins(:events).merge(Event.unassigned).uniq
+        @filter_info += t('lackmus.signatures.unassigned')
       else
         @signatures = Signature.active.joins(:events).merge(Event.active).uniq
         @filter_info += t('lackmus.signatures.active')

@@ -15,6 +15,7 @@ de:
       last: letzte
       since: seit
       all: Alle Signaturen
+      unassigned: Aktive Signaturen mit Events ohne Filter
     really: wirklich
     truly: Echt jetzt?
     since_today: seit heute

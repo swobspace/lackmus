@@ -60,6 +60,10 @@ RSpec.describe SignaturesController, type: :controller do
       expect(Signature).not_to receive(:ignored)
       get :index, {filter: 'current'}, valid_session
     end
+    it "with filter :unassigned" do
+      expect(Event).to receive(:unassigned).and_return(Event.none)
+      get :index, {filter: 'unassigned'}, valid_session
+    end
     it "shows all signatures with filter: all" do
       expect(Signature).not_to receive(:ignored)
       expect(Signature).not_to receive(:active)
