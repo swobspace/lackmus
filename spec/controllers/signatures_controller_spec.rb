@@ -44,17 +44,17 @@ RSpec.describe SignaturesController, type: :controller do
       get :index, {}, valid_session
       expect(assigns(:signatures)).to eq([signature])
     end
-    it "uses scope #active" do
+    it "with filter :active" do
       expect(Signature).to receive(:active).and_return(Signature.none)
       expect(Signature).not_to receive(:ignored)
       get :index, {}, valid_session
     end
-    it "uses scope #ignored" do
+    it "with filter :ignored" do
       expect(Signature).to receive(:ignored).and_return(Signature.none)
       expect(Signature).not_to receive(:active)
       get :index, {filter: 'ignored'}, valid_session
     end
-    it "uses scope #current" do
+    it "with filter :current" do
       signature = FactoryGirl.create(:signature)
       expect(Signature).to receive(:active).and_return(Signature.none)
       expect(Signature).not_to receive(:ignored)
