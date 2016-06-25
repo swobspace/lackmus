@@ -1,14 +1,3 @@
-* start_page:
-
-  - Signature.most_current(24hours)
-
-* navigation:
-
-  - Signature
-    x active: not done, not ignored
-    x current: last 24, 48, 72 hours
-    x unassigned (not filter/event_rule assigned)
-
 * search for events (search form):
 
   - by IP
@@ -18,13 +7,11 @@
 
 * create a report per IP as txt, pdf, ... 
 
-* mark (all|single) events as done 
-
-* events: datatable
-
 * events#index: 
 
+  # implement datatable
   - link to signature
+  - mark (all|single) events as done 
 
 * events#show: 
 
@@ -52,6 +39,3 @@
 
 * bootstrap: responsive -> full page
 
-* IpLookup.whois:
-
-  - catch 255.255.255.255 and others 
