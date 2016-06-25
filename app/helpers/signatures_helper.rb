@@ -22,4 +22,13 @@ module SignaturesHelper
     link += %Q[</div>]
     link.html_safe
   end
+
+  def signature_id_link(signature)
+    sig = Signature.where(signature_id: signature).first
+    if sig.present?
+      link_to(signature, signature_path(sig))
+    else
+      "#{signature}"
+    end
+  end
 end
