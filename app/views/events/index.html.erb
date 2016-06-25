@@ -1,5 +1,7 @@
 <h1><%= t('controller.events') %></h1>
 
+<%= render partial: 'shared/filter_info' %>
+
 <table id="dataTable" class="table table-bordered table-striped dataTable">
 <thead>
   <tr>
@@ -36,7 +38,7 @@
     <td><%= event.alert_signature %></td>
     <td><%= event.alert_category %></td>
     <td><%= event.alert_severity %></td>
-    <td><%= event.http_hostname %></td>
+    <td><%= link_to_unless(event.http_hostname.blank?, event.http_hostname, events_path(httphost: event.http_hostname)) %></td>
     <td><%= event.done %></td>
     <td><%= event.ignore %></td>
     <td><%= event.severity %></td>
