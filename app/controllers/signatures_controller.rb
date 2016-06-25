@@ -72,15 +72,29 @@ class SignaturesController < ApplicationController
       @signature = Signature.find(params[:id])
     end
 
+    # how to use the parameter :filter
+    # /signatures?filter=current : active sigs with events within 24h
+    # /signatures?filter=current&since=48 : active sigs with events within 48h
+    # /signatures?filter=ignored : ignored signatures
+    # /signatures?filter=all     : all signatures (including sigs without events)
+    # a signature is active if signature.drop=false and signature.ignore=false
+
     def get_signatures
       if params[:filter] == 'ignored'
-        @signatures = Signature.ignored
+        @signatures = Signature.ignored.includes(:events)
       elsif params[:filter] == 'current'
-        @signatures = Signature.current
+        if params[:since].present?
+          hours = (params[:since].to_i).hours
+        else
+          hours = 24.hours
+        end
+        since = Time.now - hours
+        @signatures = Signature.active.joins(:events).
+                        merge(Event.active).merge(Event.since(since)).uniq
       elsif params[:filter] == 'all'
-        @signatures = Signature.all
+        @signatures = Signature.includes(:events).all
       else
-        @signatures = Signature.active
+        @signatures = Signature.active.joins(:events).merge(Event.active).uniq
       end
     end
 
