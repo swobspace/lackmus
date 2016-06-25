@@ -1,5 +1,5 @@
 <div class="signature_header">
-    <%= @event.alert_signature_id %>
+    <%= signature_id_link(@event.alert_signature_id) %>
     <%= @event.alert_signature %>
 </div>
 <div class="signature_subtitle">
@@ -59,14 +59,14 @@
 
   <tr>
     <th><%= t('attributes.alert_signature_id')%>:</th>
-    <td>[<%= @event.alert_gid %>:<%= @event.alert_signature_id%>:<%= @event.alert_rev %>]
+    <td>[<%= @event.alert_gid %>:<%= signature_id_link(@event.alert_signature_id)%>:<%= @event.alert_rev %>]
         <%= @event.alert_signature %> / <%= @event.alert_category %> / 
         Severity: <%= @event.alert_severity %></td>
   </tr>
  <% if @event.has_http %>
   <tr>
     <th><%= t('attributes.http_hostname')%>:</th>
-    <td><%= @event.http_hostname %></td>
+    <td><%= link_to @event.http_hostname, events_path(http_host: @event.http_hostname) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.http_xff')%>:</th>
