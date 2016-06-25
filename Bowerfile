@@ -1,6 +1,8 @@
 # A sample Bowerfile
 # Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
 
+asset 'jquery', '~> 2'
+
 # asset 'bootstrap'# >>> wob template
 asset 'bootstrap-sass'
 asset 'datatables' do
@@ -23,6 +25,6 @@ asset 'jszip'
 asset 'pdfmake'
 # <<< wob template end
 
-asset 'select2'
-asset 'select2-bootstrap-css'
+asset 'select2', '~> 4'
+asset 'select2-bootstrap-theme'
 
