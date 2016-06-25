@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   mount Wobauth::Engine, at: '/'
 
-  root 'events#index'
+  root 'signatures#index', filter: 'current'
 end
