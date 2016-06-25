@@ -25,14 +25,14 @@
 
 <% @events.each do |event| %>
   <%= content_tag_for(:tr, event) do %>
-    <td><%= event.sensor %></td>
+    <td><%= link_to(event.sensor, events_path(sensor: event.sensor)) %></td>
     <td><%= event.event_time.to_s(:precision) %></td>
     <td><%= events_by_ip(event.src_ip) %></td>
     <td><%= event.src_port %></td>
     <td><%= events_by_ip(event.dst_ip) %></td>
     <td><%= event.dst_port %></td>
     <td><%= event.proto %></td>
-    <td><%= link_to(event.alert_signature_id, signature_path(event.signature)) %></td>
+    <td><%= link_to event.alert_signature_id, signature_path(event.alert_signature_id) %></td>
     <td><%= event.alert_signature %></td>
     <td><%= event.alert_category %></td>
     <td><%= event.alert_severity %></td>
