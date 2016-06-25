@@ -44,7 +44,6 @@
     <td><%= event.severity %></td>
     <td class="nowrap">
       <%= show_link event %>
-      <%= edit_link event %>
       <%= delete_link event %>
       <%= link_to image_tag("wireshark.png"), packet_event_path(event), class: 'btn btn-default',
             title: "Download pcap file" %>
@@ -57,4 +56,3 @@
 <br />
 
 <%= back_link %>
-<%= new_link Event %>
