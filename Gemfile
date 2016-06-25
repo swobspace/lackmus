@@ -34,6 +34,10 @@ group :development do
   gem 'spring'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
+  gem "railroady"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "meta_request"
 end
 
 group :test, :development do
