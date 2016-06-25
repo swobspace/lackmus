@@ -6,11 +6,14 @@ de:
     show_all: Alles anzeigen
     signatures:
       active: Aktive Signaturen
-      ingored: Ingorierte Signaturen
+      ignored: Ingorierte Signaturen
+      choosen_filter: gewählter Filter
       current: Letzte 24h
       current48: Letzte 48h
       current72: Letzte 72h
       current_week: Letzte 7d
+      last: letzte
+      since: seit
       all: Alle Signaturen
     really: wirklich
     truly: Echt jetzt?

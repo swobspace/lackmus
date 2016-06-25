@@ -80,8 +80,10 @@ class SignaturesController < ApplicationController
     # a signature is active if signature.drop=false and signature.ignore=false
 
     def get_signatures
+        @filter_info = t('lackmus.signatures.choosen_filter') + ": "
       if params[:filter] == 'ignored'
-        @signatures = Signature.ignored.includes(:events)
+        @signatures   = Signature.ignored.includes(:events)
+        @filter_info += t('lackmus.signatures.ignored')
       elsif params[:filter] == 'current'
         if params[:since].present?
           hours = (params[:since].to_i).hours
@@ -89,12 +91,15 @@ class SignaturesController < ApplicationController
           hours = 24.hours
         end
         since = Time.now - hours
+        @filter_info += t('lackmus.signatures.since') + " " + since.to_s
         @signatures = Signature.active.joins(:events).
                         merge(Event.active).merge(Event.since(since)).uniq
       elsif params[:filter] == 'all'
         @signatures = Signature.includes(:events).all
+        @filter_info += t('lackmus.signatures.all')
       else
         @signatures = Signature.active.joins(:events).merge(Event.active).uniq
+        @filter_info += t('lackmus.signatures.active')
       end
     end
 
