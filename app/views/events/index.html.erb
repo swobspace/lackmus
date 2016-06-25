@@ -34,7 +34,7 @@
     <td><%= events_by_ip(event.dst_ip) %></td>
     <td><%= event.dst_port %></td>
     <td><%= event.proto %></td>
-    <td><%= link_to event.alert_signature_id, signature_path(event.alert_signature_id) %></td>
+    <td><%= signature_link(event.alert_signature_id) %></td>
     <td><%= event.alert_signature %></td>
     <td><%= event.alert_category %></td>
     <td><%= event.alert_severity %></td>
