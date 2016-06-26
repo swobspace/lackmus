@@ -9,14 +9,22 @@ module ApplicationHelper
 
   def threatcrowd_link(options = {})
     options.symbolize_keys!
-    threatcrowd = "threatcrowd.org"
+    msg = "threatcrowd.org"
     if ip = options.fetch(:ip, nil)
-      link_to threatcrowd, 
-              "https://www.threatcrowd.org/ip.php?ip=#{ip}",
-              target: "_blank", class: "btn btn-info btn-xs"
+      threat = Threatcrowd.by_ip(ip)
+      btncolor = if threat.malware_md5.size >= 5
+                    'btn-danger'
+                  elsif threat.malware_md5.size > 1
+                    'btn-warning'
+                  elsif threat.malware_md5.size == 1
+                    'btn-primary'
+                  else
+                    'btn-info'
+                  end
+      link_to msg, "https://www.threatcrowd.org/ip.php?ip=#{ip}",
+              target: "_blank", class: "btn #{btncolor} btn-xs"
     elsif domain = options.fetch(:domain, nil)
-      link_to threatcrowd, 
-              "https://www.threatcrowd.org/domain.php?domain=#{domain}",
+      link_to msg, "https://www.threatcrowd.org/domain.php?domain=#{domain}",
               target: "_blank", class: "btn btn-info btn-xs"
     end
   end
