@@ -21,4 +21,12 @@ module ApplicationHelper
     end
   end
 
+  def ipintel_link(options = {})
+    options.symbolize_keys!
+    msg = "ipintel.io"
+    if ip = options.fetch(:ip, nil)
+      link_to msg, "https://ipintel.io/#{ip}",
+              target: "_blank", class: "btn btn-info btn-xs"
+    end
+  end
 end

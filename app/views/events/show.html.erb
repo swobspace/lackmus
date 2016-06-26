@@ -32,11 +32,13 @@
           <%= events_by_ip(@event.src_ip) %> /
           <%= IpLookup.hostname(@event.src_ip) %>
           <%= threatcrowd_link(ip: @event.src_ip) %>
+          <%= ipintel_link(ip: @event.src_ip) %>
         </div>
         <div class="col-md-6">
           <%= events_by_ip(@event.dst_ip) %> /
           <%= IpLookup.hostname(@event.dst_ip) %>
           <%= threatcrowd_link(ip: @event.dst_ip) %>
+          <%= ipintel_link(ip: @event.dst_ip) %>
         </div>
       </div>
     </td>
