@@ -2,6 +2,9 @@ module EventRuleConcerns
   extend ActiveSupport::Concern
 
   included do
+    scope :active, -> {
+      where(["action NOT IN (?)", ['drop', 'ignore']])
+    }
   end
 
   class_methods do
