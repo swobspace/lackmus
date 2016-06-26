@@ -98,11 +98,18 @@ RSpec.describe Event, type: :model do
   end
  
   describe "with scope ::active" do
+    let(:ignore_rule)  { FactoryGirl.create(:event_rule, action: 'ignore') }
+    let(:drop_rule)    { FactoryGirl.create(:event_rule, action: 'drop') }
     let!(:active_event) { FactoryGirl.create(:event) }
     let!(:ignore_event) { FactoryGirl.create(:event, ignore: true) }
     let!(:done_event)   { FactoryGirl.create(:event, done: true) }
+    let!(:ignore_rule_event) { FactoryGirl.create(:event, event_rule_id: ignore_rule.id) }
+    let!(:drop_rule_event)  { FactoryGirl.create(:event, event_rule_id: drop_rule.id) }
 
-    it { expect(Event.active).to contain_exactly(active_event) }
+    it { expect(Event.active).to contain_exactly(active_event, ignore_rule_event, drop_rule_event) }
+    it { expect(Event.active.
+           joins('LEFT OUTER JOIN event_rules ON event_rules.id = events.event_rule_id').
+           merge(EventRule.active)).to contain_exactly(active_event) }
   end
  
   describe "::unassigned" do
