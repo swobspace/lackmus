@@ -31,10 +31,12 @@
         <div class="col-md-6">
           <%= events_by_ip(@event.src_ip) %> /
           <%= IpLookup.hostname(@event.src_ip) %>
+          <%= threadcrowd_link(ip: @event.src_ip) %>
         </div>
         <div class="col-md-6">
           <%= events_by_ip(@event.dst_ip) %> /
           <%= IpLookup.hostname(@event.dst_ip) %>
+          <%= threadcrowd_link(ip: @event.dst_ip) %>
         </div>
       </div>
     </td>
@@ -66,7 +68,10 @@
  <% if @event.has_http %>
   <tr>
     <th><%= t('attributes.http_hostname')%>:</th>
-    <td><%= link_to @event.http_hostname, events_path(http_host: @event.http_hostname) %></td>
+    <td>
+      <%= link_to @event.http_hostname, events_path(http_host: @event.http_hostname) %>
+      <%= threadcrowd_link(domain: @event.http_hostname) %>
+    </td>
   </tr>
   <tr>
     <th><%= t('attributes.http_xff')%>:</th>
