@@ -7,15 +7,15 @@ module ApplicationHelper
     end
   end
 
-  def threadcrowd_link(options = {})
+  def threatcrowd_link(options = {})
     options.symbolize_keys!
-    threadcrowd = "threadcrowd.org"
+    threatcrowd = "threatcrowd.org"
     if ip = options.fetch(:ip, nil)
-      link_to threadcrowd, 
+      link_to threatcrowd, 
               "https://www.threatcrowd.org/ip.php?ip=#{ip}",
               target: "_blank", class: "btn btn-info btn-xs"
     elsif domain = options.fetch(:domain, nil)
-      link_to threadcrowd, 
+      link_to threatcrowd, 
               "https://www.threatcrowd.org/domain.php?domain=#{domain}",
               target: "_blank", class: "btn btn-info btn-xs"
     end

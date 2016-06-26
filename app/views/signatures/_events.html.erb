@@ -31,12 +31,12 @@
 	<td><%= event.event_time.to_s(:precision) %></td>
 	<td><%= signatures_by_ip(event.src_ip) %> / 
 	    <%= IpLookup.hostname(event.src_ip) %> <br />
-            <%= threadcrowd_link(ip: event.src_ip) %>
+            <%= threatcrowd_link(ip: event.src_ip) %>
 	</td>
 	<td><%= event.src_port %></td>
 	<td><%= signatures_by_ip(event.dst_ip) %> / 
 	    <%= IpLookup.hostname(event.dst_ip) %> <br />
-            <%= threadcrowd_link(ip: event.dst_ip) %>
+            <%= threatcrowd_link(ip: event.dst_ip) %>
 	</td>
 	<td><%= event.dst_port %></td>
 	<td><%= event.proto %></td>
@@ -44,7 +44,7 @@
           <% unless event.http_hostname.blank? %>
             <%= link_to event.http_hostname, events_path(httphost: event.http_hostname) %>
             <br />
-            <%= threadcrowd_link(domain: event.http_hostname) %>
+            <%= threatcrowd_link(domain: event.http_hostname) %>
           <% end %>
        </td>
 	<td class="nowrap">
