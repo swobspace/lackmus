@@ -26,6 +26,16 @@
       </ul>
     </li>
   <% end %>
+  <% if can? :navigate, :event_rules %>
+    <li class="dropdown <%= active_class('events') %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('controller.event_rules') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to t('lackmus.overview'), main_app.event_rules_path %></li>
+        <li> <%=link_to t('wobapphelpers.controller.new', name: t('activerecord.models.event_rule')), main_app.new_event_rule_path %></li>
+      </ul>
+    </li>
+  <% end %>
   <% if can? :navigate, :configuration %>
     <li class="dropdown <%= configuration_active_class %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
