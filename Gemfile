@@ -46,10 +46,12 @@ group :test, :development do
   gem 'dotenv'
   gem 'guard-rspec', require: false
   gem 'byebug'
+  gem "json_spec"
 end
 
 group :test do
   gem 'shoulda-matchers', require: false
+  gem 'fakeweb', "~> 1.3", require: false
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem 'capybara'
