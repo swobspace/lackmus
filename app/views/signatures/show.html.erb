@@ -35,6 +35,6 @@
 <% if can? :read, Event %>
   <br />  
   <h2><%= t('controller.events') %></h2>
-  <%= render partial: 'events', locals: { events: @signature.events.not_done.most_current(50) } %>
+  <%= render partial: 'events', locals: { events: @signature.events.active.most_current(50) } %>
 <% end %>
 
