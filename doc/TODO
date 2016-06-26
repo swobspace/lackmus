@@ -10,7 +10,6 @@
 * events#index: 
 
   # implement datatable
-  - link to signature
   - mark (all|single) events as done 
 
 * events#show: 
@@ -18,8 +17,6 @@
   - whois frame lower height
   - include ipinfo data (http://ipinfo.io/<ip>/geo)
   - include firehol.org blocklist info
-  - include www.threatcrowd.org info (ip + domain)
-  - link to signature
   - button mark done
 
 * event_rules#index:
@@ -35,6 +32,4 @@
   - i.e. search for IP
   - create PCAP and summary mail
   - mark events as done
-
-* bootstrap: responsive -> full page
 
