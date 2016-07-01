@@ -31,8 +31,8 @@ bin/rails g scaffold Event \
   'http_cookie:text' \
   'http_length:integer' \
   'http_status:integer{2}' \
-  'http_protocol:string{20}' \
-  'http_method:string{10}' \
+  'http_protocol:string' \
+  'http_method:string' \
   'http_refer:string' \
   'payload:text' \
   'packet:text' \

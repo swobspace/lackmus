@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625095815) do
+ActiveRecord::Schema.define(version: 20160627081555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,43 +30,43 @@ ActiveRecord::Schema.define(version: 20160625095815) do
   add_index "event_rules", ["position"], name: "index_event_rules_on_position", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "sensor",                                                      null: false
-    t.datetime "event_time",                    precision: 6,                 null: false
+    t.string   "sensor",                                                       null: false
+    t.datetime "event_time",                     precision: 6,                 null: false
     t.integer  "flow_id",            limit: 8
-    t.string   "in_iface",           limit: 20,               default: ""
-    t.string   "event_type",         limit: 20,               default: ""
+    t.string   "in_iface",           limit: 20,                default: ""
+    t.string   "event_type",         limit: 20,                default: ""
     t.inet     "src_ip"
     t.integer  "src_port"
     t.inet     "dst_ip"
     t.integer  "dst_port"
-    t.string   "proto",              limit: 20,               default: ""
-    t.string   "alert_action",       limit: 20,               default: ""
+    t.string   "proto",              limit: 20,                default: ""
+    t.string   "alert_action",       limit: 20,                default: ""
     t.integer  "alert_gid"
     t.integer  "alert_signature_id"
     t.integer  "alert_rev"
-    t.string   "alert_signature",                             default: ""
-    t.string   "alert_category",                              default: ""
+    t.string   "alert_signature",                              default: ""
+    t.string   "alert_category",                               default: ""
     t.integer  "alert_severity",     limit: 2
-    t.string   "http_hostname",                               default: ""
+    t.string   "http_hostname",                                default: ""
     t.inet     "http_xff"
-    t.string   "http_url",                                    default: ""
-    t.string   "http_user_agent",                             default: ""
-    t.string   "http_content_type",                           default: ""
+    t.string   "http_url",                                     default: ""
+    t.string   "http_user_agent",                              default: ""
+    t.string   "http_content_type",                            default: ""
     t.text     "http_cookie"
     t.integer  "http_length"
     t.integer  "http_status",        limit: 2
-    t.string   "http_protocol",      limit: 20,               default: ""
-    t.string   "http_method",        limit: 10,               default: ""
-    t.string   "http_refer",                                  default: ""
+    t.string   "http_protocol",      limit: 255,               default: ""
+    t.string   "http_method",        limit: 255,               default: ""
+    t.string   "http_refer",                                   default: ""
     t.text     "payload"
     t.text     "packet"
     t.integer  "stream",             limit: 2
-    t.boolean  "done",                                        default: false
-    t.boolean  "ignore",                                      default: false
-    t.boolean  "has_http",                                    default: false
+    t.boolean  "done",                                         default: false
+    t.boolean  "ignore",                                       default: false
+    t.boolean  "has_http",                                     default: false
     t.integer  "severity",           limit: 2
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
     t.integer  "event_rule_id"
   end
 
