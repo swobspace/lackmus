@@ -5,7 +5,7 @@ class ImportSystemEventJob < ActiveJob::Base
     options.symbolize_keys!
     count = options.fetch(:count, 0)
 
-    Syslog::Systemevent.current.find_each do |sysevent|
+    Syslog::Systemevent.find_each do |sysevent|
       begin
         event = Event.new(sysevent.event_attributes)
         if event.save

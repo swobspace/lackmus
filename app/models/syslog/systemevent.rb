@@ -17,6 +17,4 @@ class Syslog::Systemevent < Syslog::Base
   # -- validations and callbacks
   # -- attributes
 
-  # dummy
-  scope :current, -> { }
 end
