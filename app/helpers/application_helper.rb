@@ -11,6 +11,7 @@ module ApplicationHelper
     options.symbolize_keys!
     msg = "threatcrowd.org"
     if ip = options.fetch(:ip, nil)
+      return "" if IpLookup.is_private?(ip)
       threat = Threatcrowd.by_ip(ip)
       btncolor = if threat.malware_md5.size >= 5
                     'btn-danger'
@@ -33,6 +34,7 @@ module ApplicationHelper
     options.symbolize_keys!
     msg = "ipintel.io"
     if ip = options.fetch(:ip, nil)
+      return "" if IpLookup.is_private?(ip)
       link_to msg, "https://ipintel.io/#{ip}",
               target: "_blank", class: "btn btn-info btn-xs"
     end
