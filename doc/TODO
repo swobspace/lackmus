@@ -19,6 +19,10 @@
   - include firehol.org blocklist info
   - button mark done
 
+* events#destroy:
+
+  - redirect to calling page or active scope of events
+
 * event_rules#index:
 
   - event count
@@ -33,3 +37,13 @@
   - create PCAP and summary mail
   - mark events as done
 
+* signatures#index
+
+  - add filter ip to filterinfo (do not overwrite")
+  with filtered events:
+  - delete all events (button dropdown)
+  - mark all events as done (button dropdown)
+
+* signatures#show
+
+  - link references if possible

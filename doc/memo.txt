@@ -27,3 +27,24 @@
 
   Signature.joins(:events).merge(Event.since(Time.now - 1.day))
 
+
+# EventRule.new: get attributes from event
+
+attribs = Event.first.attributes.extract!(*EventRule::FILTER_ATTRIBUTES)
+-> IP addresses must be converted
+
+EventRule.new(filter: cleaned_attribs)
+
+
+# EventRule: cleanup events
+
+Event.joins(:event_rule).where(event_rules: {action: 'drop'}).count
+Event.joins(:event_rule).where(event_rules: {action: 'drop'}).destroy_all
+
+# 2014726 ET POLICY Outdated Windows Flash Version IE
+
+## delete all old events
+ Event.where(alert_signature_id: 2014726).where('event_time < ?', Time.now - 1.week).destroy_all
+
+## list remaining src ips
+Event.where(alert_signature_id: 2014726).pluck(:src_ip).map(&:to_s).sort.uniq.join(", ")
