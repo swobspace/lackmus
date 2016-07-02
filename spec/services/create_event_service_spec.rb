@@ -20,16 +20,41 @@ RSpec.describe CreateEventService do
 
     it "calls Event.create" do
       event = instance_double(Event)
-      expect(Event).to receive(:create).with(event_attributes).and_return(event)
-      allow(event).to receive(:errors)
+      expect(Event).to receive(:new).with(event_attributes).and_return(event)
+      expect(event).to receive(:save)
+      allow(event).to receive_message_chain(:errors, :messages)
       subject.call
     end
     
-    it "creates an Event" do
-      expect {
-        subject.call
-      }.to change{Event.count}.by(1)
+    context "with valid event_attributes" do
+      it "creates an Event" do
+	expect {
+	  subject.call
+	}.to change{Event.count}.by(1)
+      end
+      describe "#call" do
+        let(:result) { subject.call }
+        it { expect(result.success?).to be_truthy }
+        it { expect(result.error_messages.present?).to be_falsey }
+        it { expect(result.event).to be_a_kind_of Event }
+      end
+    end
+
+    context "with invalid event_attributes" do
+      subject { CreateEventService.new() }
+
+      it "creates an Event" do
+	expect {
+	  subject.call
+	}.to change{Event.count}.by(0)
+      end
+      describe "#call" do
+        let(:result) { subject.call }
+        it { expect(result.success?).to be_falsey }
+        it { expect(result.error_messages.present?).to be_truthy }
+        it { expect(result.event).to be_nil }
+      end
     end
   end
- 
+
 end
