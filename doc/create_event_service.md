@@ -8,6 +8,7 @@ CreateEventService
 
   if result.success?
     # ...
+    event = result.event
   else
     flash[:error] = result.error_messages.join(", ")
     redirect_to 'new' # or something else
