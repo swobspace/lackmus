@@ -7,11 +7,12 @@ class ImportSystemEventJob < ActiveJob::Base
 
     Syslog::Systemevent.find_each do |sysevent|
       begin
-        event = Event.new(sysevent.event_attributes)
-        if event.save
+        result = CreateEventService.new(sysevent.event_attributes).call
+        if result.success?
           sysevent.destroy
-          LogEvent.log(event) if Rails.env.development?
+          LogEvent.log(result.event) if Rails.env.development?
         else
+          Rails.logger.debug(result.error_messages.join(", ")) if Rails.env.developement?
           LogSyslogsysevent.log(sysevent)
         end
       rescue => e

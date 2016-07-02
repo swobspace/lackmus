@@ -7,13 +7,18 @@ RSpec.describe ImportSystemEventJob, type: :job do
   describe "#perform" do
     context "with valid syslog message" do
       before(:each) do
-	expect(systemevent).to receive(:fromhost).and_return("Sensor")
-	expect(systemevent).to receive(:message).and_return(syslog_eve_message)
+	expect(systemevent).to receive(:fromhost).and_return("Sensor").at_least(:once)
+	expect(systemevent).to receive(:message).and_return(syslog_eve_message).at_least(:once)
 	expect(Syslog::Systemevent).to receive(:find_each).and_yield(systemevent)
-	expect(systemevent).to receive(:destroy)
+      end
+
+      it "calls CreateEventService instance" do
+        expect(CreateEventService).to receive(:new)
+        ImportSystemEventJob.perform_now
       end
 
       it "creates a new event" do
+	expect(systemevent).to receive(:destroy)
 	expect {
 	  ImportSystemEventJob.perform_now
 	}.to change{ Event.count }.by(1)
