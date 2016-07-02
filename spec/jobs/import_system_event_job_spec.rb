@@ -9,7 +9,7 @@ RSpec.describe ImportSystemEventJob, type: :job do
       before(:each) do
 	expect(systemevent).to receive(:fromhost).and_return("Sensor")
 	expect(systemevent).to receive(:message).and_return(syslog_eve_message)
-	expect(Syslog::Systemevent).to receive_message_chain(:current, :find_each).and_yield(systemevent)
+	expect(Syslog::Systemevent).to receive(:find_each).and_yield(systemevent)
 	expect(systemevent).to receive(:destroy)
       end
 
@@ -24,7 +24,7 @@ RSpec.describe ImportSystemEventJob, type: :job do
     context "with invalid syslog message" do
       before(:each) do
 	expect(LogSyslogsysevent).to receive(:log).with(systemevent)
-	expect(Syslog::Systemevent).to receive_message_chain(:current, :find_each).and_yield(systemevent)
+	expect(Syslog::Systemevent).to receive(:find_each).and_yield(systemevent)
 	expect(systemevent).to receive(:message).and_return(syslog_invalid_message)
 	expect(systemevent).not_to receive(:destroy)
       end
