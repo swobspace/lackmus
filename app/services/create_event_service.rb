@@ -6,14 +6,15 @@ class CreateEventService
   end
 
   def call
-    if @event = Event.create(event_attributes) 
-      result = Result.new(success?: true, error_messages: [], event: event)
+    @event = Event.new(event_attributes)
+    if @event.save
+      result = Result.new(success: true, error_messages: [], event: event)
     else
-      result = Result.new(success?: false, error_messages: @event.errors.messages)
+      result = Result.new(success: false, error_messages: @event.errors.messages)
     end
   end
 
 private
   attr_reader :reader, :event_attributes, :event
-  
+
 end
