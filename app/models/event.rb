@@ -13,7 +13,6 @@ class Event < ActiveRecord::Base
 
   # -- validations and callbacks
   before_save :import_signature
-  before_save :assign_filter if :event_rule_id.nil?
 
   validates :sensor, :event_time, :src_ip, :dst_ip, :proto, presence: true
 

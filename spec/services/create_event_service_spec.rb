@@ -15,7 +15,7 @@ RSpec.describe CreateEventService do
   end
 
   describe "#call" do
-    let(:event_attributes) { FactoryGirl.attributes_for(:event) }
+    let(:event_attributes) { FactoryGirl.attributes_for(:event, sensor: "sentinel" ) }
     subject { CreateEventService.new(event_attributes) }
 
     it "calls Event.create" do
@@ -25,18 +25,28 @@ RSpec.describe CreateEventService do
       allow(event).to receive_message_chain(:errors, :messages)
       subject.call
     end
-    
+
     context "with valid event_attributes" do
       it "creates an Event" do
+        expect_any_instance_of(Event).to receive(:assign_filter)
 	expect {
 	  subject.call
 	}.to change{Event.count}.by(1)
       end
+
+      it "assigns an event_rule" do
+        event_rule = FactoryGirl.create(:event_rule, filter: {"sensor" => "sentinel"})
+	expect {
+	  subject.call
+	}.to change{event_rule.events.count}.by(1)
+      end
+
       describe "#call" do
         let(:result) { subject.call }
         it { expect(result.success?).to be_truthy }
         it { expect(result.error_messages.present?).to be_falsey }
         it { expect(result.event).to be_a_kind_of Event }
+        it { expect(result.event).to be_persisted }
       end
     end
 
@@ -48,6 +58,7 @@ RSpec.describe CreateEventService do
 	  subject.call
 	}.to change{Event.count}.by(0)
       end
+
       describe "#call" do
         let(:result) { subject.call }
         it { expect(result.success?).to be_falsey }

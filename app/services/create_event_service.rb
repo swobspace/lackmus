@@ -7,7 +7,8 @@ class CreateEventService
 
   def call
     @event = Event.new(event_attributes)
-    if @event.save
+    if event.save
+      event.assign_filter
       result = Result.new(success: true, error_messages: [], event: event)
     else
       result = Result.new(success: false, error_messages: @event.errors.messages)
