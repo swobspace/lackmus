@@ -25,7 +25,7 @@ RSpec.describe SignaturesController, type: :controller do
   # Signature. As you add validations to Signature, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:signature)
+    FactoryGirl.attributes_for(:signature, signature_id: 55432)
   }
 
   let(:invalid_attributes) {
@@ -40,7 +40,7 @@ RSpec.describe SignaturesController, type: :controller do
   describe "GET #index" do
     it "assigns all signatures as @signatures" do
       signature = Signature.create! valid_attributes
-      event = FactoryGirl.create(:event, signature: signature)
+      event = FactoryGirl.create(:event, alert_signature_id: signature.signature_id)
       get :index, {}, valid_session
       expect(assigns(:signatures)).to eq([signature])
     end
@@ -83,6 +83,7 @@ RSpec.describe SignaturesController, type: :controller do
 
   describe "GET #pcap" do
     it "downloads corresponding events pcap in one file" do
+      signature = FactoryGirl.create(:signature, signature_id: 5656567)
       event = FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  alert_signature_id: 5656567, alert_signature: "Exploit")
@@ -199,6 +200,7 @@ RSpec.describe SignaturesController, type: :controller do
   end
 
   describe "DELETE #destroy_event" do
+    let!(:sig)   { FactoryGirl.create(:signature, signature_id: 5656567) }
     let!(:event) { FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  done: false,
