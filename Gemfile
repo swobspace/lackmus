@@ -23,6 +23,7 @@ gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 gem 'whois'
 gem 'packetfu'
 gem 'acts_as_list'
+gem 'immutable-struct'
 
 group :development do
   gem 'thin'
