@@ -17,6 +17,12 @@ RSpec.describe ImportSystemEventJob, type: :job do
         ImportSystemEventJob.perform_now
       end
 
+      it "calls ImportEventSignatureService instance" do
+	expect(systemevent).to receive(:destroy)
+        expect(ImportEventSignatureService).to receive_message_chain(:new, :call)
+        ImportSystemEventJob.perform_now
+      end
+
       it "creates a new event" do
 	expect(systemevent).to receive(:destroy)
 	expect {

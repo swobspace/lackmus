@@ -11,6 +11,7 @@ class ImportSystemEventJob < ActiveJob::Base
         if result.success?
           sysevent.destroy
           LogEvent.log(result.event) if Rails.env.development?
+          ImportEventSignatureService.new.call(result.event)
         else
           Rails.logger.debug(result.error_messages.join(", ")) if Rails.env.developement?
           LogSyslogsysevent.log(sysevent)
