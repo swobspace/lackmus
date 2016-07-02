@@ -26,7 +26,7 @@ gem 'acts_as_list'
 gem 'immutable-struct'
 
 group :development do
-  gem 'thin'
+  gem 'puma'
   gem 'guard'
   gem 'guard-livereload', require: false
   gem 'guard-rails'
