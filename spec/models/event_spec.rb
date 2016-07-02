@@ -17,14 +17,6 @@ RSpec.describe Event, type: :model do
     expect(g).to be_valid
   end
 
-  it "should create the corresponding signature" do
-    event = FactoryGirl.build(:event, alert_signature_id: 999999,
-                              alert_signature: "Lorem Ipsum")
-    expect {
-      event.save
-    }.to change{ Signature.count }.by(1)
-  end
-
   it "prints printable chars" do
     clear = "Unverschüsselter \x06\x7F Text\x01"
     e = FactoryGirl.build_stubbed(:event, payload: Base64.encode64(clear))
