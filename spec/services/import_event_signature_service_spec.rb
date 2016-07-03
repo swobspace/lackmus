@@ -42,6 +42,7 @@ RSpec.describe ImportEventSignatureService do
         it { expect(result.error_messages.present?).to be_falsey }
         it { expect(result.signature).to be_a_kind_of Signature }
         it { expect(result.signature).to be_persisted }
+        it { expect(result.signature.events_count).to eq(1)}
       end
     end
 

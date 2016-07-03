@@ -27,7 +27,8 @@ private
       signature_info: event.alert_signature,
       action: options.fetch(:action, 'normal'),
       category: event.alert_category,
-      severity: event.alert_severity
+      severity: event.alert_severity,
+      events_count: 1
     }
   end
 
