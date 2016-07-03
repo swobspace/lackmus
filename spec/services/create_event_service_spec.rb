@@ -22,13 +22,13 @@ RSpec.describe CreateEventService do
       event = instance_double(Event)
       expect(Event).to receive(:new).with(event_attributes).and_return(event)
       expect(event).to receive(:save)
+      expect(event).to receive(:event_rule_id)
       allow(event).to receive_message_chain(:errors, :messages)
       subject.call
     end
 
     context "with valid event_attributes" do
       it "creates an Event" do
-        expect_any_instance_of(Event).to receive(:assign_filter)
 	expect {
 	  subject.call
 	}.to change{Event.count}.by(1)
