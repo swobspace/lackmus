@@ -17,7 +17,7 @@ class Threatcrowd
   def threat_by_ip
     Rails.cache.fetch("threadcrowd/ip/#{ip_addr}", expires_in: 3.days) do
       begin 
-        JSON.parse(open(ip_uri(@ip_addr)).read)
+        JSON.parse(open(ip_uri(@ip_addr), proxy: Lackmus.proxy).read)
       rescue JSON::ParserError => e
         {}
       end
