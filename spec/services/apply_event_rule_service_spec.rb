@@ -75,5 +75,24 @@ RSpec.describe ApplyEventRuleService do
         it { expect(result.event.done).to be_falsey }
       end
     end
+
+    context "with a matching signature action: drop" do
+      let!(:signature) { FactoryGirl.create(:signature, action: 'drop',
+                            signature_id: 99799) }
+
+      it "does not save event" do
+        expect_any_instance_of(Event).not_to receive(:save)
+	expect {
+	  subject.call(event)
+	}.to change{Event.count}.by(0)
+      end
+
+      describe "#call(event)" do
+        let(:result) { subject.call(event) }
+        it { expect(result.success?).to be_truthy }
+        it { expect(result.error_messages.present?).to be_falsey }
+        it { expect(result.event).to be_nil }
+      end
+    end
   end
 end

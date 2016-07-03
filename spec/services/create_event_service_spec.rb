@@ -23,6 +23,7 @@ RSpec.describe CreateEventService do
       expect(Event).to receive(:new).with(event_attributes).and_return(event)
       expect(event).to receive(:save)
       expect(event).to receive(:event_rule_id)
+      expect(event).to receive(:signature)
       allow(event).to receive_message_chain(:errors, :messages)
       subject.call
     end

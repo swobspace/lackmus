@@ -8,6 +8,7 @@ class ApplyEventRuleService
   def call(event)
     @event = assign_filter(event)
     if @event.event_rule_id.nil?
+      @event = check_signature_action(@event)
       result = Result.new(success: true, error_messages: [], event: @event)
     elsif @event.event_rule.action == "drop"
       result = Result.new(success: true, error_messages: [], event: nil)
@@ -33,6 +34,15 @@ private
 
   def strattributes(event)
     @strattributes ||= event.attributes.map{|k,v| [k, v.to_s]}.to_h
+  end
+
+  def check_signature_action(event)
+    return event if event.signature.blank? 
+    return nil   if event.signature.action == 'drop'
+    if event.signature.action == 'ignore'
+      event.ignore = true
+    end
+    event
   end
 
 end
