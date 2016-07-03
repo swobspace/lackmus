@@ -65,20 +65,7 @@ module EventConcerns
   end
 
 
-  def assign_filter
-    EventRule.order(:position).each do |event_rule|
-      if Hash[event_rule.filter] == strattributes.slice(*event_rule.filter.keys)
-        update_attributes(event_rule_id: event_rule.id)
-        break
-      end
-    end
-  end
-
 private
-
-  def strattributes
-    @strattributes ||= attributes.map{|k,v| [k, v.to_s]}.to_h
-  end
 
 end
 
