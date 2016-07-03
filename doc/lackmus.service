@@ -1,0 +1,25 @@
+# -------------------------------------------------------------------
+# systemd service file example for running lackmus/puma in production
+# 1. copy file to /etc/systemd/system
+# 2. adapt ip, port and working directory to your needs
+# 3. systemctl daemon-reload
+# 4. systemctl start lackmus(.service)
+# 5. systemctl enable lackmus(.service)
+#
+# this file is based on https://github.com/puma/puma/blob/master/docs/systemd.md
+# -------------------------------------------------------------------
+
+[Unit]
+Description=Lackmus / Puma HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/path/to/my/app
+ExecStart=/usr/local/bin/puma -b tcp://0.0.0.0:9292 -e production
+ExecReload=/bin/kill -USR2 $MAINPID
+Restart=on-failure
+User=<deploy>
+
+[Install]
+WantedBy=multi-user.target
