@@ -10,14 +10,16 @@ class ImportSystemEventJob < ActiveJob::Base
         result = CreateEventService.new(sysevent.event_attributes).call
         if result.success?
           sysevent.destroy
-          LogEvent.log(result.event) if Rails.env.development?
-          ImportEventSignatureService.new.call(result.event)
+          if result.event.present?
+            LogEvent.log(result.event) if Rails.env.development?
+            ImportEventSignatureService.new.call(result.event)
+          end
         else
-          Rails.logger.debug(result.error_messages.join(", ")) if Rails.env.developement?
+          Rails.logger.warn(result.error_messages.join(", ")) if Rails.env.developement?
           LogSyslogsysevent.log(sysevent)
         end
       rescue => e
-         Rails.logger.debug("RESCUE: #{e.inspect}") 
+         Rails.logger.warn("RESCUE: #{e.inspect}")
          LogSyslogsysevent.log(sysevent)
       end
     end
