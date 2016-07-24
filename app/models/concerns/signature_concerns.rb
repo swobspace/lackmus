@@ -10,7 +10,7 @@ module SignatureConcerns
 
   def last_seen
     return "" unless ( events_count > 0 )
-    evnt  = events.order('event_time desc').first
+    evnt  = events.active.order('event_time desc').first
     return nil unless evnt.present?
     days  = (Time.now - evnt.event_time).to_i / 86400
     "#{evnt.event_time.to_s(:precision)} [#{evnt.sensor}] (#{days}d)"
