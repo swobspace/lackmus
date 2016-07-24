@@ -15,8 +15,9 @@ After=network.target
 
 [Service]
 Type=simple
+Environment=RAILS_SERVE_STATIC_FILES=1
 WorkingDirectory=/path/to/my/app
-ExecStart=/usr/local/bin/puma -b tcp://0.0.0.0:9292 -e production
+ExecStart=/bin/bash -lc 'bundle exec puma -b tcp://0.0.0.0:9292 -e production'
 ExecReload=/bin/kill -USR2 $MAINPID
 Restart=on-failure
 User=<deploy>
