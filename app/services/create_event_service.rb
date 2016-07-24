@@ -10,7 +10,9 @@ class CreateEventService
     apply_result = apply_event_rule.call(event)
     if apply_result.success?
       event = apply_result.event
-      if event.save
+      if event.nil?
+        return_result = Result.new(success: true, error_messages: [], event: nil)
+      elsif event.save
         return_result = Result.new(success: true, error_messages: [], event: event)
       else
         return_result = Result.new(success: false, error_messages: event.errors.messages)
