@@ -47,4 +47,6 @@ Event.joins(:event_rule).where(event_rules: {action: 'drop'}).destroy_all
  Event.where(alert_signature_id: 2014726).where('event_time < ?', Time.now - 1.week).destroy_all
 
 ## list remaining src ips
-Event.where(alert_signature_id: 2014726).pluck(:src_ip).map(&:to_s).sort.uniq.join(", ")
+Event.where(alert_signature_id: 2014726).where('event_time < ?', Time.now - 5.days).where('event_time < ?', Time.now - 5.days).pluck(:src_ip).map(&:to_s).sort.uniq.join(", ")
+
+where("src_ip << '172.17.32.0/21'")
