@@ -11,7 +11,7 @@ module ApplicationHelper
     options.symbolize_keys!
     msg = "threatcrowd.org"
     if ip = options.fetch(:ip, nil)
-      return "" if IpLookup.is_private?(ip)
+      return "" if IpLookup.is_special?(ip)
       threat = Threatcrowd.by_ip(ip)
       btncolor = if threat.malware_md5.size >= 5
                     'btn-danger'
