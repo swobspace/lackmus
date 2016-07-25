@@ -42,6 +42,9 @@ de:
 
   attributes:
     action: Aktion
+    alert_signature_id: Sig. ID
+    alert_signature: Signatur
+    alert_severity: A. Sev.
     category: Kategorie
     count: Anzahl
     description: Beschreibung
