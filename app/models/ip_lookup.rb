@@ -16,8 +16,22 @@ class IpLookup
   end
 
   def self.is_private?(ip)
-    self.new(ip).check_private_subnet
+    self.new(ip).private_subnet?
   end
+
+  def self.is_multicast?(ip)
+    self.new(ip).multicast_subnet?
+  end
+
+  def self.is_linklocal?(ip)
+    self.new(ip).linklocal_subnet?
+  end
+
+  def self.is_special?(ip)
+    myip = self.new(ip)
+    myip.private_subnet? || myip.linklocal_subnet? || myip.multicast_subnet?
+  end
+
 
   def get_hostname
     Rails.cache.fetch("ip/#{ip_addr}/hostname") do
@@ -40,7 +54,7 @@ class IpLookup
     end
   end
 
-  def check_private_subnet
+  def private_subnet?
     @private_class_a ||= IPAddr.new('10.0.0.0/8')
     @private_class_b ||= IPAddr.new('172.16.0.0/12')
     @private_class_c ||= IPAddr.new('192.168.0.0/16')
@@ -50,4 +64,13 @@ class IpLookup
       @private_class_c.include?(@ip_obj)
   end
 
+  def multicast_subnet?
+    @multicast ||= IPAddr.new('224.0.0.0/4')
+    @multicast.include?(@ip_obj)
+  end
+
+  def linklocal_subnet?
+    @linklocal ||= IPAddr.new('169.254.0.0/16')
+    @linklocal.include?(@ip_obj)
+  end
 end
