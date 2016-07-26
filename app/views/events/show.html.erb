@@ -141,4 +141,5 @@
   <%= back_link %>
   <%= delete_link(@event) %>
   <%= link_to "Download PCAP", packet_event_path(@event), class: 'btn btn-default' %>
+  <%= new_rule_from_event(@event) %>
 </div>

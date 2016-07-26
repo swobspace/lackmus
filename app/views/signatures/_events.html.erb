@@ -54,7 +54,7 @@
 	  <%= delete_link event %>
 	  <%= link_to image_tag("wireshark.png"), packet_event_path(event), 
 		class: 'btn btn-default', title: "Download pcap file" %>
-
+          <%= new_rule_from_event(event) %>
 	</td>
       <% end %>
     <% end %>
