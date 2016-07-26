@@ -1,8 +1,9 @@
 de:
   lackmus:
     overview: Übersicht
-    configuration: Konfiguration
     change_columns: Spalten ändern
+    configuration: Konfiguration
+    create_rule_from_event: Filterregel erstellen
     show_all: Alles anzeigen
     signatures:
       active: Aktive Signaturen

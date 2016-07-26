@@ -32,8 +32,7 @@ END_OF_WHOIS
     let(:event) { FactoryGirl.create(:event) }
     let(:subject) { Capybara.string(helper.new_rule_from_event(event)) }
 
-    it "returns link to new_event_rule_path with param event_id" do
-      expect(subject.find("a")['href']).to match(/event_rules\/new\?event_id=#{event.to_param}/)
-    end
+    it { expect(subject.find("a")['href']).to match(/event_rules\/new\?event_id=#{event.to_param}/) }
+    it { expect(subject.find("a")['title']).to match(/Filterregel erstellen/) }
   end
 end

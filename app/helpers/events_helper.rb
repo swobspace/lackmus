@@ -12,6 +12,7 @@ module EventsHelper
     button += %Q[<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>]
     button += %Q[</button>]
 
-    link_to button.html_safe, new_event_rule_path(event_id: event.to_param)
+    link_to button.html_safe, new_event_rule_path(event_id: event.to_param),
+      title: I18n.t('lackmus.create_rule_from_event')
   end
 end
