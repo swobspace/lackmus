@@ -27,4 +27,11 @@ END_OF_WHOIS
       expect(events_by_ip("192.0.2.1")).to match(/events\?ip=192.0.2.1/)
     end
   end
+
+  describe "#new_rule_from_event" do
+    let(:event) { FactoryGirl.create(:event) }
+    it "returns link to new_event_rule_path with param event_id" do
+      expect(new_rule_from_event(event)).to match(/event_rules\/new\?event_id=#{event.to_param}/)
+    end
+  end
 end
