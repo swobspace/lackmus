@@ -15,7 +15,7 @@ class EventRulesController < ApplicationController
 
   # GET /event_rules/new
   def new
-    @event_rule = EventRule.new
+    @event_rule = EventRule.new(new_event_rule_params)
     respond_with(@event_rule)
   end
 
@@ -26,7 +26,6 @@ class EventRulesController < ApplicationController
   # POST /event_rules
   def create
     @event_rule = EventRule.new(event_rule_params.merge(filter: filter_params))
-
     @event_rule.save
     respond_with(@event_rule)
   end
@@ -49,6 +48,19 @@ class EventRulesController < ApplicationController
   end
 
   private
+    def fromevent_filter_params
+      event = params.permit(:event_id)
+      if event[:event_id].present?
+        Event.find(event[:event_id]).attributes.slice(*EventRule::FILTER_ATTRIBUTES)
+      else
+        {}
+      end
+    end
+
+    def new_event_rule_params
+      { filter: fromevent_filter_params }
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event_rule
       @event_rule = EventRule.find(params[:id])

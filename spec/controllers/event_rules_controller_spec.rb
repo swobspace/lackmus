@@ -54,11 +54,29 @@ RSpec.describe EventRulesController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new event_rule as @event_rule" do
-      get :new, {}, valid_session
-      expect(assigns(:event_rule)).to be_a_new(EventRule)
+    context "without event" do
+      it "assigns a new event_rule as @event_rule" do
+	get :new, {}, valid_session
+	expect(assigns(:event_rule)).to be_a_new(EventRule)
+      end
+    end
+
+    context "with event" do
+      let(:event) { FactoryGirl.create(:event, 'src_ip' => '192.0.2.7',
+                      'dst_ip' => '198.51.100.3', 'src_port' => 1234, 'dst_port' => 99,
+                      'sensor' => 'sentinel') }
+      before(:each) do
+        get :new, {event_id: event.to_param}, valid_session
+      end
+
+      it { expect(assigns(:event_rule).filter['src_ip']).to eq('192.0.2.7') }
+      it { expect(assigns(:event_rule).filter['src_port']).to eq(1234) }
+      it { expect(assigns(:event_rule).filter['dst_ip']).to eq('198.51.100.3') }
+      it { expect(assigns(:event_rule).filter['dst_port']).to eq(99) }
+      it { expect(assigns(:event_rule).filter['sensor']).to eq('sentinel') }
     end
   end
+
 
   describe "GET #edit" do
     it "assigns the requested event_rule as @event_rule" do
