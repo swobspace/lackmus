@@ -33,6 +33,7 @@ de:
     search: Suche
     cancel: abbrechen
     reset_table: Tabelle zurücksetzen
+    submit: absenden
 
   activerecord:
     models:
@@ -70,3 +71,9 @@ de:
     events: Ereignisse
     event_rules: Filterregeln
     signatures: Signaturen
+
+  report_mailer:
+    host_event_report:
+      subject: Aktuelle Ereignisse für %{host}
+    signature_event_report:
+      subject: Aktuelle Ereignisse für Signatur %{signature}

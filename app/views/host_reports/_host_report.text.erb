@@ -1,0 +1,6 @@
+Current events for: <%= host.to_s%>
+==================================
+
+<%= @message if @message.present? %>
+
+<%= render(partial: 'host_reports/event', collection: events) || "No events available" %>

@@ -35,3 +35,14 @@ div.signature_info {
 table.autowidth {
   width: 50%
 }
+
+div.event_item {
+  padding-bottom: 1em;
+  line-height: 20px;
+  div.event_headline {
+    font-weight: bold;
+  }
+  div.event_info {
+    padding-left: 20px; 
+  }
+}

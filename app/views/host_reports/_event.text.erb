@@ -1,0 +1,6 @@
+<%= event.sensor %> <%= event.event_time.to_s(:precision) %> [<%= event.alert_signature_id %>] <%= event.alert_signature %> [<%= event.alert_category %>] 
+    {<%= event.proto %>} <%= event.src_ip %>:<%= event.src_port %> (<%=IpLookup.hostname(event.src_ip)%>) -> <%= event.dst_ip %>:<%= event.dst_port %> (<%= IpLookup.hostname(event.dst_ip)%>)
+<% if event.has_http %>
+    <%= event.http_method %> <%= event.http_hostname %> <%= event.http_url%> [<%= event.http_status %>] size:<%= event.http_length %>
+<% end %>
+

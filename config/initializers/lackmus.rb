@@ -9,5 +9,17 @@ module Lackmus
       nil
     end
   end
+
+  def self.mail_from
+    if CONFIG['mail_from'].present?
+      @@mail_from ||= CONFIG['mail_from']
+    else
+      @@mail_from ||= 'lackmus@localhost.local'
+    end
+  end
+
+  def self.mail_from=(from)
+    @@mail_from = from
+  end
 end
 
