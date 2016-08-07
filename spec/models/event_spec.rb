@@ -99,6 +99,7 @@ RSpec.describe Event, type: :model do
     let!(:drop_rule_event)  { FactoryGirl.create(:event, event_rule_id: drop_rule.id) }
 
     it { expect(Event.active).to contain_exactly(active_event, ignore_rule_event, drop_rule_event) }
+    it { expect(Event.not_ignored).to contain_exactly(active_event, done_event, ignore_rule_event, drop_rule_event) }
     it "TODO: Query Object" do
       skip
          expect(Event.active.

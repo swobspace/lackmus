@@ -12,6 +12,7 @@ module EventConcerns
     }
     scope :since, ->(timestamp) { where(["event_time >= ?", timestamp]) }
     scope :not_done, -> { where(done: false) }
+    scope :not_ignored, -> { where(ignore: false) }
     scope :active, -> { where(done: false, ignore: false) }
     scope :unassigned, -> { where(event_rule_id: nil) }
   end
