@@ -24,7 +24,7 @@ class HostReportsController < ApplicationController
 private
 
   def get_events
-     @events = Event.active.by_network(host).most_current(50)
+     @events = Event.not_ignored.by_network(host).most_current(50)
   end
 
   def host
