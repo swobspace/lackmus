@@ -78,4 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.colorize_logging = false
+
+  # -- action mailer: send to local mail system
+  config.action_mailer.delivery_method = :sendmail
 end
