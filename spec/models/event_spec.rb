@@ -101,7 +101,7 @@ RSpec.describe Event, type: :model do
     it { expect(Event.active).to contain_exactly(active_event, ignore_rule_event, drop_rule_event) }
     it { expect(Event.not_ignored).to contain_exactly(active_event, done_event, ignore_rule_event, drop_rule_event) }
     it "TODO: Query Object" do
-      skip
+      skip "try it later: left outer join between event_rules and events"
          expect(Event.active.
            joins('LEFT OUTER JOIN event_rules ON event_rules.id = events.event_rule_id').
            merge(EventRule.active)).to contain_exactly(active_event)

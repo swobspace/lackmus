@@ -43,7 +43,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # -- devise stuff
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include RequestMacros, type: :feature
   config.include FakeWebHelper, type: :views
