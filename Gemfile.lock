@@ -7,21 +7,26 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers
-  revision: c6df6c2c2a54a07d2ea0c5285a703fb0dd87fd88
+  revision: 8da868353da49051874fda1ae45637ac243e7fc5
   branch: master
   specs:
-    wobapphelpers (0.0.1)
+    wobapphelpers (1.0.0)
+      coffee-rails
+      jquery-rails
+      rails (~> 4.1)
       responders
+      sass-rails
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 65fe8f44859d4182b8b8e353d1b24a7199a4520a
+  revision: 5c34be944aa4001d7339d704c0d661c76fb161bf
   branch: master
   specs:
-    wobauth (0.0.1)
-      cancancan (~> 1.9)
+    wobauth (1.0.0)
+      cancancan (~> 1.7)
       coffee-rails
       devise
+      jquery-rails
       rails (~> 4.1)
       sass-rails
       simple_form
@@ -393,7 +398,7 @@ DEPENDENCIES
   postgres_ext
   puma
   railroady
-  rails (~> 4.2.6)
+  rails (~> 4.2.7)
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
