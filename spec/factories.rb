@@ -4,10 +4,6 @@ FactoryGirl.define do
     "recipient_#{n}@example.org"
   end
 
-  sequence :aname do |n|
-    "name_#{n}"
-  end
-
   sequence :number do |num|
     num
   end
