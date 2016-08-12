@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :main_searches, only: [:new, :create, :show]
+  resources :main_searches, only: [:new, :create]
+
+  get 'main_searches/show', 
+        controller: :main_searches, action: :show,
+        as: :show_main_search
 
   get 'host_reports/show', 
         controller: :host_reports, action: :show,
