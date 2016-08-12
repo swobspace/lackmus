@@ -1,6 +1,6 @@
 class MainSearch
   def initialize(options = {})
-    @options = options.symbolize_keys!
+    @options = options.symbolize_keys
     if @query = options.fetch(:q, nil)
       @ip = is_ip?(@query) ? @query : nil
     else
