@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'main_searches/new'
+
+  get 'main_searches/create'
+
+  get 'main_searches/show'
+
   get 'host_reports/show', 
         controller: :host_reports, action: :show,
         as: :show_host_report
