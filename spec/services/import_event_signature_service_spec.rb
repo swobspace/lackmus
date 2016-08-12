@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe ImportEventSignatureService do
   let(:event) { FactoryGirl.create(:event, alert_signature_id: 99799,
-                                   alert_signature: "Lorem Ipsum") }
+                                   alert_signature: "Lorem Ipsum",
+                                   alert_category: "A Trojan may be or so",
+                                   alert_severity: 7 ) }
 
   # check for class methods
   it { expect(ImportEventSignatureService.respond_to? :new).to be_truthy}
@@ -20,7 +22,7 @@ RSpec.describe ImportEventSignatureService do
     subject { ImportEventSignatureService.new }
 
     it "creates a signature" do
-      signature = instance_double(Signature)
+      signature = FactoryGirl.build_stubbed(:signature)
       expect(Signature).to receive_message_chain(:create_with, :find_or_initialize_by).
         and_return(signature)
       expect(signature).to receive(:persisted?).and_return(false)
@@ -43,6 +45,18 @@ RSpec.describe ImportEventSignatureService do
         it { expect(result.signature).to be_a_kind_of Signature }
         it { expect(result.signature).to be_persisted }
         it { expect(result.signature.events_count).to eq(1)}
+        it { expect(result.signature.category).to eq("A Trojan may be or so")}
+        it { expect(result.signature.severity).to eq(7)}
+      end
+    end
+
+    context "with prexisting incomplete signature" do
+      let!(:signature) { FactoryGirl.create(:signature, signature_id: 99799,
+                                            signature_info: "Lorem Ipsum") }
+      describe "#call updates attributes" do
+        let(:result) { subject.call(event) }
+        it { expect(result.signature.category).to eq("A Trojan may be or so")}
+        it { expect(result.signature.severity).to eq(7)}
       end
     end
 
