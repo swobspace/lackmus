@@ -11,7 +11,10 @@ class ImportEventSignatureService
     @signature = Signature.create_with(signature_attributes).
                            find_or_initialize_by(signature_id: event.alert_signature_id)
 
-    if signature.persisted? || signature.save
+    if signature.persisted?
+      @signature = update_signature(signature, event)
+      result = Result.new(success: true, error_messages: [], signature: signature)
+    elsif signature.save
       result = Result.new(success: true, error_messages: [], signature: signature)
     else
       result = Result.new(success: false, error_messages: signature.errors.messages)
@@ -30,6 +33,16 @@ private
       severity: event.alert_severity,
       events_count: 1
     }
+  end
+
+  def update_signature(sig, ev)
+    if sig.category.blank?
+      sig.category = ev.alert_category
+    end
+    if sig.severity.blank?
+      sig.severity = ev.alert_severity
+    end
+    sig
   end
 
 end
