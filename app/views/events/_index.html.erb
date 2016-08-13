@@ -1,0 +1,58 @@
+
+<%= render partial: 'shared/filter_info' %>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.sensor') %></th>
+    <th><%= t('attributes.event_time') %></th>
+    <th><%= t('attributes.src_ip') %></th>
+    <th><%= t('attributes.src_port') %></th>
+    <th><%= t('attributes.dst_ip') %></th>
+    <th><%= t('attributes.dst_port') %></th>
+    <th><%= t('attributes.proto') %></th>
+    <th><%= t('attributes.alert_signature_id') %></th>
+    <th><%= t('attributes.alert_signature') %></th>
+    <th><%= t('attributes.alert_category') %></th>
+    <th><%= t('attributes.alert_severity') %></th>
+    <th><%= t('attributes.http_hostname') %></th>
+    <th><%= t('attributes.done') %></th>
+    <th><%= t('attributes.ignore') %></th>
+    <th><%= t('attributes.severity') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @events.each do |event| %>
+  <%= content_tag_for(:tr, event) do %>
+    <td><%= link_to(event.sensor, events_path(sensor: event.sensor)) %></td>
+    <td><%= event.event_time.to_s(:precision) %></td>
+    <td><%= events_by_ip(event.src_ip) %></td>
+    <td><%= event.src_port %></td>
+    <td><%= events_by_ip(event.dst_ip) %></td>
+    <td><%= event.dst_port %></td>
+    <td><%= event.proto %></td>
+    <td><%= signature_id_link(event.alert_signature_id) %></td>
+    <td><%= event.alert_signature %></td>
+    <td><%= event.alert_category %></td>
+    <td><%= event.alert_severity %></td>
+    <td><%= link_to_unless(event.http_hostname.blank?, event.http_hostname, events_path(httphost: event.http_hostname)) %></td>
+    <td><%= event.done %></td>
+    <td><%= event.ignore %></td>
+    <td><%= event.severity %></td>
+    <td class="nowrap">
+      <%= show_link event %>
+      <%= delete_link event %>
+      <%= link_to image_tag("wireshark.png"), packet_event_path(event), class: 'btn btn-default',
+            title: "Download pcap file" %>
+      <%= new_rule_from_event(event) %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>

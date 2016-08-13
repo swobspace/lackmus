@@ -21,6 +21,7 @@ de:
     truly: Echt jetzt?
     since_today: seit heute
     since_yesterday: seit gestern
+    search_result: Suchergebnis
 
   actions:
     destroy: Datensatz löschen
@@ -40,6 +41,7 @@ de:
       user: User
       event: Event
       event_rule: Filterregel
+      main_search: Suche
       signature: Signature
 
   attributes:
@@ -58,6 +60,7 @@ de:
     packet: Paket
     payload: Payload
     position: Position
+    query: Suche
     references: Referenzen
     severity: Schweregrad (1=hoch, 3=niedrig)
     signature_id: SignaturID
@@ -70,6 +73,7 @@ de:
     users: Benutzer
     events: Ereignisse
     event_rules: Filterregeln
+    main_searches: Suche
     signatures: Signaturen
 
   report_mailer:

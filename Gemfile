@@ -60,4 +60,4 @@ group :test do
 end
 
 gem 'cancancan'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'develop'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'

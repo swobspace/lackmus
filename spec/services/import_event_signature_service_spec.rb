@@ -54,9 +54,12 @@ RSpec.describe ImportEventSignatureService do
       let!(:signature) { FactoryGirl.create(:signature, signature_id: 99799,
                                             signature_info: "Lorem Ipsum") }
       describe "#call updates attributes" do
-        let(:result) { subject.call(event) }
-        it { expect(result.signature.category).to eq("A Trojan may be or so")}
-        it { expect(result.signature.severity).to eq(7)}
+        before(:each) do
+          subject.call(event)
+          signature.reload
+        end
+        it { expect(signature.category).to eq("A Trojan may be or so")}
+        it { expect(signature.severity).to eq(7)}
       end
     end
 
