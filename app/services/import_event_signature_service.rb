@@ -11,8 +11,8 @@ class ImportEventSignatureService
     @signature = Signature.create_with(signature_attributes).
                            find_or_initialize_by(signature_id: event.alert_signature_id)
 
-    if signature.persisted?
-      @signature = update_signature(signature, event)
+    if signature.persisted? && 
+       signature.update_attributes(signature_update_attributes(signature, event))
       result = Result.new(success: true, error_messages: [], signature: signature)
     elsif signature.save
       result = Result.new(success: true, error_messages: [], signature: signature)
@@ -35,14 +35,15 @@ private
     }
   end
 
-  def update_signature(sig, ev)
+  def signature_update_attributes(sig, ev)
+    attributes = Hash.new
     if sig.category.blank?
-      sig.category = ev.alert_category
+      attributes[:category] = ev.alert_category
     end
     if sig.severity.blank?
-      sig.severity = ev.alert_severity
+      attributes[:severity] = ev.alert_severity
     end
-    sig
+    attributes
   end
 
 end
