@@ -1,6 +1,7 @@
 class MainSearch
+  attr_reader :filter_info
   def initialize(options = {})
-    @signature = nil; @ip = nil; @sensor = nil
+    @signature = nil; @ip = nil; @sensor = nil; @filter_info = ""
     @options = options.symbolize_keys
     if @query = options.fetch(:q, nil)
       if  is_ip?(@query) 
@@ -32,6 +33,7 @@ private
     events = events.where(["sensor like :sensor", sensor: "%#{sensor}%"]) unless sensor.nil?
     events = events.where(alert_signature_id: signature) unless signature.nil?
     events = events.where("http_hostname like :hostname", hostname: "%#{http_hostname}") unless http_hostname.nil?
+    @filter_info = events.to_sql
     events
   end
 

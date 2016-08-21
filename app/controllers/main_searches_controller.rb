@@ -18,6 +18,7 @@ class MainSearchesController < ApplicationController
     else
       add_breadcrumb(t('lackmus.search_result'), show_main_search_path)
       @events = search.events
+      @filter_info = search.filter_info
       render action: 'show'
     end
   end
