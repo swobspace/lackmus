@@ -34,6 +34,7 @@ RSpec.describe "event_rules/new", type: :view do
 
       assert_select "input#event_rule_severity[name=?]", "event_rule[severity]"
       assert_select "input#event_rule_valid_until[name=?]", "event_rule[valid_until]"
+      assert_select "textarea#event_rule_description[name=?]", "event_rule[description]"
     end
   end
 end

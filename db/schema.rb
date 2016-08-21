@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627081555) do
+ActiveRecord::Schema.define(version: 20160821162150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160627081555) do
     t.datetime "valid_until"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.text     "description"
   end
 
   add_index "event_rules", ["action"], name: "index_event_rules_on_action", using: :btree

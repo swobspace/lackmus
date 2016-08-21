@@ -5,6 +5,7 @@
   <tr>
     <th><%= t('attributes.position') %></th>
     <th><%= t('attributes.filter') %></th>
+    <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.action') %></th>
     <th><%= t('attributes.severity') %></th>
     <th><%= t('attributes.valid_until') %></th>
@@ -17,6 +18,7 @@
   <%= content_tag_for(:tr, event_rule) do %>
     <td><%= event_rule.position %></td>
     <td><%= event_rule.filter %></td>
+    <td><%= event_rule.description %></td>
     <td><%= event_rule.action %></td>
     <td><%= event_rule.severity %></td>
     <td><%= event_rule.valid_until.to_s %></td>

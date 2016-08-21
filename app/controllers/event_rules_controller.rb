@@ -68,7 +68,8 @@ class EventRulesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_rule_params
-      params.require(:event_rule).permit(:position, :action, :severity, :valid_until)
+      params.require(:event_rule).permit(:position, :action, :severity, 
+                                         :description, :valid_until)
     end
 
     def filter_params

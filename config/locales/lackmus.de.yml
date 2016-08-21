@@ -62,7 +62,7 @@ de:
     position: Position
     query: Suche
     references: Referenzen
-    severity: Schweregrad (1=hoch, 3=niedrig)
+    severity: Sev.
     signature_id: SignaturID
     signature_info: Signatur
     sn: Nachname

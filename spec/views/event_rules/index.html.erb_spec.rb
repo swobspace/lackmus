@@ -14,6 +14,7 @@ RSpec.describe "event_rules/index", type: :view do
         :filter => {"src_ip" => "1.2.3.4"},
         :action => "alert",
         :severity => 99,
+        :description => "MyDescription",
         :valid_until => Date.tomorrow
       ),
       EventRule.create!(
@@ -21,6 +22,7 @@ RSpec.describe "event_rules/index", type: :view do
         :filter => {"src_ip" => "1.2.3.4"},
         :action => "alert",
         :severity => 99,
+        :description => "MyDescription",
         :valid_until => Date.tomorrow
       )
     ])
@@ -31,6 +33,7 @@ RSpec.describe "event_rules/index", type: :view do
     assert_select "tr>td", :text => 1.to_s, :count => 1
     assert_select "tr>td", :text => 2.to_s, :count => 1
     assert_select "tr>td", :text => "alert".to_s, :count => 2
+    assert_select "tr>td", :text => "MyDescription".to_s, :count => 2
     assert_select "tr>td", :text => 99.to_s, :count => 2
     assert_select "tr>td", :text => Date.tomorrow.to_time.to_s, :count => 2
     expect(rendered).to match(/{&quot;src_ip&quot;=&gt;&quot;1.2.3.4&quot;}/)
