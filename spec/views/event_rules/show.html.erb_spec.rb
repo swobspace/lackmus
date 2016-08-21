@@ -13,7 +13,8 @@ RSpec.describe "event_rules/show", type: :view do
       :filter => {"src_ip" => "1.2.3.4"},
       :action => "alert",
       :severity => 2, 
-      :valid_until => Date.tomorrow
+      :valid_until => Date.tomorrow,
+      :description => "MyDescription"
     ))
   end
 
@@ -24,5 +25,6 @@ RSpec.describe "event_rules/show", type: :view do
     expect(rendered).to match(/alert/)
     expect(rendered).to match(/2/)
     expect(rendered).to match(/#{Date.tomorrow.to_s}/)
+    expect(rendered).to match(/MyDescription/)
   end
 end

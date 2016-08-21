@@ -23,6 +23,8 @@
         <li> <%=link_to t('lackmus.overview'), main_app.events_path %></li>
         <li> <%=link_to t('lackmus.since_today'), main_app.events_path(since: "today") %></li>
         <li> <%=link_to t('lackmus.since_yesterday'), main_app.events_path(since: "yesterday") %></li>
+        <li role="separator" class="divider"></li>
+        <li> <%=link_to t('lackmus.search'), main_app.new_main_search_path %></li>
       </ul>
     </li>
   <% end %>

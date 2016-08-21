@@ -1,9 +1,3 @@
-* navigation bar, search form with selector:
-
-  - input field
-  - search for: event_id, host, signature
-  - output: events list
-
 * create a report per IP as txt, pdf, ... 
 
 * events#index: 
@@ -42,10 +36,6 @@
 
   - list of events (see signatures#show) with assigned rule
   - button apply rule (to all unassigned events)
-
-* event_rules#new, edit:
-
-  - add text field description
 
 * event_rules#process:
 
@@ -88,7 +78,14 @@
 * signatures#show
 
   - link references if possible
+  - mark all events for current entries
 
 * ip_lookup:
 
   - check for multicast addresses
+
+* Start Page - statistics
+
+  - Events.count / done / ignored
+  - Events.count last 24 h / done / ignored
+  - Syslog::Systemevent.count / count older than 10 min.

@@ -67,5 +67,6 @@ bin/rails g scaffold EventRule \
   'filter:text' \
   'action:string{20}:index' \
   'severity:integer{1}' \
-  'valid_until:datetime'
+  'valid_until:datetime' \
+  'description:text'
 ```

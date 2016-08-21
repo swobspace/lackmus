@@ -8,7 +8,7 @@ namespace :lackmus do
 
   desc "process all cleanups and rule assignments"
   task :process_all do
-    Rake::Task['lackmus:cleanup'].invoke
     Rake::Task['lackmus:event_rules:process'].invoke
+    Rake::Task['lackmus:cleanup'].invoke
   end
 end
