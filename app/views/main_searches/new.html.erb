@@ -14,6 +14,42 @@
     </div>
 
     <div class="form-group">
+      <label for="ip" class="col-sm-2 control-label">
+        <%= t('attributes.ip') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="search_ip" name="search[ip]">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sensor" class="col-sm-2 control-label">
+        <%= t('attributes.sensor') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="search_sensor" name="search[sensor]">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="signature" class="col-sm-2 control-label">
+        <%= t('attributes.signature') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="search_signature" name="search[signature]">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="http_hostname" class="col-sm-2 control-label">
+        <%= t('attributes.http_hostname') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="search_http_hostname" name="search[http_hostname]">
+      </div>
+    </div>
+
+    <div class="form-group">
       <div class="col-sm-offset-2 col-sm-9">
         <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
         <%= cancel_button %>

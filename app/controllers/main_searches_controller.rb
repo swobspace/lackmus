@@ -25,6 +25,6 @@ class MainSearchesController < ApplicationController
 private
 
   def search_params
-    params.require(:search).permit(:q, :ip)
+    params.require(:search).permit(:q, :ip, :sensor, :signature, :http_hostname).reject{|_, v| v.blank?}
   end
 end

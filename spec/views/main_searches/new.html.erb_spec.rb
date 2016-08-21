@@ -16,6 +16,10 @@ RSpec.describe "main_searches/new.html.erb", type: :view do
 
     assert_select "form[action=?][method=?]", main_searches_path, "post" do
       assert_select "input#search_q[name=?]", "search[q]"
+      assert_select "input#search_ip[name=?]", "search[ip]"
+      assert_select "input#search_sensor[name=?]", "search[sensor]"
+      assert_select "input#search_signature[name=?]", "search[signature]"
+      assert_select "input#search_http_hostname[name=?]", "search[http_hostname]"
     end
   end
 
