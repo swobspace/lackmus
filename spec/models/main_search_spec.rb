@@ -38,6 +38,30 @@ RSpec.describe MainSearch, type: :model do
       it {expect(MainSearch.new(q: "1223344").events).to contain_exactly(event1)}
       it {expect(MainSearch.new(q: "22446688").events).to contain_exactly(event2)}
     end
+
+    context "search sensor via :sensor" do
+      let!(:event1) { FactoryGirl.create(:event, sensor: 'sentinel') }
+      let!(:event2) { FactoryGirl.create(:event, sensor: 'quark') }
+
+      it {expect(MainSearch.new(sensor: "entinel").events).to contain_exactly(event1)}
+      it {expect(MainSearch.new(sensor: "quar").events).to contain_exactly(event2)}
+    end
+
+    context "search signature via :signature" do
+      let!(:event1) { FactoryGirl.create(:event, alert_signature_id: '11335577') }
+      let!(:event2) { FactoryGirl.create(:event, alert_signature_id: '22446688') }
+
+      it {expect(MainSearch.new(signature: "11335577").events).to contain_exactly(event1)}
+      it {expect(MainSearch.new(signature: "22446688").events).to contain_exactly(event2)}
+    end
+
+    context "search http_hostname via :http_hostname" do
+      let!(:event1) { FactoryGirl.create(:event, http_hostname: '0.example.com') }
+      let!(:event2) { FactoryGirl.create(:event, http_hostname: '1.example.net') }
+
+      it {expect(MainSearch.new(http_hostname: "example.com").events).to contain_exactly(event1)}
+      it {expect(MainSearch.new(http_hostname: "example.net").events).to contain_exactly(event2)}
+    end
   end
 
 end

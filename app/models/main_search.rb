@@ -11,9 +11,12 @@ class MainSearch
         @signature = @query
       end
     end
+    # -- may be in simple query
     @ip        = options.fetch(:ip,     nil) if @ip.nil?
     @sensor    = options.fetch(:sensor, nil) if @sensor.nil?
     @signature = options.fetch(:signature, nil) if @signature.nil?
+    # -- non simple query fields
+    @http_hostname = options.fetch(:http_hostname, nil)
   end
 
   def events
@@ -21,13 +24,14 @@ class MainSearch
   end
 
 private
-  attr_reader :options, :ip, :sensor, :signature
+  attr_reader :options, :ip, :sensor, :signature, :http_hostname
 
   def find_events
     events = Event.order("event_time DESC")
     events = events.where(["src_ip <<= :ip or dst_ip <<= :ip", ip: ip]) unless ip.nil?
     events = events.where(["sensor like :sensor", sensor: "%#{sensor}%"]) unless sensor.nil?
     events = events.where(alert_signature_id: signature) unless signature.nil?
+    events = events.where("http_hostname like :hostname", hostname: "%#{http_hostname}") unless http_hostname.nil?
     events
   end
 
