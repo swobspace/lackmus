@@ -24,13 +24,19 @@ RSpec.describe MainSearch, type: :model do
     end
 
     context "search ip via query" do
-      let!(:event1) { FactoryGirl.create(:event, src_ip: "192.0.2.1") }
-      let!(:event2) { FactoryGirl.create(:event, dst_ip: "198.51.100.1") }
+      let!(:event1) { FactoryGirl.create(:event, src_ip: "192.0.2.1", 
+                                         sensor: 'sentinel', alert_signature_id: 1223344) }
+      let!(:event2) { FactoryGirl.create(:event, dst_ip: "198.51.100.1", 
+                                         sensor: 'quark', alert_signature_id: 22446688) }
 
       it {expect(MainSearch.new(q: "192.0.2.1").events).to contain_exactly(event1)}
       it {expect(MainSearch.new(q: "192.0.2.0/25").events).to contain_exactly(event1)}
       it {expect(MainSearch.new(q: "198.51.100.1").events).to contain_exactly(event2)}
       it {expect(MainSearch.new(q: "198.51.100.0/29").events).to contain_exactly(event2)}
+      it {expect(MainSearch.new(q: "entinel").events).to contain_exactly(event1)}
+      it {expect(MainSearch.new(q: "quar").events).to contain_exactly(event2)}
+      it {expect(MainSearch.new(q: "1223344").events).to contain_exactly(event1)}
+      it {expect(MainSearch.new(q: "22446688").events).to contain_exactly(event2)}
     end
   end
 
