@@ -24,6 +24,7 @@ gem 'whois'
 gem 'packetfu'
 gem 'acts_as_list'
 gem 'immutable-struct'
+gem 'whenever', :require => false
 
 group :development do
   gem 'puma'
