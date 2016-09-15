@@ -1,1 +1,4 @@
 <%= render partial: 'host_report', locals: {host: @host, events: @events} %>
+
+<br />
+<%= link_to t('actions.send_mail'), new_mail_host_report_path(ip: @host), class: 'btn btn-primary' %>
