@@ -24,7 +24,7 @@ END_OF_WHOIS
 
   describe "#events_by_ip" do
     it "returns link to events_path with filter by ip" do
-      expect(events_by_ip("192.0.2.1")).to match(/events\?ip=192.0.2.1/)
+      expect(helper.events_by_ip("192.0.2.1")).to match(/events\?ip=192.0.2.1/)
     end
   end
 

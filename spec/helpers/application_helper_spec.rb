@@ -48,7 +48,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "#host_reports_link" do
     it "returns link to host_reports path with ip" do
-      expect(host_reports_link("192.0.2.1")).to match(/host_reports/show\?ip=192.0.2.1/)
+      expect(helper.host_report_link("192.0.2.1")).to match(/host_reports\/show\?ip=192.0.2.1/)
     end
   end
 
