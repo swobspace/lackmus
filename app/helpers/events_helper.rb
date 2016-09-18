@@ -4,7 +4,8 @@ module EventsHelper
   end
 
   def events_by_ip(ip)
-    link_to "#{ip}", events_path(ip: ip)
+    link_to("#{ip}", events_path(ip: ip)) + " " +
+    host_report_link(ip)
   end
 
   def new_rule_from_event(event)

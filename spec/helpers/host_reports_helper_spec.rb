@@ -1,15 +1,9 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the HostReportsHelper. For example:
-#
-# describe HostReportsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe HostReportsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#host_report_link" do
+    it "returns link to show_host_report_path with ip" do
+      expect(helper.host_report_link("192.0.2.1")).to match(/host_reports\/show\?ip=192.0.2.1/)
+    end
+  end
 end

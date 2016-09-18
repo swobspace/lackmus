@@ -24,6 +24,14 @@ class MainSearch
     @events ||= find_events
   end
 
+  def event_ids
+    events.pluck(:id)
+  end
+
+  def signatures
+    Signature.active.joins(:events).where("events.id in (?)", event_ids).uniq
+  end
+
 private
   attr_reader :options, :ip, :sensor, :signature, :http_hostname
 

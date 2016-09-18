@@ -35,6 +35,7 @@ de:
     cancel: abbrechen
     reset_table: Tabelle zurücksetzen
     submit: absenden
+    send_mail: Mail senden
 
   activerecord:
     models:

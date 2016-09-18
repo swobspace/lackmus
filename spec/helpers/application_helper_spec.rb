@@ -45,4 +45,11 @@ RSpec.describe ApplicationHelper, type: :helper do
       it { expect(subject.find("a").text).to match("ipintel.io") }
     end
   end
+
+  describe "#host_reports_link" do
+    it "returns link to host_reports path with ip" do
+      expect(helper.host_report_link("192.0.2.1")).to match(/host_reports\/show\?ip=192.0.2.1/)
+    end
+  end
+
 end

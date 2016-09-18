@@ -1,0 +1,11 @@
+#
+# copy me to deploy-config.yml and edit
+#
+hosts: 
+  web: myserver
+  app: myserver
+  db: myserver
+repo_url: https://github.com/swobspace/lackmus.git
+user: deploy
+deploy_to: /var/www/apps/lackmus
+relative_url_root: /

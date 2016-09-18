@@ -88,14 +88,19 @@ RSpec.describe "events/index", type: :view do
 
   it "renders a list of events" do
     render
+
     assert_select "tr>td", :text => "Sensor".to_s, :count => 2
     assert_select "tr>td", :text => ts.to_s(:precision), :count => 2
     assert_select "tr>td", :text => 1234.to_s, :count => 0
     assert_select "tr>td", :text => "In Iface".to_s, :count => 0
     assert_select "tr>td", :text => "Event Type".to_s, :count => 0
-    assert_select "tr>td", :text => "1.2.3.4".to_s, :count => 2
+    assert_select "tr>td" do
+      assert_select "a", :text => "1.2.3.4".to_s, :count => 2
+    end 
     assert_select "tr>td", :text => 5678.to_s, :count => 2
-    assert_select "tr>td", :text => "1.2.3.9".to_s, :count => 2
+    assert_select "tr>td" do
+      assert_select "a", :text => "1.2.3.9".to_s, :count => 2
+    end
     assert_select "tr>td", :text => 3128.to_s, :count => 2
     assert_select "tr>td", :text => "Proto".to_s, :count => 2
     assert_select "tr>td", :text => "MyAlert".to_s, :count => 0

@@ -13,7 +13,9 @@ RSpec.describe "main_searches/show.html.erb", type: :view do
 
   it "renders a list of events" do
     render
-    puts rendered
-    assert_select "tr>td", :text => "192.0.2.8".to_s, :count => 3
+
+    assert_select "tr>td" do
+      assert_select "a", :text => "192.0.2.8".to_s, :count => 3
+    end
   end
 end
