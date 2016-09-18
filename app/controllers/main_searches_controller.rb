@@ -17,15 +17,21 @@ class MainSearchesController < ApplicationController
       render action: 'new'
     else
       add_breadcrumb(t('lackmus.search_result'), show_main_search_path)
-      @events = search.events
-      @filter_info = search.filter_info
-      render action: 'show'
+      if search.options.fetch(:layout, "") == 'Events'
+        @events = search.events
+        @filter_info = search.filter_info
+        render template: 'main_searches/show_events'
+      else
+        @signatures = search.signatures
+        @filter_info = search.filter_info
+        render template: 'main_searches/show_signatures'
+      end
     end
   end
 
 private
 
   def search_params
-    params.require(:search).permit(:q, :ip, :sensor, :signature, :http_hostname).reject{|_, v| v.blank?}
+    params.require(:search).permit(:q, :ip, :sensor, :signature, :http_hostname, :layout).reject{|_, v| v.blank?}
   end
 end
