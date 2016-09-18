@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe MainSearchesController, type: :controller do
-  let!(:event1) { FactoryGirl.create(:event, src_ip: '192.0.2.7') }
-  let!(:event2) { FactoryGirl.create(:event, dst_ip: '192.0.2.7') }
+  let(:signature) { FactoryGirl.create(:signature) }
+  let!(:event1) { FactoryGirl.create(:event, src_ip: '192.0.2.7', signature: signature) }
+  let!(:event2) { FactoryGirl.create(:event, dst_ip: '192.0.2.7', signature: signature) }
   login_admin
 
   describe "GET #new" do
@@ -31,9 +32,15 @@ RSpec.describe MainSearchesController, type: :controller do
     end
 
     it "assigns events to @events" do
-      get :create, search: {q: '192.0.2.7'}
+      get :create, search: {q: '192.0.2.7', layout: 'Events'}
       get :show
       expect(assigns(:events)).to contain_exactly(event1, event2)
+    end
+
+    it "assigns signatures to @signatures" do
+      get :create, search: {q: '192.0.2.7'}
+      get :show
+      expect(assigns(:signatures)).to contain_exactly(signature)
     end
   end
 
