@@ -20,12 +20,13 @@ module EventConcerns
   class_methods do
     def assign_filters
       EventRule.all.each do |event_rule|
-        unassigned.assign_filter(event_rule)
+        assign_filter(event_rule, Event.unassigned)
       end
     end
     
-    def assign_filter(event_rule)
-      where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
+    def assign_filter(event_rule, relation)
+      # relation.where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
+      EventFilterQuery.new(filter: event_rule.filter, relation: relation).all.update_all(event_rule_id: event_rule.id)
     end
   end
 
