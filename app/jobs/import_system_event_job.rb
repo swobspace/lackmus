@@ -5,6 +5,8 @@ class ImportSystemEventJob < ActiveJob::Base
     options.symbolize_keys!
     count = options.fetch(:count, 0)
 
+    timestamp = Time.now
+
     Syslog::Systemevent.find_each do |sysevent|
       begin
         result = CreateEventService.new(sysevent.event_attributes).call
@@ -25,6 +27,11 @@ class ImportSystemEventJob < ActiveJob::Base
     end
     # execute complexe event_rules (base on active record statements)
     Event.assign_filters
-    Event.joins(:event_rule).where(event_rules: {action: 'drop'}).count
+    # drop events with event_rule.action = drop, but only if created
+    # in this job for safety reasons
+    Event.joins(:event_rule).
+      where("events.created_at >= :ts", ts: timestamp).
+      where(event_rules: {action: 'drop'}).
+      destroy_all
   end
 end
