@@ -70,6 +70,30 @@ RSpec.describe EventFilterQuery do
     end
   end
 
+  context "with filter sensor: 'abc001;def002'" do
+    subject { EventFilterQuery.new(filter: {sensor: "abc001;def002"}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(event1,event4) }
+    end
+
+    describe "#find_each" do
+      it "executes event1 and event4" do
+        a = []
+        subject.find_each do |e|
+          a << e.id
+        end
+        expect(a).to contain_exactly(event1.id, event4.id)
+      end
+    end
+
+    describe "#include?" do
+      it { expect(subject.include?(event1)).to be_truthy }
+      it { expect(subject.include?(event2)).to be_falsey }
+      it { expect(subject.include?(event3)).to be_falsey }
+      it { expect(subject.include?(event4)).to be_truthy }
+    end
+  end
+
   context "with filter src_ip: '192.0.2.1/29'" do
     subject { EventFilterQuery.new(filter: {src_ip: "192.0.2.0/29"}) }
     describe "#all" do
