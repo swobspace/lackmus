@@ -29,9 +29,14 @@ class ImportSystemEventJob < ActiveJob::Base
     Event.assign_filters
     # drop events with event_rule.action = drop, but only if created
     # in this job for safety reasons
-    Event.joins(:event_rule).
+    drop_count = Event.joins(:event_rule).
       where("events.created_at >= :ts", ts: timestamp).
       where(event_rules: {action: 'drop'}).
-      destroy_all
-  end
+      destroy_all.count
+    ignore_count = Event.joins(:event_rule).
+      where("events.created_at >= :ts", ts: timestamp).
+      where(event_rules: {action: 'ignore'}).
+      update_all(ignore: true)
+    Rails.logger.info("process complex rules: #{drop_count} drop, #{ignore_count} ignore")
+  end # def perform
 end
