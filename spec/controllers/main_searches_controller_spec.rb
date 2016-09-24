@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe MainSearchesController, type: :controller do
   let(:signature) { FactoryGirl.create(:signature) }
+  let(:signature2) { FactoryGirl.create(:signature) }
   let!(:event1) { FactoryGirl.create(:event, src_ip: '192.0.2.7', signature: signature) }
   let!(:event2) { FactoryGirl.create(:event, dst_ip: '192.0.2.7', signature: signature) }
+  let!(:event3) { FactoryGirl.create(:event, dst_ip: '198.51.100.3', signature: signature2) }
   login_admin
 
   describe "GET #new" do
@@ -39,6 +41,12 @@ RSpec.describe MainSearchesController, type: :controller do
 
     it "assigns signatures to @signatures" do
       get :create, search: {q: '192.0.2.7'}
+      get :show
+      expect(assigns(:signatures)).to contain_exactly(signature)
+    end
+
+    it "assigns signatures to @signatures" do
+      get :create, search: {q: '192.0.2.0/29'}
       get :show
       expect(assigns(:signatures)).to contain_exactly(signature)
     end
