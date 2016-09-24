@@ -8,7 +8,8 @@ RSpec.describe ReportMailer, type: :mailer do
   end
 
   describe "host_event_report" do
-    let(:events) { FactoryGirl.create_list(:event, 3, src_ip: '198.51.100.4') }
+    let(:signature) { FactoryGirl.create(:signature) }
+    let(:events) { FactoryGirl.create_list(:event, 3, src_ip: '198.51.100.4', signature: signature) }
     let(:mail_params) {{ 
       ip: '198.51.100.4', mail_to: 'recipient@example.org', 
       subject: 'MyVeryReallyNeededSubject', prefix: 'PREFIX ',
