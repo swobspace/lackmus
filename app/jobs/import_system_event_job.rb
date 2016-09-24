@@ -23,5 +23,8 @@ class ImportSystemEventJob < ActiveJob::Base
          LogSyslogsysevent.log(sysevent)
       end
     end
+    # execute complexe event_rules (base on active record statements)
+    Event.assign_filters
+    Event.joins(:event_rule).where(event_rules: {action: 'drop'}).count
   end
 end
