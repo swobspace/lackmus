@@ -34,7 +34,7 @@ module ApplicationHelper
     options.symbolize_keys!
     msg = "ipintel.io"
     if ip = options.fetch(:ip, nil)
-      return "" if IpLookup.is_private?(ip)
+      return "" if IpLookup.is_special?(ip)
       link_to msg, "https://ipintel.io/#{ip}",
               target: "_blank", class: "btn btn-info btn-xs"
     end
