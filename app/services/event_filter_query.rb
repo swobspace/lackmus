@@ -38,6 +38,9 @@ private
       elsif [:src_ip, :dst_ip].include?(key)
         q = q.where("#{key} <<= :ip", ip: value)
         dirty = true
+      # wildcard
+      elsif value.include?('*')
+        q = q.where("#{key} LIKE :value", value: value.tr('*', '%'))
       # don't touch the rest
       else
         hash[key] = value
