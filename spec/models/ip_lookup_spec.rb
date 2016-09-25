@@ -9,6 +9,11 @@ RSpec.describe IpLookup, type: :model do
   describe "#IpLookup.whois(domain)" do
     it { expect(IpLookup.whois("example.com").to_s).to match /Registrar: RESERVED-INTERNET ASSIGNED NUMBERS AUTHORITY/ }
     it { expect(IpLookup.whois("192.0.2.1").to_s).to match /NetRange:       192.0.2.0 - 192.0.2.255/ }
+    it { expect(IpLookup.whois("239.255.255.255").to_s).to match /Multicast address range/ }
+    it { expect(IpLookup.whois("192.168.1.2").to_s).to match /Private address range/ }
+    it { expect(IpLookup.whois("172.17.9.1").to_s).to match /Private address range/ }
+    it { expect(IpLookup.whois("10.1.2.4").to_s).to match /Private address range/ }
+    it { expect(IpLookup.whois("169.254.17.23").to_s).to match /Link local address range/ }
   end
 
   describe "#IpLookup.is_private(ip)" do

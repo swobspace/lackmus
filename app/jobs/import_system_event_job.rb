@@ -5,6 +5,8 @@ class ImportSystemEventJob < ActiveJob::Base
     options.symbolize_keys!
     count = options.fetch(:count, 0)
 
+    timestamp = Time.now
+
     Syslog::Systemevent.find_each do |sysevent|
       begin
         result = CreateEventService.new(sysevent.event_attributes).call
@@ -23,5 +25,18 @@ class ImportSystemEventJob < ActiveJob::Base
          LogSyslogsysevent.log(sysevent)
       end
     end
-  end
+    # execute complexe event_rules (base on active record statements)
+    Event.assign_filters
+    # drop events with event_rule.action = drop, but only if created
+    # in this job for safety reasons
+    drop_count = Event.joins(:event_rule).
+      where("events.created_at >= :ts", ts: timestamp).
+      where(event_rules: {action: 'drop'}).
+      destroy_all.count
+    ignore_count = Event.joins(:event_rule).
+      where("events.created_at >= :ts", ts: timestamp).
+      where(event_rules: {action: 'ignore'}).
+      update_all(ignore: true)
+    Rails.logger.info("process complex rules: #{drop_count} drop, #{ignore_count} ignore")
+  end # def perform
 end

@@ -20,6 +20,7 @@ RSpec.describe "main_searches/new.html.erb", type: :view do
       assert_select "input#search_sensor[name=?]", "search[sensor]"
       assert_select "input#search_signature[name=?]", "search[signature]"
       assert_select "input#search_http_hostname[name=?]", "search[http_hostname]"
+      assert_select "select#search_layout[name=?]", "search[layout]"
     end
   end
 

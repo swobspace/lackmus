@@ -1,72 +1,9 @@
 * create a report per IP as txt, pdf, ... 
 
-* events#index: 
-
-  # implement datatable
-  - mark (all|single) events as done 
-
-* events#show: 
-
-  - whois frame lower height
-  - include ipinfo data (http://ipinfo.io/<ip>/geo)
-  - include firehol.org blocklist info
-  - button mark done, button mark ignore
-  - uncompress gzip data
-
-* events#search:
-
-  - by IP
-  - by date
-  - generate PCAP for all results
-
-* events#edit:
-
-  - short form, show only editable fields, i.e. done, action, severity
-
-* events#destroy:
-
-  - redirect to calling page or active scope of events
-
 * event_rules#index:
 
   - event count
   - description
-
-* event_rules#show:
-
-  - list of events (see signatures#show) with assigned rule
-  - button apply rule (to all unassigned events)
-
-* event_rules#process:
-
-  - allow cidr addresses for src_ip, dst_ip
-  - allow wildcards for some text fields (sensor)
-  - allow ranges for numeric fields (src_port, dst_port)
-
-* process ip or signature:
-
-  - i.e. search for IP
-  - create PCAP and summary mail
-  - mark events as done
-
-* host_reports#mail:
-
-  - mail form: include/exclude event /checkbox
-  - create log entry for event
-  - set event action (investigate, ignore, normal, drop) /select
-  - mark as done /checkbox
-
-* host_reports#show:
-  
-  - show links to event
-
-* log entry:
-
-  - signature_id
-  - event_id
-  - host ip
-  - timestamp
-  - prosa: subject, note
 
 * signatures#index
 
@@ -79,10 +16,6 @@
 
   - link references if possible
   - mark all events for current entries
-
-* ip_lookup:
-
-  - check for multicast addresses
 
 * Start Page - statistics
 

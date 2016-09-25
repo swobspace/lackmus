@@ -34,7 +34,8 @@ module SignaturesHelper
   end
 
   def signatures_by_ip(ip)
-    link_to "#{ip}", signatures_path(ip: ip)
+    link_to("#{ip}", signatures_path(ip: ip)) + " " +
+    host_report_link(ip)
   end
 
   def delete_events_link(sig)

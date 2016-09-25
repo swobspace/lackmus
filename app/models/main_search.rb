@@ -1,5 +1,5 @@
 class MainSearch
-  attr_reader :filter_info
+  attr_reader :filter_info, :options
   def initialize(options = {})
     @signature = nil; @ip = nil; @sensor = nil; @filter_info = ""
     @options = options.symbolize_keys
@@ -33,7 +33,7 @@ class MainSearch
   end
 
 private
-  attr_reader :options, :ip, :sensor, :signature, :http_hostname
+  attr_reader :ip, :sensor, :signature, :http_hostname
 
   def find_events
     events = Event.order("event_time DESC")

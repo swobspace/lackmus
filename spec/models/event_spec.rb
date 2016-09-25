@@ -127,8 +127,8 @@ RSpec.describe Event, type: :model do
 
     context "::assign_filter(filter)" do
       before(:each) do
-        Event.unassigned.assign_filter(event_rule1)
-        Event.unassigned.assign_filter(event_rule2)
+        Event.assign_filter(event_rule1, Event.unassigned)
+        Event.assign_filter(event_rule2, Event.unassigned)
       end
 
       it {expect(event_rule1.events).to contain_exactly(event1)}

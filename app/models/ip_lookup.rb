@@ -44,7 +44,12 @@ class IpLookup
   end
 
   def get_whois
-    return nil if @ip_addr =~ /(0.0.0.0|255.255.255.255)/
+    return "Broadcast address" if @ip_addr =~ /(0.0.0.0|255.255.255.255)/
+    if is_ip?
+      return "Private address range" if private_subnet?
+      return "Multicast address range" if multicast_subnet?
+      return "Link local address range" if linklocal_subnet?
+    end
     Rails.cache.fetch("ip/#{ip_addr}/whois") do
       begin
         Whois::Client.new(timeout: 2).lookup(ip_addr)
@@ -52,6 +57,10 @@ class IpLookup
         nil
       end
     end
+  end
+
+  def is_ip?
+    @ip_addr =~ /\A[0-9]{0,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\z/
   end
 
   def private_subnet?
