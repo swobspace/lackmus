@@ -1,7 +1,10 @@
 <div style="padding-bottom: 1em; line-height: 20px;">
   <div style="font-weight: bold;">
-<%= link_to("#{event.sensor} #{event.event_time.to_s(:precision)}", event_url(event)) %>
-<%= link_to("[#{event.alert_signature_id}] #{event.alert_signature} [#{event.alert_category}]", signature_url(event.signature)) %>
+    <% if @is_form %>
+      <%= check_box_tag "event_ids[]", event.id, true %>
+    <% end %>
+    <%= link_to("#{event.sensor} #{event.event_time.to_s(:precision)}", event_url(event)) %>
+    <%= link_to("[#{event.alert_signature_id}] #{event.alert_signature} [#{event.alert_category}]", signature_url(event.signature)) %>
   </div>
   <div style="padding-left: 20px">
     {<%= event.proto %>} <%= event.src_ip %>:<%= event.src_port %> (<%=IpLookup.hostname(event.src_ip)%>) -> <%= event.dst_ip %>:<%= event.dst_port %> (<%= IpLookup.hostname(event.dst_ip)%>)

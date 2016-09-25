@@ -8,11 +8,12 @@ class HostReportsController < ApplicationController
   end
 
   def new_mail
+    @is_form = true
   end
 
   def create_mail
     if mail_params[:mail_to].present?
-      ReportMailer.host_event_report(mail_params.merge(event_ids: @events.pluck(:id))).deliver_later
+      ReportMailer.host_event_report(mail_params.merge(event_ids: event_ids)).deliver_later
       flash[:success] = "Success"
       redirect_to show_host_report_url(ip: mail_params[:ip])
     else
@@ -25,6 +26,10 @@ private
 
   def get_events
      @events = Event.not_ignored.by_network(host).most_current(50)
+  end
+
+  def event_ids
+    params[:event_ids] || []
   end
 
   def host
