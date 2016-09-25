@@ -2,11 +2,11 @@ module Lackmus
   CONFIGURATION_CONTROLLER = []
   CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'lackmus.yml'))
 
-  def self.proxy
-    if CONFIG['proxy'].present?
-      CONFIG['proxy']
+  def self.default_recipient
+    if CONFIG['default_recipient'].present?
+      CONFIG['default_recipient']
     else
-      nil
+      ""
     end
   end
 
@@ -15,6 +15,14 @@ module Lackmus
       CONFIG['host']
     else
       "localhost"
+    end
+  end
+
+  def self.proxy
+    if CONFIG['proxy'].present?
+      CONFIG['proxy']
+    else
+      nil
     end
   end
 
