@@ -13,22 +13,8 @@ class EventsController < ApplicationController
     respond_with(@event)
   end
 
-  # GET /events/new
-  def new
-    @event = Event.new
-    respond_with(@event)
-  end
-
   # GET /events/1/edit
   def edit
-  end
-
-  # POST /events
-  def create
-    @event = Event.new(event_params)
-
-    @event.save
-    respond_with(@event)
   end
 
   # PATCH/PUT /events/1

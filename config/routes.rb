@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       delete 'destroy_events'
     end
   end
-  resources :events do
+  resources :events, except: [:new, :create] do
     member do
       get 'packet'
     end
