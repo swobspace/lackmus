@@ -9,6 +9,7 @@ class HostReportsController < ApplicationController
 
   def new_mail
     @is_form = true
+    @message = "Unchecked events are always done"
   end
 
   def create_mail

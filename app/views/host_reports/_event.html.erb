@@ -1,7 +1,7 @@
 <div style="padding-bottom: 1em; line-height: 20px;">
   <div style="font-weight: bold;">
     <% if @is_form %>
-      <%= check_box_tag "event_ids[]", event.id, true %>
+      <%= check_box_tag "event_ids[]", event.id, !event.done %>
     <% end %>
     <%= link_to("#{event.sensor} #{event.event_time.to_s(:precision)}", event_url(event)) %>
     <%= link_to("[#{event.alert_signature_id}] #{event.alert_signature} [#{event.alert_category}]", signature_url(event.signature)) %>
