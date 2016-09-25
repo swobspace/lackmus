@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ReportMailer, type: :mailer do
   describe "ReportMailer default from" do
     it "uses Lackmus.mail_from" do
-      expect(ReportMailer.default[:from]).to eq('lackmus@localhost.local')
+      expect(ReportMailer.default[:from]).to eq(Lackmus.mail_from)
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe ReportMailer, type: :mailer do
 
     # header
     it { expect(mail.to).to eq(["recipient@example.org"]) }
-    it { expect(mail.from).to eq(["lackmus@localhost.local"]) }
+    it { expect(mail.from).to eq([Lackmus.mail_from]) }
 
     context "with subject set" do
       it { expect(mail.subject).to eq("PREFIX MyVeryReallyNeededSubject") }
@@ -44,7 +44,7 @@ RSpec.describe ReportMailer, type: :mailer do
 
     # header
     it { expect(mail.to).to eq(["recipient@example.org"]) }
-    it { expect(mail.from).to eq(["lackmus@localhost.local"]) }
+    it { expect(mail.from).to eq([Lackmus.mail_from]) }
 
     context "with subject set" do
       it { expect(mail.subject).to eq("PREFIX MyVeryReallyNeededSubject") }
