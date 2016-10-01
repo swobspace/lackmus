@@ -25,6 +25,10 @@ ready = ->
       'copy', 'excel', 'csv', 'pdf', 'print', 'colvis'
     ]
     stateSave: true
+    columnDefs: [
+      "targets": 'nosort', "orderable": false
+    ]
+
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
   )
@@ -58,6 +62,10 @@ ready = ->
         document.getElementById(myid).type = 'date'
   else
     $(".datepicker").datepicker()
+
+  $('#checkAll').click(->
+    $('form input:checkbox').prop('checked', this.checked)
+  )
 
 # $(document).ready(ready)
 # $(document).on('page:load', ready)
