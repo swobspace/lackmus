@@ -36,14 +36,10 @@ module Lackmus
 
   def self.mail_from
     if CONFIG['mail_from'].present?
-      @@mail_from ||= CONFIG['mail_from']
+      CONFIG['mail_from']
     else
-      @@mail_from ||= 'lackmus@localhost.local'
+      'lackmus@localhost.local'
     end
-  end
-
-  def self.mail_from=(from)
-    @@mail_from = from
   end
 
   ActionMailer::Base.default_url_options = { 

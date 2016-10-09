@@ -8,9 +8,10 @@
   <div class="form-group">
 
     <table id="eventsTable" class="table table-bordered table-striped dataTable">
+
     <thead>
       <tr>
-	<th></th>
+	<th class="center nosort"><%= check_box_tag "checkAll" %></th>
 	<th><%= t('attributes.sensor') %></th>
 	<th><%= t('attributes.event_time') %></th>
 	<th><%= t('attributes.src_ip') %></th>
@@ -19,14 +20,14 @@
 	<th><%= t('attributes.dst_port') %></th>
 	<th><%= t('attributes.proto') %></th>
 	<th><%= t('attributes.http_hostname') %></th>
-	<th></th>
+	<th class="nosort"></th>
       </tr>
     </thead>
     <tbody>
 
     <% events.each do |event| %>
       <%= content_tag_for(:tr, event) do %>
-	<td class="center"><%= check_box_tag "event_ids[]", event.id %></td>
+	<td class="center nosort"><%= check_box_tag "event_ids[]", event.id %></td>
         <td><%= link_to(event.sensor, events_path(sensor: event.sensor)) %></td>
 	<td><%= event.event_time.to_s(:precision) %></td>
 	<td><%= signatures_by_ip(event.src_ip) %> / 

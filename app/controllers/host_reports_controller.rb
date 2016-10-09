@@ -9,11 +9,15 @@ class HostReportsController < ApplicationController
 
   def new_mail
     @is_form = true
+    @message = "Unchecked events are always done"
   end
 
   def create_mail
     if mail_params[:mail_to].present?
       ReportMailer.host_event_report(mail_params.merge(event_ids: event_ids)).deliver_later
+      if mark_done?
+        Event.where(['id IN (?)', event_ids]).update_all(done: true)
+      end
       flash[:success] = "Success"
       redirect_to show_host_report_url(ip: mail_params[:ip])
     else
@@ -30,6 +34,10 @@ private
 
   def event_ids
     params[:event_ids] || []
+  end
+
+  def mark_done?
+   params[:mark_done].present?
   end
 
   def host

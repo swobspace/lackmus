@@ -1,7 +1,10 @@
 <h1> Current events for: <%= host.to_s%> </h1>
 
 <% if @message.present? %>
-<p><%= @message %></p>
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p><%= @message %></p>
+  </div>
 <% end %>
 
 <%= render(partial: 'host_reports/event', collection: events) || "No events available" %>
