@@ -50,7 +50,7 @@ group :test, :development do
   gem 'guard-rspec', require: false
   gem 'byebug'
   gem "json_spec"
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing', require: false
 end
 
 group :test do

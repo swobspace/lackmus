@@ -10,6 +10,7 @@ require 'shoulda/matchers'
 require 'factory_girl_rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'rails-controller-testing'
 
 Capybara.javascript_driver = :poltergeist
 
@@ -46,8 +47,13 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include RequestMacros, type: :feature
-  config.include FakeWebHelper, type: :views
-  config.include Wobapphelpers, type: :views
+  config.include FakeWebHelper, type: :view
+
+  [:controller, :view, :request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, type: type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
+    config.include ::Rails::Controller::Testing::Integration, type: type
+  end
 
   config.before(:suite) do
     DatabaseRewinder.clean_all
