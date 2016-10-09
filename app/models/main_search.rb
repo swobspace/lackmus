@@ -2,7 +2,7 @@ class MainSearch
   attr_reader :filter_info, :options
   def initialize(options = {})
     @signature = nil; @ip = nil; @sensor = nil; @filter_info = ""
-    @options = options.symbolize_keys
+    @options = options.to_h.symbolize_keys
     if @query = options.fetch(:q, nil)
       if  is_ip?(@query) 
         @ip = @query
@@ -29,7 +29,7 @@ class MainSearch
   end
 
   def signatures
-    Signature.active.joins(:events).where("events.id in (?)", event_ids).uniq
+    Signature.active.joins(:events).where("events.id in (?)", event_ids).distinct
   end
 
 private
