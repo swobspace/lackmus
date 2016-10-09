@@ -1,41 +1,7 @@
 GIT
-  remote: https://github.com/ifad/data-confirm-modal.git
-  revision: aa48a32a84bd70307fcdd82b6b6e242a410f5b36
-  specs:
-    data-confirm-modal (1.2.0)
-      railties (>= 3.0)
-
-GIT
-  remote: https://github.com/swobspace/wobapphelpers
-  revision: 4867abda982be0d5df7ec1e6e3dce50c596afc1a
-  branch: master
-  specs:
-    wobapphelpers (2.0.0)
-      coffee-rails
-      jquery-rails
-      rails (~> 5.0)
-      record_tag_helper (~> 1.0)
-      responders
-      sass-rails
-
-GIT
-  remote: https://github.com/swobspace/wobauth.git
-  revision: 9a0b474d306783ca5441163cb8c6bc892ff2ce5f
-  branch: master
-  specs:
-    wobauth (2.0.0)
-      cancancan
-      coffee-rails
-      devise
-      jquery-rails
-      rails (~> 5.0)
-      record_tag_helper (~> 1.0)
-      sass-rails
-      simple_form
-      wobapphelpers
-
-GEM
-  remote: https://rubygems.org/
+  remote: git://github.com/rails/rails.git
+  revision: aa5621f2c3d6c38654755940dc0258fbfe2bf31c
+  branch: 5-0-stable
   specs:
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
@@ -74,6 +40,64 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    rails (5.0.0.1)
+      actioncable (= 5.0.0.1)
+      actionmailer (= 5.0.0.1)
+      actionpack (= 5.0.0.1)
+      actionview (= 5.0.0.1)
+      activejob (= 5.0.0.1)
+      activemodel (= 5.0.0.1)
+      activerecord (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 5.0.0.1)
+      sprockets-rails (>= 2.0.0)
+    railties (5.0.0.1)
+      actionpack (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+
+GIT
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: aa48a32a84bd70307fcdd82b6b6e242a410f5b36
+  specs:
+    data-confirm-modal (1.2.0)
+      railties (>= 3.0)
+
+GIT
+  remote: https://github.com/swobspace/wobapphelpers
+  revision: 4867abda982be0d5df7ec1e6e3dce50c596afc1a
+  branch: master
+  specs:
+    wobapphelpers (2.0.0)
+      coffee-rails
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      responders
+      sass-rails
+
+GIT
+  remote: https://github.com/swobspace/wobauth.git
+  revision: 9a0b474d306783ca5441163cb8c6bc892ff2ce5f
+  branch: master
+  specs:
+    wobauth (2.0.0)
+      cancancan
+      coffee-rails
+      devise
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      sass-rails
+      simple_form
+      wobapphelpers
+
+GEM
+  remote: https://rubygems.org/
+  specs:
     acts_as_list (0.8.2)
       activerecord (>= 3.0)
     addressable (2.4.0)
@@ -246,18 +270,6 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     railroady (1.5.2)
-    rails (5.0.0.1)
-      actioncable (= 5.0.0.1)
-      actionmailer (= 5.0.0.1)
-      actionpack (= 5.0.0.1)
-      actionview (= 5.0.0.1)
-      activejob (= 5.0.0.1)
-      activemodel (= 5.0.0.1)
-      activerecord (= 5.0.0.1)
-      activesupport (= 5.0.0.1)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 5.0.0.1)
-      sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.1)
       actionpack (~> 5.x)
       actionview (~> 5.x)
@@ -267,12 +279,6 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    railties (5.0.0.1)
-      actionpack (= 5.0.0.1)
-      activesupport (= 5.0.0.1)
-      method_source
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
@@ -402,7 +408,7 @@ DEPENDENCIES
   poltergeist
   puma
   railroady
-  rails (~> 5.0.0)
+  rails!
   rails-controller-testing
   record_tag_helper (~> 1.0)
   rspec-rails

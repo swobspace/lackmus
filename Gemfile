@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0'
+# gem 'rails', '~> 5.0.0'
+gem 'rails', github: 'rails/rails', branch: '5-0-stable'
 gem 'pg'
 # gem 'postgres_ext'
 
