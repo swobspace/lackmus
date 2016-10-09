@@ -1,4 +1,4 @@
-class ImportSystemEventJob < ActiveJob::Base
+class ImportSystemEventJob < ApplicationJob
   queue_as :import
 
   def perform(options = {})
