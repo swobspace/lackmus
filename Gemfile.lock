@@ -231,15 +231,10 @@ GEM
       pcaprub (~> 0.12)
     pcaprub (0.12.4)
     pg (0.19.0)
-    pg_array_parser (0.0.9)
     poltergeist (1.10.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    postgres_ext (3.0.0)
-      activerecord (>= 4.0.0)
-      arel (>= 4.0.1)
-      pg_array_parser (~> 0.0.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -405,7 +400,6 @@ DEPENDENCIES
   packetfu
   pg
   poltergeist
-  postgres_ext
   puma
   railroady
   rails (~> 5.0.0)
