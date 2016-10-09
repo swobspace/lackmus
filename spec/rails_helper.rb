@@ -47,6 +47,7 @@ RSpec.configure do |config|
   config.extend ControllerMacros, type: :controller
   config.include RequestMacros, type: :feature
   config.include FakeWebHelper, type: :views
+  config.include Wobapphelpers, type: :views
 
   config.before(:suite) do
     DatabaseRewinder.clean_all
