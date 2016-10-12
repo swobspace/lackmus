@@ -65,4 +65,5 @@ end
 gem 'cancancan'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'record_tag_helper', '~> 1.0'
+gem 'delayed_job_active_record'
 
