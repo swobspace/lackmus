@@ -17,7 +17,7 @@ class ImportSystemEventJob < ApplicationJob
             ImportEventSignatureService.new.call(result.event)
           end
         else
-          Rails.logger.warn(result.error_messages.join(", ")) if Rails.env.developement?
+          Rails.logger.warn(result.error_messages.join(", ")) if Rails.env.development?
           LogSyslogsysevent.log(sysevent)
         end
       rescue => e
