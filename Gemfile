@@ -37,6 +37,7 @@ group :development do
   gem 'spring'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
+  gem 'capistrano3-delayed-job', '~> 1.0'
   gem "railroady"
   gem "better_errors"
   gem "binding_of_caller"
@@ -66,4 +67,5 @@ gem 'cancancan'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'record_tag_helper', '~> 1.0'
 gem 'delayed_job_active_record'
+gem 'daemons'
 

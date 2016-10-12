@@ -131,6 +131,8 @@ GEM
     capistrano-rails (1.1.8)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano3-delayed-job (1.7.2)
+      capistrano (~> 3.0, >= 3.0.0)
     capybara (2.10.1)
       addressable
       mime-types (>= 1.16)
@@ -149,6 +151,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    daemons (1.2.4)
     database_rewinder (0.6.4)
     debug_inspector (0.0.2)
     delayed_job (4.1.2)
@@ -390,8 +393,10 @@ DEPENDENCIES
   cancancan
   capistrano-passenger
   capistrano-rails
+  capistrano3-delayed-job (~> 1.0)
   capybara
   coffee-rails (~> 4.2)
+  daemons
   data-confirm-modal!
   database_rewinder
   delayed_job_active_record
