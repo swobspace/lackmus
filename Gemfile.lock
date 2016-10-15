@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rails/rails.git
-  revision: aa5621f2c3d6c38654755940dc0258fbfe2bf31c
+  revision: 4cf4c863c30f445aca908bf79afe8cde2520b038
   branch: 5-0-stable
   specs:
     actioncable (5.0.0.1)
@@ -152,7 +152,7 @@ GEM
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
     daemons (1.2.4)
-    database_rewinder (0.6.4)
+    database_rewinder (0.6.5)
     debug_inspector (0.0.2)
     delayed_job (4.1.2)
       activesupport (>= 3.0, < 5.1)
@@ -263,7 +263,7 @@ GEM
       pcaprub (~> 0.12)
     pcaprub (0.12.4)
     pg (0.19.0)
-    poltergeist (1.10.0)
+    poltergeist (1.11.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
@@ -319,7 +319,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    ruby_dep (1.4.0)
+    ruby_dep (1.5.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
