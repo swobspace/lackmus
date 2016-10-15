@@ -98,7 +98,7 @@ RSpec.describe EventRulesController, type: :controller do
         post :create, params: {:event_rule => valid_attributes}
         expect(assigns(:event_rule)).to be_a(EventRule)
         expect(assigns(:event_rule)).to be_persisted
-        expect(assigns(:event_rule).filter.class.name).to eq('Hash')
+        expect(assigns(:event_rule).filter.class.name).to eq('ActiveSupport::HashWithIndifferentAccess')
       end
 
       it "redirects to the created event_rule" do
