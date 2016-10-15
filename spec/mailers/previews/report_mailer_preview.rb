@@ -3,10 +3,11 @@ class ReportMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/report_mailer/host_event_report
   def host_event_report
-    ReportMailer.host_event_report(
-      ip: '198.51.100.4', mail_to: 'recipient@example.org', message: "additional info"
+    event_ids = Event.last(5).map{|e| e.id}
+    ReportMailer.host_event_report({
+      ip: '198.51.100.4', mail_to: 'recipient@example.org', message: "additional info",
+      event_ids: event_ids}
     )
-
   end
 
   # Preview this email at http://localhost:3000/rails/mailers/report_mailer/signature_event_report
