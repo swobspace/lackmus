@@ -1,4 +1,4 @@
-class EventRule < ActiveRecord::Base
+class EventRule < ApplicationRecord
   include EventRuleConcerns
   # -- associations
   has_many :events, dependent: :nullify

@@ -5,7 +5,7 @@ class MainSearchesController < ApplicationController
   end
 
   def create
-    Rails.cache.write("MainSearch/#{current_user.id}", MainSearch.new(search_params),
+    Rails.cache.write("MainSearch/#{current_user.id}", MainSearch.new(search_params.to_h),
                       expires_in: 1.day)
     redirect_to action: "show"
   end

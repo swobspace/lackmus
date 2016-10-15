@@ -43,7 +43,7 @@ RSpec.describe Signature, type: :model do
             done_event.signature, noevent_sig, ignore_event.signature)}
     end
     describe "#current" do
-      it { expect(Signature.active.joins(:events).merge(Event.active).uniq).
+      it { expect(Signature.active.joins(:events).merge(Event.active).distinct).
              to contain_exactly(active_event.signature) }
     end
     describe "#ignored" do

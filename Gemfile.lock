@@ -1,4 +1,65 @@
 GIT
+  remote: git://github.com/rails/rails.git
+  revision: aa5621f2c3d6c38654755940dc0258fbfe2bf31c
+  branch: 5-0-stable
+  specs:
+    actioncable (5.0.0.1)
+      actionpack (= 5.0.0.1)
+      nio4r (~> 1.2)
+      websocket-driver (~> 0.6.1)
+    actionmailer (5.0.0.1)
+      actionpack (= 5.0.0.1)
+      actionview (= 5.0.0.1)
+      activejob (= 5.0.0.1)
+      mail (~> 2.5, >= 2.5.4)
+      rails-dom-testing (~> 2.0)
+    actionpack (5.0.0.1)
+      actionview (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      rack (~> 2.0)
+      rack-test (~> 0.6.3)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionview (5.0.0.1)
+      activesupport (= 5.0.0.1)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    activejob (5.0.0.1)
+      activesupport (= 5.0.0.1)
+      globalid (>= 0.3.6)
+    activemodel (5.0.0.1)
+      activesupport (= 5.0.0.1)
+    activerecord (5.0.0.1)
+      activemodel (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      arel (~> 7.0)
+    activesupport (5.0.0.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    rails (5.0.0.1)
+      actioncable (= 5.0.0.1)
+      actionmailer (= 5.0.0.1)
+      actionpack (= 5.0.0.1)
+      actionview (= 5.0.0.1)
+      activejob (= 5.0.0.1)
+      activemodel (= 5.0.0.1)
+      activerecord (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 5.0.0.1)
+      sprockets-rails (>= 2.0.0)
+    railties (5.0.0.1)
+      actionpack (= 5.0.0.1)
+      activesupport (= 5.0.0.1)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+
+GIT
   remote: https://github.com/ifad/data-confirm-modal.git
   revision: aa48a32a84bd70307fcdd82b6b6e242a410f5b36
   specs:
@@ -7,27 +68,29 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers
-  revision: 2ae54f852225b4d1d17c0e2cd6b1b0ed80acc442
-  branch: 1-0-stable
+  revision: 4867abda982be0d5df7ec1e6e3dce50c596afc1a
+  branch: master
   specs:
-    wobapphelpers (1.0.0)
+    wobapphelpers (2.0.0)
       coffee-rails
       jquery-rails
-      rails (~> 4.1)
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
       responders
       sass-rails
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 8cc8482f7e0bca6760d3f3e0096012871df2680b
-  branch: 1-0-stable
+  revision: 9a0b474d306783ca5441163cb8c6bc892ff2ce5f
+  branch: master
   specs:
-    wobauth (1.0.1)
-      cancancan (~> 1.7)
+    wobauth (2.0.0)
+      cancancan
       coffee-rails
       devise
       jquery-rails
-      rails (~> 4.1)
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
       sass-rails
       simple_form
       wobapphelpers
@@ -35,47 +98,12 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.2.7.1)
-      actionpack (= 4.2.7.1)
-      actionview (= 4.2.7.1)
-      activejob (= 4.2.7.1)
-      mail (~> 2.5, >= 2.5.4)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.7.1)
-      actionview (= 4.2.7.1)
-      activesupport (= 4.2.7.1)
-      rack (~> 1.6)
-      rack-test (~> 0.6.2)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (4.2.7.1)
-      activesupport (= 4.2.7.1)
-      builder (~> 3.1)
-      erubis (~> 2.7.0)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    activejob (4.2.7.1)
-      activesupport (= 4.2.7.1)
-      globalid (>= 0.3.0)
-    activemodel (4.2.7.1)
-      activesupport (= 4.2.7.1)
-      builder (~> 3.1)
-    activerecord (4.2.7.1)
-      activemodel (= 4.2.7.1)
-      activesupport (= 4.2.7.1)
-      arel (~> 6.0)
-    activesupport (4.2.7.1)
-      i18n (~> 0.7)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
-      tzinfo (~> 1.1)
     acts_as_list (0.8.2)
       activerecord (>= 3.0)
     addressable (2.4.0)
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
-    arel (6.0.3)
+    arel (7.1.4)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -103,6 +131,8 @@ GEM
     capistrano-rails (1.1.8)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano3-delayed-job (1.7.2)
+      capistrano (~> 3.0, >= 3.0.0)
     capybara (2.10.1)
       addressable
       mime-types (>= 1.16)
@@ -113,16 +143,22 @@ GEM
     chronic (0.10.2)
     cliver (0.3.2)
     coderay (1.1.1)
-    coffee-rails (4.1.1)
+    coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.1.x)
+      railties (>= 4.0.0, < 5.2.x)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    daemons (1.2.4)
     database_rewinder (0.6.4)
     debug_inspector (0.0.2)
+    delayed_job (4.1.2)
+      activesupport (>= 3.0, < 5.1)
+    delayed_job_active_record (4.1.1)
+      activerecord (>= 3.0, < 5.1)
+      delayed_job (>= 3.0, < 5)
     devise (4.2.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -145,7 +181,6 @@ GEM
     fakeweb (1.3.0)
     ffi (1.9.14)
     formatador (0.2.5)
-    git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     guard (2.14.0)
@@ -216,6 +251,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
     network_interface (0.0.1)
+    nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
@@ -227,57 +263,38 @@ GEM
       pcaprub (~> 0.12)
     pcaprub (0.12.4)
     pg (0.19.0)
-    pg_array_parser (0.0.9)
     poltergeist (1.10.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    postgres_ext (3.0.0)
-      activerecord (>= 4.0.0)
-      arel (>= 4.0.1)
-      pg_array_parser (~> 0.0.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     puma (3.6.0)
-    rack (1.6.4)
-    rack-contrib (1.4.0)
-      git-version-bump (~> 0.15)
-      rack (~> 1.4)
+    rack (2.0.1)
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     railroady (1.5.2)
-    rails (4.2.7.1)
-      actionmailer (= 4.2.7.1)
-      actionpack (= 4.2.7.1)
-      actionview (= 4.2.7.1)
-      activejob (= 4.2.7.1)
-      activemodel (= 4.2.7.1)
-      activerecord (= 4.2.7.1)
-      activesupport (= 4.2.7.1)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.7.1)
-      sprockets-rails
-    rails-deprecated_sanitizer (1.0.3)
-      activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.7)
-      activesupport (>= 4.2.0.beta, < 5.0)
+    rails-controller-testing (1.0.1)
+      actionpack (~> 5.x)
+      actionview (~> 5.x)
+      activesupport (~> 5.x)
+    rails-dom-testing (2.0.1)
+      activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
-      rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    railties (4.2.7.1)
-      actionpack (= 4.2.7.1)
-      activesupport (= 4.2.7.1)
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    record_tag_helper (1.0.0)
+      actionview (~> 5.x)
     ref (2.0.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -376,10 +393,13 @@ DEPENDENCIES
   cancancan
   capistrano-passenger
   capistrano-rails
+  capistrano3-delayed-job (~> 1.0)
   capybara
-  coffee-rails (~> 4.1.0)
+  coffee-rails (~> 4.2)
+  daemons
   data-confirm-modal!
   database_rewinder
+  delayed_job_active_record
   dotenv
   factory_girl_rails
   fakeweb (~> 1.3)
@@ -389,7 +409,7 @@ DEPENDENCIES
   guard-rails
   guard-rspec
   immutable-struct
-  jbuilder (~> 2.0)
+  jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails
   json_spec
@@ -397,19 +417,20 @@ DEPENDENCIES
   packetfu
   pg
   poltergeist
-  postgres_ext
   puma
   railroady
-  rails (~> 4.2.7)
+  rails!
+  rails-controller-testing
+  record_tag_helper (~> 1.0)
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   shoulda-matchers
-  simple_form
+  simple_form (~> 3.3)
   spring
   spring-commands-rspec
   therubyracer
-  turbolinks
+  turbolinks (~> 5)
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   whenever

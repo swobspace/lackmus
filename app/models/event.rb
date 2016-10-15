@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include EventConcerns
   # -- associations
   belongs_to :signature, counter_cache: true,

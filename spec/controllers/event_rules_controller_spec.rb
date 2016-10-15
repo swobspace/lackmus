@@ -40,7 +40,7 @@ RSpec.describe EventRulesController, type: :controller do
   describe "GET #index" do
     it "assigns all event_rules as @event_rules" do
       event_rule = EventRule.create! valid_attributes
-      get :index, {}, valid_session
+      get :index
       expect(assigns(:event_rules)).to eq([event_rule])
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe EventRulesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested event_rule as @event_rule" do
       event_rule = EventRule.create! valid_attributes
-      get :show, {:id => event_rule.to_param}, valid_session
+      get :show, params: {:id => event_rule.to_param}
       expect(assigns(:event_rule)).to eq(event_rule)
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe EventRulesController, type: :controller do
   describe "GET #new" do
     context "without event" do
       it "assigns a new event_rule as @event_rule" do
-	get :new, {}, valid_session
+	get :new, params: {}
 	expect(assigns(:event_rule)).to be_a_new(EventRule)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe EventRulesController, type: :controller do
                       'dst_ip' => '198.51.100.3', 'src_port' => 1234, 'dst_port' => 99,
                       'sensor' => 'sentinel') }
       before(:each) do
-        get :new, {event_id: event.to_param}, valid_session
+        get :new, params: {event_id: event.to_param}
       end
 
       it { expect(assigns(:event_rule).filter['src_ip']).to eq('192.0.2.7') }
@@ -81,7 +81,7 @@ RSpec.describe EventRulesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested event_rule as @event_rule" do
       event_rule = EventRule.create! valid_attributes
-      get :edit, {:id => event_rule.to_param}, valid_session
+      get :edit, params: {:id => event_rule.to_param}
       expect(assigns(:event_rule)).to eq(event_rule)
     end
   end
@@ -90,31 +90,31 @@ RSpec.describe EventRulesController, type: :controller do
     context "with valid params" do
       it "creates a new EventRule" do
         expect {
-          post :create, {:event_rule => valid_attributes}, valid_session
+          post :create, params: {:event_rule => valid_attributes}
         }.to change(EventRule, :count).by(1)
       end
 
       it "assigns a newly created event_rule as @event_rule" do
-        post :create, {:event_rule => valid_attributes}, valid_session
+        post :create, params: {:event_rule => valid_attributes}
         expect(assigns(:event_rule)).to be_a(EventRule)
         expect(assigns(:event_rule)).to be_persisted
         expect(assigns(:event_rule).filter.class.name).to eq('Hash')
       end
 
       it "redirects to the created event_rule" do
-        post :create, {:event_rule => valid_attributes}, valid_session
+        post :create, params: {:event_rule => valid_attributes}
         expect(response).to redirect_to(EventRule.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved event_rule as @event_rule" do
-        post :create, {:event_rule => invalid_attributes}, valid_session
+        post :create, params: {:event_rule => invalid_attributes}
         expect(assigns(:event_rule)).to be_a_new(EventRule)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:event_rule => invalid_attributes}, valid_session
+        post :create, params: {:event_rule => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -128,20 +128,20 @@ RSpec.describe EventRulesController, type: :controller do
 
       it "updates the requested event_rule" do
         event_rule = EventRule.create! valid_attributes
-        put :update, {:id => event_rule.to_param, :event_rule => new_attributes}, valid_session
+        put :update, params: {:id => event_rule.to_param, :event_rule => new_attributes}
         event_rule.reload
         expect(event_rule.severity).to eq 99
       end
 
       it "assigns the requested event_rule as @event_rule" do
         event_rule = EventRule.create! valid_attributes
-        put :update, {:id => event_rule.to_param, :event_rule => valid_attributes}, valid_session
+        put :update, params: {:id => event_rule.to_param, :event_rule => valid_attributes}
         expect(assigns(:event_rule)).to eq(event_rule)
       end
 
       it "redirects to the event_rule" do
         event_rule = EventRule.create! valid_attributes
-        put :update, {:id => event_rule.to_param, :event_rule => valid_attributes}, valid_session
+        put :update, params: {:id => event_rule.to_param, :event_rule => valid_attributes}
         expect(response).to redirect_to(event_rule)
       end
     end
@@ -149,13 +149,13 @@ RSpec.describe EventRulesController, type: :controller do
     context "with invalid params" do
       it "assigns the event_rule as @event_rule" do
         event_rule = EventRule.create! valid_attributes
-        put :update, {:id => event_rule.to_param, :event_rule => invalid_attributes}, valid_session
+        put :update, params: {:id => event_rule.to_param, :event_rule => invalid_attributes}
         expect(assigns(:event_rule)).to eq(event_rule)
       end
 
       it "re-renders the 'edit' template" do
         event_rule = EventRule.create! valid_attributes
-        put :update, {:id => event_rule.to_param, :event_rule => invalid_attributes}, valid_session
+        put :update, params: {:id => event_rule.to_param, :event_rule => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -165,13 +165,13 @@ RSpec.describe EventRulesController, type: :controller do
     it "destroys the requested event_rule" do
       event_rule = EventRule.create! valid_attributes
       expect {
-        delete :destroy, {:id => event_rule.to_param}, valid_session
+        delete :destroy, params: {:id => event_rule.to_param}
       }.to change(EventRule, :count).by(-1)
     end
 
     it "redirects to the event_rules list" do
       event_rule = EventRule.create! valid_attributes
-      delete :destroy, {:id => event_rule.to_param}, valid_session
+      delete :destroy, params: {:id => event_rule.to_param}
       expect(response).to redirect_to(event_rules_url)
     end
   end

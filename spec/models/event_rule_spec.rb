@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EventRule, type: :model do
   it { is_expected.to have_many(:events) }
 
-  it { is_expected.to serialize(:filter) }
+  it { pending "bug in shoulda-matchers with rails5"; is_expected.to serialize(:filter) }
   it { is_expected.to validate_presence_of(:filter) }
   it "validates action from list" do
     evrule = FactoryGirl.build(:event_rule)
