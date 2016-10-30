@@ -17,6 +17,8 @@ $.datepicker.setDefaults({
       buttonImageOnly: true
 })
 
+Turbolinks.enableProgressBar()
+
 ready = ->
   table = $(".dataTable").dataTable(
     pagingType: "full_numbers"

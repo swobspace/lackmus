@@ -46,8 +46,8 @@ div.event_item {
     padding-left: 20px; 
   }
 }
-.turbolinks-progress-bar {
-  height: 5px;
-  background-color: #008000;
+html.turbolinks-progress-bar::before {
+  height: 5px !important;
+  background-color: #008000 !important;
   z-index: 2000;
 }
