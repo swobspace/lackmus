@@ -24,27 +24,57 @@ RSpec.describe Signature, type: :model do
     let!(:done_events_sig) { FactoryGirl.create(:signature, signature_id: 99999) }
     let!(:active_event_sig){ FactoryGirl.create(:signature, signature_id: 55555) }
     let!(:ignore_event_sig){ FactoryGirl.create(:signature, signature_id: 77777) }
+    let!(:yesterday_event_sig){ FactoryGirl.create(:signature, signature_id: 55561) }
+    let!(:lastweek_event_sig){ FactoryGirl.create(:signature, signature_id: 55571) }
 
     let!(:active_event) { FactoryGirl.create(:event, alert_signature_id: 55555,
+					event_time: Time.now,
                                         alert_signature: "Lorem Ipsum") }
     let!(:active_event2) { FactoryGirl.create(:event, alert_signature_id: 55555,
+					event_time: Time.now,
+                                        alert_signature: "Lorem Ipsum") }
+    let!(:yesterday_event) { FactoryGirl.create(:event, alert_signature_id: 55561,
+					event_time: (Time.now - 1.day),
+                                        alert_signature: "Lorem Ipsum") }
+    let!(:last_week_event) { FactoryGirl.create(:event, alert_signature_id: 55571,
+					event_time: (Time.now - 7.day),
                                         alert_signature: "Lorem Ipsum") }
     let!(:some_event)   { FactoryGirl.create(:event, alert_signature_id: 66666,
                                         alert_signature: "Lorem Ipsum") }
     let!(:ignore_event) { FactoryGirl.create(:event, alert_signature_id: 77777,
+					event_time: (Time.now - 14.day),
                                         alert_signature: "Lorem Ipsum",
                                         ignore: true ) }
     let!(:done_event)   { FactoryGirl.create(:event, alert_signature_id: 99999,
+					event_time: (Time.now.beginning_of_week - 7.day),
                                         alert_signature: "Lorem Ipsum",
                                         done: true) }
 
     describe "#active" do
       it {expect(Signature.active).to contain_exactly(active_event_sig, 
-            done_event.signature, noevent_sig, ignore_event.signature)}
+            done_event.signature, noevent_sig, ignore_event.signature, 
+            yesterday_event.signature, last_week_event.signature)}
     end
     describe "#current" do
       it { expect(Signature.active.joins(:events).merge(Event.active).distinct).
+             to contain_exactly(active_event.signature, yesterday_event.signature,
+                                last_week_event.signature) }
+    end
+    describe "#today" do
+      it { expect(Signature.active.joins(:events).merge(Event.today).distinct).
              to contain_exactly(active_event.signature) }
+    end
+    describe "#yesterday" do
+      it { expect(Signature.active.joins(:events).merge(Event.yesterday).distinct).
+             to contain_exactly(yesterday_event.signature) }
+    end
+    describe "#thisweek" do
+      it { expect(Signature.active.joins(:events).merge(Event.thisweek).distinct).
+             to include(active_event.signature) }
+    end
+    describe "#lastweek" do
+      it { expect(Signature.active.joins(:events).merge(Event.lastweek).distinct).
+             to include(last_week_event.signature, done_event.signature) }
     end
     describe "#ignored" do
       it { expect(Signature.ignored).to contain_exactly(ignore_sig) }

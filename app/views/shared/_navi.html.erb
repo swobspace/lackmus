@@ -7,6 +7,12 @@
         <li> <%=link_to t('lackmus.signatures.current'), main_app.signatures_path(filter: 'current') %></li>
         <li> <%=link_to t('lackmus.signatures.current48'), main_app.signatures_path(filter: 'current', since: '48') %></li>
         <li> <%=link_to t('lackmus.signatures.current_week'), main_app.signatures_path(filter: 'current', since: '168') %></li>
+        <li role="separator" class="divider"></li>
+        <li> <%=link_to t('lackmus.signatures.today'), main_app.signatures_path(filter: 'today') %></li>
+        <li> <%=link_to t('lackmus.signatures.yesterday'), main_app.signatures_path(filter: 'yesterday') %></li>
+        <li> <%=link_to t('lackmus.signatures.thisweek'), main_app.signatures_path(filter: 'thisweek') %></li>
+        <li> <%=link_to t('lackmus.signatures.lastweek'), main_app.signatures_path(filter: 'lastweek') %></li>
+        <li role="separator" class="divider"></li>
         <li> <%=link_to t('lackmus.signatures.active'), main_app.signatures_path %></li>
         <li> <%=link_to t('lackmus.signatures.unassigned'), main_app.signatures_path(filter: 'unassigned') %></li>
         <li role="separator" class="divider"></li>

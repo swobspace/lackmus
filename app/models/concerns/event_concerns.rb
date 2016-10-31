@@ -15,6 +15,14 @@ module EventConcerns
     scope :not_ignored, -> { where(ignore: false) }
     scope :active, -> { where(done: false, ignore: false) }
     scope :unassigned, -> { where(event_rule_id: nil) }
+    scope :today, -> { where(["event_time >= ?", Time.now.beginning_of_day]) }
+    scope :yesterday, -> { where("event_time >= :start and event_time < :end", 
+                                 start: (Time.now - 1.day).beginning_of_day, 
+                                   end: (Time.now - 1.day).end_of_day )}
+    scope :thisweek, -> { where(["event_time >= ?", Time.now.beginning_of_week]) }
+    scope :lastweek, -> { where("event_time >= :start and event_time < :end", 
+                                 start: (Time.now - 1.week).beginning_of_week, 
+                                   end: (Time.now - 1.week).end_of_week )}
   end
 
   class_methods do

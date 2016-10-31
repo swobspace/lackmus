@@ -17,6 +17,10 @@ de:
       since: seit
       all: Alle Signaturen
       unassigned: Aktive Signaturen mit Events ohne Filter
+      today: Heute
+      yesterday: Gestern
+      thisweek: Diese Woche
+      lastweek: Letzte Woche
     really: wirklich
     truly: Echt jetzt?
     since_today: seit heute

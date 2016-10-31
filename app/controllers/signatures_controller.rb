@@ -99,6 +99,10 @@ class SignaturesController < ApplicationController
         since = Time.now - hours
         @filter_info += t('lackmus.signatures.since') + " " + since.to_s
         @signatures = @signatures.merge(Event.active).merge(Event.since(since)).distinct
+      elsif params[:filter] =~ /\A(today|yesterday|thisweek|lastweek)\z/
+        match = $~.to_s
+        @filter_info = t('lackmus.signatures.' + match)
+        @signatures = @signatures.merge(Event.active).merge(Event.send(match)).distinct
       elsif params[:filter] == 'all'
         @signatures = Signature.all
         @filter_info += t('lackmus.signatures.all')

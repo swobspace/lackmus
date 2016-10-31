@@ -49,6 +49,22 @@ RSpec.describe SignaturesController, type: :controller do
       expect(Signature).not_to receive(:ignored)
       get :index
     end
+    it "with filter :today" do
+      get :index, params: {filter: 'today'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.today'))
+    end
+    it "with filter :yesterday" do
+      get :index, params: {filter: 'yesterday'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.yesterday'))
+    end
+    it "with filter :thisweek" do
+      get :index, params: {filter: 'thisweek'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.thisweek'))
+    end
+    it "with filter :lastweek" do
+      get :index, params: {filter: 'lastweek'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.lastweek'))
+    end
     it "with filter :ignored" do
       expect(Signature).to receive(:ignored).and_return(Signature.none)
       get :index, params: {filter: 'ignored'}
