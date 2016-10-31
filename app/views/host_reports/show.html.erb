@@ -1,4 +1,14 @@
+<%= form_tag update_host_report_path,
+    method: :post, class: 'form-horizontal'  do %>
+
 <%= render partial: 'host_report', locals: {host: @host, events: @events} %>
 
 <br />
-<%= link_to t('actions.send_mail'), new_mail_host_report_path(ip: @host), class: 'btn btn-primary' %>
+<div class="btn-toolbar" role="toolbar">
+  <%= link_to t('actions.send_mail'), new_mail_host_report_path(ip: @host), class: 'btn btn-primary' %>
+  <%= submit_tag(t('actions.marked_done'), class: "btn btn-success",
+          data: {confirm: "#{t('lackmus.really')} #{t('actions.marked_done')}?"})%>
+</div>
+
+<% end %>
+

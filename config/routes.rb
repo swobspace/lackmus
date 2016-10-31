@@ -17,6 +17,10 @@ Rails.application.routes.draw do
         controller: :host_reports, action: :create_mail,
         as: :create_mail_host_report
 
+  post 'host_reports/update', 
+        controller: :host_reports, action: :update,
+        as: :update_host_report
+
   resources :event_rules
   resources :signatures do
     member do

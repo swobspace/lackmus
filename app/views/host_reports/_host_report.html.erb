@@ -6,5 +6,13 @@
     <p><%= @message %></p>
   </div>
 <% end %>
+<%= hidden_field_tag "ip", @host %>
+
+<div class="checkbox">
+  <label>
+    <%= check_box_tag "checkAll" %> <%= t('actions.mark_all') %> 
+  </label>
+</div>
+<br />
 
 <%= render(partial: 'host_reports/event', collection: events) || "No events available" %>

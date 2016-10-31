@@ -33,6 +33,7 @@ de:
     destroy_all: ALLE Datensätze löschen
     mandantory: Pflichtfelder
     marked_done: markierte erledigen
+    mark_all: Alle markieren
     all_done: alle erledigen
     optional: Optional
     search: Suche
