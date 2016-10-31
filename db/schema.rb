@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821162150) do
+ActiveRecord::Schema.define(version: 20161012060120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
 
   create_table "event_rules", force: :cascade do |t|
     t.integer  "position",               default: 0
@@ -25,15 +39,14 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.text     "description"
+    t.index ["action"], name: "index_event_rules_on_action", using: :btree
+    t.index ["position"], name: "index_event_rules_on_position", using: :btree
   end
-
-  add_index "event_rules", ["action"], name: "index_event_rules_on_action", using: :btree
-  add_index "event_rules", ["position"], name: "index_event_rules_on_position", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "sensor",                                                       null: false
     t.datetime "event_time",                     precision: 6,                 null: false
-    t.integer  "flow_id",            limit: 8
+    t.bigint   "flow_id"
     t.string   "in_iface",           limit: 20,                default: ""
     t.string   "event_type",         limit: 20,                default: ""
     t.inet     "src_ip"
@@ -69,9 +82,8 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.datetime "created_at",                                                   null: false
     t.datetime "updated_at",                                                   null: false
     t.integer  "event_rule_id"
+    t.index ["event_rule_id"], name: "index_events_on_event_rule_id", using: :btree
   end
-
-  add_index "events", ["event_rule_id"], name: "index_events_on_event_rule_id", using: :btree
 
   create_table "signatures", force: :cascade do |t|
     t.integer  "signature_id"
@@ -83,10 +95,9 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.integer  "severity",       limit: 2
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["action"], name: "index_signatures_on_action", using: :btree
+    t.index ["signature_id"], name: "index_signatures_on_signature_id", using: :btree
   end
-
-  add_index "signatures", ["action"], name: "index_signatures_on_action", using: :btree
-  add_index "signatures", ["signature_id"], name: "index_signatures_on_signature_id", using: :btree
 
   create_table "wobauth_authorities", force: :cascade do |t|
     t.integer  "authorizable_id"
@@ -98,11 +109,10 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.date     "valid_until"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["authorizable_id"], name: "index_wobauth_authorities_on_authorizable_id", using: :btree
+    t.index ["authorized_for_id"], name: "index_wobauth_authorities_on_authorized_for_id", using: :btree
+    t.index ["role_id"], name: "index_wobauth_authorities_on_role_id", using: :btree
   end
-
-  add_index "wobauth_authorities", ["authorizable_id"], name: "index_wobauth_authorities_on_authorizable_id", using: :btree
-  add_index "wobauth_authorities", ["authorized_for_id"], name: "index_wobauth_authorities_on_authorized_for_id", using: :btree
-  add_index "wobauth_authorities", ["role_id"], name: "index_wobauth_authorities_on_role_id", using: :btree
 
   create_table "wobauth_groups", force: :cascade do |t|
     t.string   "name"
@@ -117,10 +127,9 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.boolean  "auto",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["group_id"], name: "index_wobauth_memberships_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_wobauth_memberships_on_user_id", using: :btree
   end
-
-  add_index "wobauth_memberships", ["group_id"], name: "index_wobauth_memberships_on_group_id", using: :btree
-  add_index "wobauth_memberships", ["user_id"], name: "index_wobauth_memberships_on_user_id", using: :btree
 
   create_table "wobauth_roles", force: :cascade do |t|
     t.string   "name"
@@ -149,9 +158,8 @@ ActiveRecord::Schema.define(version: 20160821162150) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["reset_password_token"], name: "index_wobauth_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_wobauth_users_on_username", unique: true, using: :btree
   end
-
-  add_index "wobauth_users", ["reset_password_token"], name: "index_wobauth_users_on_reset_password_token", unique: true, using: :btree
-  add_index "wobauth_users", ["username"], name: "index_wobauth_users_on_username", unique: true, using: :btree
 
 end

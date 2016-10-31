@@ -1,4 +1,4 @@
-class ImportSystemEventJob < ActiveJob::Base
+class ImportSystemEventJob < ApplicationJob
   queue_as :import
 
   def perform(options = {})
@@ -17,7 +17,7 @@ class ImportSystemEventJob < ActiveJob::Base
             ImportEventSignatureService.new.call(result.event)
           end
         else
-          Rails.logger.warn(result.error_messages.join(", ")) if Rails.env.developement?
+          Rails.logger.warn(result.error_messages.join(", ")) if Rails.env.development?
           LogSyslogsysevent.log(sysevent)
         end
       rescue => e

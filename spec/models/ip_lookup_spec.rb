@@ -37,6 +37,13 @@ RSpec.describe IpLookup, type: :model do
     it { expect(IpLookup.is_linklocal?("169.254.1.2")).to be_truthy }
   end
 
+  describe "#IpLookup.is_broadcast?(ip)" do
+    it { expect(IpLookup.is_broadcast?("8.8.8.8")).to be_falsy }
+    it { expect(IpLookup.is_broadcast?("255.255.255.255")).to be_truthy }
+    it { expect(IpLookup.is_broadcast?("0.0.0.0")).to be_truthy }
+  end
+
+
   describe "#IpLookup.is_special?(ip)" do
     it { expect(IpLookup.is_special?("8.8.8.8")).to be_falsy }
     it { expect(IpLookup.is_special?("169.254.1.2")).to be_truthy }
@@ -44,6 +51,7 @@ RSpec.describe IpLookup, type: :model do
     it { expect(IpLookup.is_special?("192.168.1.2")).to be_truthy }
     it { expect(IpLookup.is_special?("172.17.9.1")).to be_truthy }
     it { expect(IpLookup.is_special?("10.1.2.4")).to be_truthy }
+    it { expect(IpLookup.is_special?("255.255.255.255")).to be_truthy }
   end
  
  

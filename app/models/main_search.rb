@@ -29,7 +29,7 @@ class MainSearch
   end
 
   def signatures
-    Signature.active.joins(:events).where("events.id in (?)", event_ids).uniq
+    Signature.active.joins(:events).where("events.id in (?)", event_ids).distinct
   end
 
 private

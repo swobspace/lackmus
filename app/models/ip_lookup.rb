@@ -27,9 +27,14 @@ class IpLookup
     self.new(ip).linklocal_subnet?
   end
 
+  def self.is_broadcast?(ip)
+    self.new(ip).broadcast_address?
+  end
+
   def self.is_special?(ip)
     myip = self.new(ip)
-    myip.private_subnet? || myip.linklocal_subnet? || myip.multicast_subnet?
+    myip.private_subnet? || myip.linklocal_subnet? || 
+      myip.multicast_subnet? || myip.broadcast_address?
   end
 
 
@@ -82,4 +87,9 @@ class IpLookup
     @linklocal ||= IPAddr.new('169.254.0.0/16')
     @linklocal.include?(@ip_obj)
   end
+
+  def broadcast_address?
+    @ip_addr =~ /(0.0.0.0|255.255.255.255)/
+  end
+
 end

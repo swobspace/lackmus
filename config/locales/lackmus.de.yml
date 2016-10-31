@@ -17,6 +17,10 @@ de:
       since: seit
       all: Alle Signaturen
       unassigned: Aktive Signaturen mit Events ohne Filter
+      today: Heute
+      yesterday: Gestern
+      thisweek: Diese Woche
+      lastweek: Letzte Woche
     really: wirklich
     truly: Echt jetzt?
     since_today: seit heute
@@ -29,6 +33,7 @@ de:
     destroy_all: ALLE Datensätze löschen
     mandantory: Pflichtfelder
     marked_done: markierte erledigen
+    mark_all: Alle markieren
     all_done: alle erledigen
     optional: Optional
     search: Suche

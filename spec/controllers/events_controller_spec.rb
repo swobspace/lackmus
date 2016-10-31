@@ -41,7 +41,7 @@ RSpec.describe EventsController, type: :controller do
   describe "GET #index" do
     it "assigns all events as @events" do
       event = Event.create! valid_attributes
-      get :index, {}, valid_session
+      get :index
       expect(assigns(:events)).to eq([event])
     end
 
@@ -50,12 +50,12 @@ RSpec.describe EventsController, type: :controller do
       let!(:second_event) { FactoryGirl.create(:event, done: true) }
 
       it "get all events" do
-        get :index, {all: 1}, valid_session
+        get :index, params: {all: 1}
         expect(assigns(:events)).to contain_exactly(first_event, second_event)
       end
 
       it "get unprocessed events" do
-        get :index, {}, valid_session
+        get :index
         expect(assigns(:events)).to contain_exactly(first_event)
       end
     end
@@ -65,22 +65,22 @@ RSpec.describe EventsController, type: :controller do
       let!(:second_event) { FactoryGirl.create(:event, dst_ip: "192.0.2.9") }
 
       it "search by ip returns first event" do
-        get :index, {ip: "192.0.2.1"}, valid_session
+        get :index, params: {ip: "192.0.2.1"}
         expect(assigns(:events)).to contain_exactly(first_event)
       end
 
       it "search by /29 mask returns first event" do
-        get :index, {ip: "192.0.2.1/29"}, valid_session
+        get :index, params: {ip: "192.0.2.1/29"}
         expect(assigns(:events)).to contain_exactly(first_event)
       end
 
       it "search by /24 mask returns both events" do
-        get :index, {ip: "192.0.2.1/24"}, valid_session
+        get :index, params: {ip: "192.0.2.1/24"}
         expect(assigns(:events)).to contain_exactly(first_event, second_event)
       end
 
       it "search by other network empty list" do
-        get :index, {ip: "198.51.100.10"}, valid_session
+        get :index, params: {ip: "198.51.100.10"}
         expect(assigns(:events)).to eq([])
       end
     end
@@ -91,12 +91,12 @@ RSpec.describe EventsController, type: :controller do
       let!(:current_event) { FactoryGirl.create(:event, event_time: Time.now) }
 
       it "get current events" do
-        get :index, {since: "today"}, valid_session
+        get :index, params: {since: "today"}
         expect(assigns(:events)).to contain_exactly(current_event)
       end
 
       it "get events since yesterday" do
-        get :index, {since: "yesterday"}, valid_session
+        get :index, params: {since: "yesterday"}
         expect(assigns(:events)).to contain_exactly(last_event, current_event)
       end
     end
@@ -106,7 +106,7 @@ RSpec.describe EventsController, type: :controller do
       let!(:second_event) { FactoryGirl.create(:event, sensor: "luuke") }
 
       it "search by sensor returns first event" do
-        get :index, {sensor: "lukcy"}, valid_session
+        get :index, params: {sensor: "lukcy"}
         expect(assigns(:events)).to contain_exactly(first_event)
       end
     end
@@ -116,7 +116,7 @@ RSpec.describe EventsController, type: :controller do
       let!(:second_event) { FactoryGirl.create(:event, http_hostname: "pollux", has_http: false) }
 
       it "search by httphost returns first event" do
-        get :index, {httphost: "castor"}, valid_session
+        get :index, params: {httphost: "castor"}
         expect(assigns(:events)).to contain_exactly(first_event)
       end
     end
@@ -126,7 +126,7 @@ RSpec.describe EventsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
-      get :show, {:id => event.to_param}, valid_session
+      get :show, params: {:id => event.to_param}
       expect(assigns(:event)).to eq(event)
     end
   end
@@ -136,7 +136,7 @@ RSpec.describe EventsController, type: :controller do
       event = Event.create! valid_attributes.
                 merge(packet: Base64.encode64("abcde")).
                 merge(payload: Base64.encode64("brubbelbrutzelplapperfix"))
-      get :packet, {:id => event.to_param}, valid_session
+      get :packet, params: {:id => event.to_param}
       expect(response.header["Content-Type"]).to eq("Application/vnd.tcpdump.pcap")
       expect(response.header["Content-Disposition"]).to match /event_#{assigns(:event).to_param}.pcap/
       expect(response.header["Content-Disposition"]).to match /attachment/
@@ -146,7 +146,7 @@ RSpec.describe EventsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
-      get :edit, {:id => event.to_param}, valid_session
+      get :edit, params: {:id => event.to_param}
       expect(assigns(:event)).to eq(event)
     end
   end
@@ -159,20 +159,20 @@ RSpec.describe EventsController, type: :controller do
 
       it "updates the requested event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => new_attributes}, valid_session
+        put :update, params: {:id => event.to_param, :event => new_attributes}
         event.reload
         event.src_ip = "3.3.3.4"
       end
 
       it "assigns the requested event as @event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => valid_attributes}, valid_session
+        put :update, params: {:id => event.to_param, :event => valid_attributes}
         expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => valid_attributes}, valid_session
+        put :update, params: {:id => event.to_param, :event => valid_attributes}
         expect(response).to redirect_to(event)
       end
     end
@@ -180,13 +180,13 @@ RSpec.describe EventsController, type: :controller do
     context "with invalid params" do
       it "assigns the event as @event" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => invalid_attributes}, valid_session
+        put :update, params: {:id => event.to_param, :event => invalid_attributes}
         expect(assigns(:event)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do
         event = Event.create! valid_attributes
-        put :update, {:id => event.to_param, :event => invalid_attributes}, valid_session
+        put :update, params: {:id => event.to_param, :event => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -196,13 +196,13 @@ RSpec.describe EventsController, type: :controller do
     it "destroys the requested event" do
       event = Event.create! valid_attributes
       expect {
-        delete :destroy, {:id => event.to_param}, valid_session
+        delete :destroy, params: {:id => event.to_param}
       }.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
       event = Event.create! valid_attributes
-      delete :destroy, {:id => event.to_param}, valid_session
+      delete :destroy, params: {:id => event.to_param}
       expect(response).to redirect_to(events_url)
     end
   end

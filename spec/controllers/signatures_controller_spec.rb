@@ -41,42 +41,58 @@ RSpec.describe SignaturesController, type: :controller do
     it "assigns all signatures as @signatures" do
       signature = Signature.create! valid_attributes
       event = FactoryGirl.create(:event, alert_signature_id: signature.signature_id)
-      get :index, {}, valid_session
+      get :index
       expect(assigns(:signatures)).to eq([signature])
     end
     it "with filter :active" do
       expect(Signature).to receive(:active).and_return(Signature.none)
       expect(Signature).not_to receive(:ignored)
-      get :index, {}, valid_session
+      get :index
+    end
+    it "with filter :today" do
+      get :index, params: {filter: 'today'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.today'))
+    end
+    it "with filter :yesterday" do
+      get :index, params: {filter: 'yesterday'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.yesterday'))
+    end
+    it "with filter :thisweek" do
+      get :index, params: {filter: 'thisweek'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.thisweek'))
+    end
+    it "with filter :lastweek" do
+      get :index, params: {filter: 'lastweek'}
+      expect(assigns(:filter_info)).to eq(I18n.t('lackmus.signatures.lastweek'))
     end
     it "with filter :ignored" do
       expect(Signature).to receive(:ignored).and_return(Signature.none)
-      get :index, {filter: 'ignored'}, valid_session
+      get :index, params: {filter: 'ignored'}
     end
     it "with filter :current" do
       signature = FactoryGirl.create(:signature)
       expect(Signature).to receive(:active).and_return(Signature.none)
       expect(Signature).not_to receive(:ignored)
-      get :index, {filter: 'current'}, valid_session
+      get :index, params: {filter: 'current'}
     end
     it "with filter :unassigned" do
       expect(Event).to receive(:unassigned).and_return(Event.none)
-      get :index, {filter: 'unassigned'}, valid_session
+      get :index, params: {filter: 'unassigned'}
     end
     it "with filter :ip" do
       expect(Event).to receive(:by_network).and_return(Event.none)
-      get :index, {ip: '1.2.3.4'}, valid_session
+      get :index, params: {ip: '1.2.3.4'}
     end
     it "shows all signatures with filter: all" do
       expect(Signature).not_to receive(:ignored)
-      get :index, {filter: 'all'}, valid_session
+      get :index, params: {filter: 'all'}
     end
   end
 
   describe "GET #show" do
     it "assigns the requested signature as @signature" do
       signature = Signature.create! valid_attributes
-      get :show, {:id => signature.to_param}, valid_session
+      get :show, params: {:id => signature.to_param}
       expect(assigns(:signature)).to eq(signature)
     end
   end
@@ -87,7 +103,7 @@ RSpec.describe SignaturesController, type: :controller do
       event = FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  alert_signature_id: 5656567, alert_signature: "Exploit")
-      get :pcap, {:id => event.signature.id.to_param}, valid_session
+      get :pcap, params: {:id => event.signature.id.to_param}
       expect(response.header["Content-Type"]).to eq("Application/vnd.tcpdump.pcap")
       expect(response.header["Content-Disposition"]).to match /signature_5656567.pcap/
       expect(response.header["Content-Disposition"]).to match /attachment/
@@ -97,7 +113,7 @@ RSpec.describe SignaturesController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new signature as @signature" do
-      get :new, {}, valid_session
+      get :new
       expect(assigns(:signature)).to be_a_new(Signature)
     end
   end
@@ -105,7 +121,7 @@ RSpec.describe SignaturesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested signature as @signature" do
       signature = Signature.create! valid_attributes
-      get :edit, {:id => signature.to_param}, valid_session
+      get :edit, params: {:id => signature.to_param}
       expect(assigns(:signature)).to eq(signature)
     end
   end
@@ -114,30 +130,30 @@ RSpec.describe SignaturesController, type: :controller do
     context "with valid params" do
       it "creates a new Signature" do
         expect {
-          post :create, {:signature => valid_attributes}, valid_session
+          post :create, params: {:signature => valid_attributes}
         }.to change(Signature, :count).by(1)
       end
 
       it "assigns a newly created signature as @signature" do
-        post :create, {:signature => valid_attributes}, valid_session
+        post :create, params: {:signature => valid_attributes}
         expect(assigns(:signature)).to be_a(Signature)
         expect(assigns(:signature)).to be_persisted
       end
 
       it "redirects to the created signature" do
-        post :create, {:signature => valid_attributes}, valid_session
+        post :create, params: {:signature => valid_attributes}
         expect(response).to redirect_to(Signature.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved signature as @signature" do
-        post :create, {:signature => invalid_attributes}, valid_session
+        post :create, params: {:signature => invalid_attributes}
         expect(assigns(:signature)).to be_a_new(Signature)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:signature => invalid_attributes}, valid_session
+        post :create, params: {:signature => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -151,20 +167,20 @@ RSpec.describe SignaturesController, type: :controller do
 
       it "updates the requested signature" do
         signature = Signature.create! valid_attributes
-        put :update, {:id => signature.to_param, :signature => new_attributes}, valid_session
+        put :update, params: {:id => signature.to_param, :signature => new_attributes}
         signature.reload
         expect(signature.signature_info).to eq("abcdefghijklmnop")
       end
 
       it "assigns the requested signature as @signature" do
         signature = Signature.create! valid_attributes
-        put :update, {:id => signature.to_param, :signature => valid_attributes}, valid_session
+        put :update, params: {:id => signature.to_param, :signature => valid_attributes}
         expect(assigns(:signature)).to eq(signature)
       end
 
       it "redirects to the signature" do
         signature = Signature.create! valid_attributes
-        put :update, {:id => signature.to_param, :signature => valid_attributes}, valid_session
+        put :update, params: {:id => signature.to_param, :signature => valid_attributes}
         expect(response).to redirect_to(signature)
       end
     end
@@ -172,13 +188,13 @@ RSpec.describe SignaturesController, type: :controller do
     context "with invalid params" do
       it "assigns the signature as @signature" do
         signature = Signature.create! valid_attributes
-        put :update, {:id => signature.to_param, :signature => invalid_attributes}, valid_session
+        put :update, params: {:id => signature.to_param, :signature => invalid_attributes}
         expect(assigns(:signature)).to eq(signature)
       end
 
       it "re-renders the 'edit' template" do
         signature = Signature.create! valid_attributes
-        put :update, {:id => signature.to_param, :signature => invalid_attributes}, valid_session
+        put :update, params: {:id => signature.to_param, :signature => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -188,13 +204,13 @@ RSpec.describe SignaturesController, type: :controller do
     it "destroys the requested signature" do
       signature = Signature.create! valid_attributes
       expect {
-        delete :destroy, {:id => signature.to_param}, valid_session
+        delete :destroy, params: {:id => signature.to_param}
       }.to change(Signature, :count).by(-1)
     end
 
     it "redirects to the signatures list" do
       signature = Signature.create! valid_attributes
-      delete :destroy, {:id => signature.to_param}, valid_session
+      delete :destroy, params: {:id => signature.to_param}
       expect(response).to redirect_to(signatures_url)
     end
   end
@@ -207,35 +223,35 @@ RSpec.describe SignaturesController, type: :controller do
                                  alert_signature_id: 5656567, alert_signature: "Exploit") }
     it "destroys marked events" do
       expect {
-      delete :destroy_events, {id: event.signature.to_param, event_ids: [event.id],
-                               commit: I18n.t('actions.destroy_marked')}, valid_session
+      delete :destroy_events, params: {id: event.signature.to_param, event_ids: [event.id],
+                               commit: I18n.t('actions.destroy_marked')}
       }.to change(Event, :count).by(-1)
     end
 
     it "destroys ALL events" do
       expect {
-      delete :destroy_events, {id: event.signature.to_param, 
-                               commit: I18n.t('actions.destroy_all')}, valid_session
+      delete :destroy_events, params: {id: event.signature.to_param, 
+                               commit: I18n.t('actions.destroy_all')}
       }.to change(Event, :count).by(-1)
     end
 
     it "marks ALL events as done" do
       expect {
-      delete :destroy_events, {id: event.signature.to_param, 
-                               commit: I18n.t('actions.all_done')}, valid_session
+      delete :destroy_events, params: {id: event.signature.to_param, 
+                               commit: I18n.t('actions.all_done')}
       }.to change(Event.not_done, :count).by(-1)
     end
 
     it "marks marked events as done" do
       expect {
-      delete :destroy_events, {id: event.signature.to_param, event_ids: [event.id],
-                               commit: I18n.t('actions.marked_done')}, valid_session
+      delete :destroy_events, params: {id: event.signature.to_param, event_ids: [event.id],
+                               commit: I18n.t('actions.marked_done')}
       }.to change(Event.not_done, :count).by(-1)
     end
 
 
     it "redirects to signature # how" do
-      delete :destroy_events, {id: event.signature.to_param, event_ids: [event.id]}, valid_session
+      delete :destroy_events, params: {id: event.signature.to_param, event_ids: [event.id]}
       expect(response).to redirect_to(signature_url(event.signature))
     end
   end

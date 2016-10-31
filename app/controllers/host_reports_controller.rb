@@ -4,7 +4,15 @@ class HostReportsController < ApplicationController
   respond_to :html, :text
 
   def show
+    @is_form = true
     respond_with(@events)
+  end
+
+  def update
+    if params[:commit] == t('actions.marked_done')
+      Event.where(['id IN (?)', event_ids]).update_all(done: true)
+    end
+    redirect_to show_host_report_url(ip: host)
   end
 
   def new_mail
@@ -14,7 +22,7 @@ class HostReportsController < ApplicationController
 
   def create_mail
     if mail_params[:mail_to].present?
-      ReportMailer.host_event_report(mail_params.merge(event_ids: event_ids)).deliver_later
+      ReportMailer.host_event_report(mail_params.merge(event_ids: event_ids).to_h).deliver_later
       if mark_done?
         Event.where(['id IN (?)', event_ids]).update_all(done: true)
       end

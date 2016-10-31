@@ -27,6 +27,10 @@ RSpec.describe ApplicationHelper, type: :helper do
       let(:subject) { Capybara.string(helper.threatcrowd_link(ip: '169.254.0.1')) }
       it { expect(subject).to have_no_css('a') }
     end
+    context "with broadcast address 255.255.255.255" do
+      let(:subject) { Capybara.string(helper.threatcrowd_link(ip: '255.255.255.255')) }
+      it { expect(subject).to have_no_css('a') }
+    end
 
     context "with a hostname " do
       let(:subject) { Capybara.string(helper.threatcrowd_link(domain: 'www.example.com')) }
@@ -62,6 +66,10 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
     context "with an reserved ip address" do
       let(:subject) { Capybara.string(helper.ipintel_link(ip: '169.254.0.1')) }
+      it { expect(subject).to have_no_css('a') }
+    end
+    context "with broadcast address 255.255.255.255" do
+      let(:subject) { Capybara.string(helper.ipintel_link(ip: '255.255.255.255')) }
       it { expect(subject).to have_no_css('a') }
     end
 

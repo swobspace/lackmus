@@ -17,7 +17,7 @@ RSpec.describe MainSearchesController, type: :controller do
 
   describe "GET #create" do
     it "redirects to show_main_search_path" do
-      get :create, search: {q: '192.0.2.7'}
+      get :create, params: { search: {q: '192.0.2.7'} }
       expect(response).to redirect_to(show_main_search_path)
     end
   end
@@ -34,19 +34,19 @@ RSpec.describe MainSearchesController, type: :controller do
     end
 
     it "assigns events to @events" do
-      get :create, search: {q: '192.0.2.7', layout: 'Events'}
+      get :create, params: { search: {q: '192.0.2.7', layout: 'Events'} }
       get :show
       expect(assigns(:events)).to contain_exactly(event1, event2)
     end
 
     it "assigns signatures to @signatures" do
-      get :create, search: {q: '192.0.2.7'}
+      get :create, params: { search: {q: '192.0.2.7'} }
       get :show
       expect(assigns(:signatures)).to contain_exactly(signature)
     end
 
     it "assigns signatures to @signatures" do
-      get :create, search: {q: '192.0.2.0/29'}
+      get :create, params: { search: {q: '192.0.2.0/29'} }
       get :show
       expect(assigns(:signatures)).to contain_exactly(signature)
     end
