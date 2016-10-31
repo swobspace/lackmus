@@ -59,7 +59,7 @@ ready = ->
   $(".datepicker").datepicker()
 
   $('#checkAll').click(->
-    $('form input:checkbox').prop('checked', this.checked)
+    $('form input:checkbox.multicheck').prop('checked', this.checked)
   )
 
 # $(document).ready(ready)

@@ -27,7 +27,7 @@
 
     <% events.each do |event| %>
       <%= content_tag_for(:tr, event) do %>
-	<td class="center nosort"><%= check_box_tag "event_ids[]", event.id %></td>
+	<td class="center nosort"><%= check_box_tag "event_ids[]", event.id, false, class: "multicheck" %></td>
         <td><%= link_to(event.sensor, events_path(sensor: event.sensor)) %></td>
 	<td><%= event.event_time.to_s(:precision) %></td>
 	<td><%= signatures_by_ip(event.src_ip) %> / 
