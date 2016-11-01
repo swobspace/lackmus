@@ -20,13 +20,53 @@ $.datepicker.setDefaults({
 Turbolinks.enableProgressBar()
 
 ready = ->
-  table = $(".dataTable").dataTable(
+  $('.dataTable tfoot th').each  (idx) ->
+    title = $('.dataTable thead th').eq( $(this).index() ).text()
+    $(this).html( '<input type="text" placeholder="<%= I18n.t('lackmus.search') %>" name="idx'+idx+'" />' )
+
+  table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
-    buttons: [
-      'copy', 'excel', 'csv', 'pdf', 'print', 'colvis'
-    ]
     stateSave: true
+    responsive: true
+    buttons: [
+      {
+        extend: 'copy',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      {
+        extend: 'excel',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      { 
+        extend: 'csv',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      { 
+        extend: 'pdf',
+        orientation: 'landscape',
+        pageSize: 'A4',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      'print',
+      {
+        extend: 'colvis',
+        text: "<%= I18n.t('lackmus.change_columns') %>",
+        columns: ':gt(0)'
+      }
+    ]
     columnDefs: [
       "targets": 'nosort', "orderable": false
     ]
@@ -35,22 +75,22 @@ ready = ->
       url: "<%= asset_path('dataTable.german.txt') %>"
   )
 
-#  if $('.dataTable').length
-#    table.columns().eq(0).each (colIdx) ->
-#      $('input[name=idx'+colIdx+']').on( 'keyup change', ->
-#        table.column(colIdx).search(this.value).draw()
-#      )
-#
-#  if table.length
-#    $('input[type=text]').val("")
-#    table.columns().search('').draw()
-#
-#  $("#reset_table").on("click",  ->
-#    $('input[type=text]').val("")
-#    table.columns().search('').draw()
-#    $('input[type=search]').val("").trigger('input')
-#  )
-#
+  if $('.dataTable').length
+    table.columns().eq(0).each (colIdx) ->
+      $('input[name=idx'+colIdx+']').on( 'keyup change', ->
+        table.column(colIdx).search(this.value).draw()
+      )
+
+  # if table.length
+  table.columns().search('').draw()
+  $('input[type=search]').val("").trigger('input')
+
+  $("#reset_table").on("click",  ->
+    $('input[type=text]').val("")
+    table.columns().search('').draw()
+    $('input[type=search]').val("").trigger('input')
+  )
+
   $('.select2').select2
     language: 'de'
     theme: 'bootstrap'

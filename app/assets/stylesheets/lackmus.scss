@@ -51,3 +51,13 @@ html.turbolinks-progress-bar::before {
   background-color: #008000 !important;
   z-index: 2000;
 }
+
+tfoot {
+  display: table-header-group;
+  input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+}
+
