@@ -15,7 +15,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-ui-rails'
 gem 'simple_form', '~> 3.3'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
 gem 'bower-rails', '~> 0.10.0'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
@@ -62,7 +62,7 @@ group :test do
 end
 
 gem 'cancancan'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
 gem 'record_tag_helper', '~> 1.0'
 gem 'delayed_job_active_record'
 gem 'daemons'
