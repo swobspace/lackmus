@@ -11,6 +11,7 @@ require 'factory_girl_rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rails-controller-testing'
+require 'webmock/rspec'
 
 Capybara.javascript_driver = :poltergeist
 
@@ -47,7 +48,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include RequestMacros, type: :feature
-  config.include FakeWebHelper, type: :view
+  # config.include FakeWebHelper, type: :view
 
   [:controller, :view, :request].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type
@@ -60,6 +61,21 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseRewinder.clean
+  end
+
+  config.before(:each, :view) do
+    stub_request(
+      :get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=1.2.3.4")
+        .with(
+          headers: {
+       	    'Accept'=>'*/*',
+       	    'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	    'User-Agent'=>'Ruby'
+          }).to_return(status: 200, body: "", headers: {})
+
+    stub_request(
+      :get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=1.2.3.9")
+     .to_return(body: '{"response_code":"0"}')
   end
 end
 

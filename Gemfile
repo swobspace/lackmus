@@ -16,7 +16,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-ui-rails'
 gem 'simple_form', '~> 3.3'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
-gem 'bower-rails', '~> 0.10.0'
+gem 'bower-rails', '~> 0.11.0'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
 gem 'whois'
@@ -54,7 +54,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'fakeweb', "~> 1.3", require: false
+  gem 'webmock', require: false
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem 'capybara'

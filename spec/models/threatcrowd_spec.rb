@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'fakeweb'
+require 'webmock/rspec'
 
 EXAMPLEIP='192.0.2.1'
 
@@ -7,8 +7,9 @@ RSpec.describe Threatcrowd, type: :model do
   let(:ipjson) {
     %Q+{"response_code":"1"}+
   }
+  let(:response) {File.read(File.join(Rails.root, 'spec', 'fixtures', "threatcrowd-#{EXAMPLEIP}.json"))}
   before(:each) do
-    FakeWeb.allow_net_connect = false
+    # FakeWeb.allow_net_connect = false
   end
 
   describe "#Threatcrowd.by_ip(ip)" do
@@ -16,8 +17,8 @@ RSpec.describe Threatcrowd, type: :model do
 
     before(:each) do
       Rails.cache.delete("threadcrowd/ip/#{EXAMPLEIP}")
-      FakeWeb.register_uri(:get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=#{EXAMPLEIP}",
-                           response: File.join(Rails.root, 'spec', 'fixtures', "threatcrowd-#{EXAMPLEIP}.json"))
+      stub_request(:get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=#{EXAMPLEIP}")
+      .to_return(response)
     end
 
     it { expect(threat).to be_a_kind_of Threatcrowd }
