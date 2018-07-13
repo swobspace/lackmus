@@ -8,9 +8,6 @@ RSpec.describe Threatcrowd, type: :model do
     %Q+{"response_code":"1"}+
   }
   let(:response) {File.read(File.join(Rails.root, 'spec', 'fixtures', "threatcrowd-#{EXAMPLEIP}.json"))}
-  before(:each) do
-    # FakeWeb.allow_net_connect = false
-  end
 
   describe "#Threatcrowd.by_ip(ip)" do
     let(:threat) { Threatcrowd.by_ip(EXAMPLEIP) }
