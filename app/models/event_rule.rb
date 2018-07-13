@@ -29,6 +29,7 @@ class EventRule < ApplicationRecord
 private
 
   def remove_empty_filter_attributes
+    return true if filter.blank?
     self[:filter] = filter.reject{|_, v| v.blank?}
   end
 
