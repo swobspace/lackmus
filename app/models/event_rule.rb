@@ -18,11 +18,18 @@ class EventRule < ApplicationRecord
   acts_as_list
 
   # -- validations and callbacks
+  before_validation :remove_empty_filter_attributes
   validates :filter, presence: true
   validates :action, :allow_blank => false,
             :inclusion => {
               in: EventRule::ACTIONS,
               message: "Select one of #{EventRule::ACTIONS.join(", ")}"
             }
+
+private
+
+  def remove_empty_filter_attributes
+    self[:filter] = filter.reject{|_, v| v.blank?}
+  end
 
 end
