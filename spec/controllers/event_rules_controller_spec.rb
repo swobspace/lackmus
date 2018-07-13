@@ -123,7 +123,9 @@ RSpec.describe EventRulesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { severity: 99 }
+        { severity: 99,
+          description: "blafasel",
+          valid_until: "2018-01-01" }
       }
 
       it "updates the requested event_rule" do

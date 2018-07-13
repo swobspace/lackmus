@@ -17,7 +17,7 @@ FactoryBot.define do
   end
 
   factory :event_rule do
-    filter {{ src_ip: "192.0.2.199", signature: 1234 }}
+    filter {{ src_ip: "192.0.2.199", alert_signature_id: 1234 }}
     action "investigate"
   end
 

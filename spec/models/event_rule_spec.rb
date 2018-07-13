@@ -24,6 +24,21 @@ RSpec.describe EventRule, type: :model do
     it {expect(event_rule.ar_filter).not_to include("src_ip")}
     it {expect(event_rule.ar_filter).not_to include(:brabbel)}
     it {expect(event_rule.ar_filter).not_to include("brabbel")}
+  end
 
+  describe "save with empty filter args" do
+    let(:filter) {{
+      sensor: "test",
+      src_ip: "1.2.3.4",
+      alert_category: "",
+      alert_severity: "",
+      http_hostname: "",
+      http_status: "",
+      http_protocol: "",
+      http_method: "",
+    }}
+    let(:event_rule) {FactoryBot.create(:event_rule, position: 1, filter: filter)}
+    
+    it { expect(event_rule.filter.keys).to contain_exactly(:sensor, :src_ip) }
   end
 end

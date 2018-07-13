@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.1.0'
 gem 'pg'
 
 gem 'sass-rails', '~> 5.0'
@@ -9,13 +9,12 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', '>= 5.0'
 gem 'jbuilder', '~> 2.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-ui-rails'
 gem 'simple_form'
-gem 'bower-rails', '~> 0.11.0'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
 
