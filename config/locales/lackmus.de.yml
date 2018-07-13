@@ -56,6 +56,7 @@ de:
     alert_signature_id: Sig. ID
     alert_signature: Signatur
     alert_severity: A. Sev.
+    alert_category: A. Sev.
     category: Kategorie
     connection: Verbindung
     count: Anzahl
