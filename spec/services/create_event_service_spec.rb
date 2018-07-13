@@ -15,7 +15,7 @@ RSpec.describe CreateEventService do
   end
 
   describe "#call" do
-    let(:event_attributes) { FactoryGirl.attributes_for(:event, sensor: "sentinel" ) }
+    let(:event_attributes) { FactoryBot.attributes_for(:event, sensor: "sentinel" ) }
     subject { CreateEventService.new(event_attributes) }
 
     it "calls Event.create" do
@@ -36,7 +36,7 @@ RSpec.describe CreateEventService do
       end
 
       it "assigns an event_rule" do
-        event_rule = FactoryGirl.create(:event_rule, filter: {"sensor" => "sentinel"})
+        event_rule = FactoryBot.create(:event_rule, filter: {"sensor" => "sentinel"})
 	expect {
 	  subject.call
 	}.to change{event_rule.events.count}.by(1)

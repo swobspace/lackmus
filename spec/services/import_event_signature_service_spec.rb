@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ImportEventSignatureService do
-  let(:event) { FactoryGirl.create(:event, alert_signature_id: 99799,
+  let(:event) { FactoryBot.create(:event, alert_signature_id: 99799,
                                    alert_signature: "Lorem Ipsum",
                                    alert_category: "A Trojan may be or so",
                                    alert_severity: 7 ) }
@@ -22,7 +22,7 @@ RSpec.describe ImportEventSignatureService do
     subject { ImportEventSignatureService.new }
 
     it "creates a signature" do
-      signature = FactoryGirl.build_stubbed(:signature)
+      signature = FactoryBot.build_stubbed(:signature)
       expect(Signature).to receive_message_chain(:create_with, :find_or_initialize_by).
         and_return(signature)
       expect(signature).to receive(:persisted?).and_return(false)
@@ -51,7 +51,7 @@ RSpec.describe ImportEventSignatureService do
     end
 
     context "with prexisting incomplete signature" do
-      let!(:signature) { FactoryGirl.create(:signature, signature_id: 99799,
+      let!(:signature) { FactoryBot.create(:signature, signature_id: 99799,
                                             signature_info: "Lorem Ipsum") }
       describe "#call updates attributes" do
         before(:each) do

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   sequence :mailaddr do |n|
     "recipient_#{n}@example.org"

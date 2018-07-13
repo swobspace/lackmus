@@ -11,21 +11,21 @@ RSpec.describe Event, type: :model do
   it { is_expected.to validate_presence_of(:proto) }
 
   it "should get plain factory working" do
-    f = FactoryGirl.create(:event)
-    g = FactoryGirl.create(:event)
+    f = FactoryBot.create(:event)
+    g = FactoryBot.create(:event)
     expect(f).to be_valid
     expect(g).to be_valid
   end
 
   it "prints printable chars" do
     clear = "Unverschüsselter \x06\x7F Text\x01"
-    e = FactoryGirl.build_stubbed(:event, payload: Base64.encode64(clear))
+    e = FactoryBot.build_stubbed(:event, payload: Base64.encode64(clear))
     expect(e.payload_printable).to eq("Unversch..sselter .. Text.")
   end
 
   describe "with scope" do
-    let(:first_event) { FactoryGirl.build(:event, event_time: Time.now - 2.hours ) }
-    let(:second_event)  { FactoryGirl.build(:event, event_time: Time.now - 1.hours ) }
+    let(:first_event) { FactoryBot.build(:event, event_time: Time.now - 2.hours ) }
+    let(:second_event)  { FactoryBot.build(:event, event_time: Time.now - 1.hours ) }
 
     describe "::most_current" do
       before(:each) do
@@ -90,13 +90,13 @@ RSpec.describe Event, type: :model do
   end
  
   describe "with scope ::active" do
-    let(:ignore_rule)  { FactoryGirl.create(:event_rule, action: 'ignore') }
-    let(:drop_rule)    { FactoryGirl.create(:event_rule, action: 'drop') }
-    let!(:active_event) { FactoryGirl.create(:event) }
-    let!(:ignore_event) { FactoryGirl.create(:event, ignore: true) }
-    let!(:done_event)   { FactoryGirl.create(:event, done: true) }
-    let!(:ignore_rule_event) { FactoryGirl.create(:event, event_rule_id: ignore_rule.id) }
-    let!(:drop_rule_event)  { FactoryGirl.create(:event, event_rule_id: drop_rule.id) }
+    let(:ignore_rule)  { FactoryBot.create(:event_rule, action: 'ignore') }
+    let(:drop_rule)    { FactoryBot.create(:event_rule, action: 'drop') }
+    let!(:active_event) { FactoryBot.create(:event) }
+    let!(:ignore_event) { FactoryBot.create(:event, ignore: true) }
+    let!(:done_event)   { FactoryBot.create(:event, done: true) }
+    let!(:ignore_rule_event) { FactoryBot.create(:event, event_rule_id: ignore_rule.id) }
+    let!(:drop_rule_event)  { FactoryBot.create(:event, event_rule_id: drop_rule.id) }
 
     it { expect(Event.active).to contain_exactly(active_event, ignore_rule_event, drop_rule_event) }
     it { expect(Event.not_ignored).to contain_exactly(active_event, done_event, ignore_rule_event, drop_rule_event) }
@@ -109,21 +109,21 @@ RSpec.describe Event, type: :model do
   end
  
   describe "::unassigned" do
-    let!(:event1) { FactoryGirl.create(:event, event_rule_id: 999) }
-    let!(:event2) { FactoryGirl.create(:event) }
+    let!(:event1) { FactoryBot.create(:event, event_rule_id: 999) }
+    let!(:event2) { FactoryBot.create(:event) }
 
     it { expect(Event.unassigned).to contain_exactly(event2) }
   
   end
 
   describe "assigning filters" do
-    let!(:event1) { FactoryGirl.create(:event, src_ip: "1.2.3.4") }
-    let!(:event2) { FactoryGirl.create(:event, alert_signature_id: 44444) }
-    let!(:event3) { FactoryGirl.create(:event, dst_ip: "5.6.7.8") }
+    let!(:event1) { FactoryBot.create(:event, src_ip: "1.2.3.4") }
+    let!(:event2) { FactoryBot.create(:event, alert_signature_id: 44444) }
+    let!(:event3) { FactoryBot.create(:event, dst_ip: "5.6.7.8") }
 
-    let!(:event_rule1) {FactoryGirl.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
-    let!(:event_rule2) {FactoryGirl.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
-    let!(:event_rule3) {FactoryGirl.create(:event_rule, position: 3, filter: {"dst_ip"=>"5.6.7.8"})}
+    let!(:event_rule1) {FactoryBot.create(:event_rule, position: 1, filter: {"src_ip"=>"1.2.3.4"})}
+    let!(:event_rule2) {FactoryBot.create(:event_rule, position: 2, filter: {"alert_signature_id"=>"44444"})}
+    let!(:event_rule3) {FactoryBot.create(:event_rule, position: 3, filter: {"dst_ip"=>"5.6.7.8"})}
 
     context "::assign_filter(filter)" do
       before(:each) do

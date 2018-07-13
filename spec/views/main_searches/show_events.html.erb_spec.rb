@@ -8,7 +8,7 @@ RSpec.describe "main_searches/show_events.html.erb", type: :view do
     allow(controller).to receive(:controller_name) { "events" }
     allow(controller).to receive(:action_name) { "show" }
 
-    assign(:events, FactoryGirl.create_list(:event, 3, src_ip: '192.0.2.8'))
+    assign(:events, FactoryBot.create_list(:event, 3, src_ip: '192.0.2.8'))
   end
 
   it "renders a list of events" do

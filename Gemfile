@@ -55,7 +55,7 @@ end
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'webmock', require: false
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_rewinder'
   gem 'capybara'
   gem 'poltergeist'

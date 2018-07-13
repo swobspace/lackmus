@@ -29,7 +29,7 @@ END_OF_WHOIS
   end
 
   describe "#new_rule_from_event" do
-    let(:event) { FactoryGirl.create(:event) }
+    let(:event) { FactoryBot.create(:event) }
     let(:subject) { Capybara.string(helper.new_rule_from_event(event)) }
 
     it { expect(subject.find("a")['href']).to match(/event_rules\/new\?event_id=#{event.to_param}/) }

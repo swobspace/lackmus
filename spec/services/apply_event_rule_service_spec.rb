@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ApplyEventRuleService do
-  let(:event) { FactoryGirl.build(:event, alert_signature_id: 99799,
+  let(:event) { FactoryBot.build(:event, alert_signature_id: 99799,
                                     sensor: 'caramel') }
 
   # check for class methods
@@ -24,7 +24,7 @@ RSpec.describe ApplyEventRuleService do
     end
 
     context "with a matching event_rule action: drop" do
-      let!(:event_rule) { FactoryGirl.create(:event_rule, action: 'drop',
+      let!(:event_rule) { FactoryBot.create(:event_rule, action: 'drop',
                             filter: {"sensor" => "caramel"}) }
 
       it "does not save event" do
@@ -43,7 +43,7 @@ RSpec.describe ApplyEventRuleService do
     end
 
     context "with a matching event_rule action: ignore" do
-      let!(:event_rule) { FactoryGirl.create(:event_rule, action: 'ignore',
+      let!(:event_rule) { FactoryBot.create(:event_rule, action: 'ignore',
                             filter: {"sensor" => "caramel"}) }
 
       describe "#call(event)" do
@@ -77,7 +77,7 @@ RSpec.describe ApplyEventRuleService do
     end
 
     context "with a matching signature action: drop" do
-      let!(:signature) { FactoryGirl.create(:signature, action: 'drop',
+      let!(:signature) { FactoryBot.create(:signature, action: 'drop',
                             signature_id: 99799) }
 
       it "does not save event" do

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe SignaturesHelper, type: :helper do
   describe "#signature_id_link" do
-    let!(:signature) { FactoryGirl.create(:signature, signature_id: "224466") }
+    let!(:signature) { FactoryBot.create(:signature, signature_id: "224466") }
 
     context "with existing signature" do
       it "returns link_to signature" do

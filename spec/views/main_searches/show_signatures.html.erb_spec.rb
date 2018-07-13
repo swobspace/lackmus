@@ -9,9 +9,9 @@ RSpec.describe "main_searches/show_signatures.html.erb", type: :view do
     allow(controller).to receive(:action_name) { "show" }
 
     assign(:signatures, [
-      FactoryGirl.create(:signature, signature_id: 11224477),
-      FactoryGirl.create(:signature, signature_id: 33995467),
-      FactoryGirl.create(:signature, signature_id: 34251699),
+      FactoryBot.create(:signature, signature_id: 11224477),
+      FactoryBot.create(:signature, signature_id: 33995467),
+      FactoryBot.create(:signature, signature_id: 34251699),
     ])
   end
 

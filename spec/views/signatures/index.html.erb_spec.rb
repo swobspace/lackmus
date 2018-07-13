@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "signatures/index", type: :view do
   let(:event_time) { Time.now }
-  let(:event) { FactoryGirl.create(:event, alert_signature_id: 23232, event_time: event_time) }
+  let(:event) { FactoryBot.create(:event, alert_signature_id: 23232, event_time: event_time) }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)

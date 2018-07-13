@@ -25,7 +25,7 @@ RSpec.describe EventRulesController, type: :controller do
   # EventRule. As you add validations to EventRule, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:event_rule)
+    FactoryBot.attributes_for(:event_rule)
   }
 
   let(:invalid_attributes) {
@@ -62,7 +62,7 @@ RSpec.describe EventRulesController, type: :controller do
     end
 
     context "with event" do
-      let(:event) { FactoryGirl.create(:event, 'src_ip' => '192.0.2.7',
+      let(:event) { FactoryBot.create(:event, 'src_ip' => '192.0.2.7',
                       'dst_ip' => '198.51.100.3', 'src_port' => 1234, 'dst_port' => 99,
                       'sensor' => 'sentinel') }
       before(:each) do

@@ -8,7 +8,7 @@ RSpec.describe HostReportsController, type: :controller do
 
   let(:host) { '192.0.2.9' }
   let(:mail) { 'mailto@example.com' }
-  let!(:events) { FactoryGirl.create_list(:event, 3, src_ip: host) }
+  let!(:events) { FactoryBot.create_list(:event, 3, src_ip: host) }
 
   describe "GET #show" do
     it "assigns selected events as @events" do
