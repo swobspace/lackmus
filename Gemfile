@@ -15,7 +15,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-ui-rails'
 gem 'simple_form'
-gem 'bower-rails', '~> 0.11.0'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
 
