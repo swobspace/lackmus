@@ -1,4 +1,5 @@
 require 'ipaddr'
+require 'resolv'
 
 class IpLookup
   attr_reader :ip_addr

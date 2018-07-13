@@ -68,6 +68,19 @@ RSpec.describe "events/show", type: :view do
       :ignore => false,
       :severity => 10
     ))
+
+    stub_request(
+      :get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=1.2.3.4")
+        .with(
+          headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent'=>'Ruby'
+          }).to_return(status: 200, body: "", headers: {})
+
+    stub_request(
+      :get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=1.2.3.9")
+     .to_return(body: '{"response_code":"0"}')
   end
 
   context "with has_http = true" do

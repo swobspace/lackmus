@@ -7,10 +7,11 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rails-controller-testing'
+require 'webmock/rspec'
 
 Capybara.javascript_driver = :poltergeist
 
@@ -47,7 +48,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include RequestMacros, type: :feature
-  config.include FakeWebHelper, type: :view
+  # config.include FakeWebHelper, type: :view
 
   [:controller, :view, :request].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type

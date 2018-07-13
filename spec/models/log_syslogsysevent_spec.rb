@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LogSyslogsysevent, type: :model do
   include_context "syslog_variables"
-  let!(:systemevent) { FactoryGirl.build_stubbed(:systemevent) }
+  let!(:systemevent) { FactoryBot.build_stubbed(:systemevent) }
 
   describe "#log" do
     context "with valid syslog message" do

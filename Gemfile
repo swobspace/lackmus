@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-# gem 'rails', '~> 5.0.0'
-gem 'rails', github: 'rails/rails', branch: '5-0-stable'
+gem 'rails', '~> 5.1.0'
 gem 'pg'
-# gem 'postgres_ext'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -11,15 +9,14 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', '>= 5.0'
 gem 'jbuilder', '~> 2.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-ui-rails'
-gem 'simple_form', '~> 3.3'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
-gem 'bower-rails', '~> 0.10.0'
-gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
+gem 'simple_form'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
 
 gem 'whois'
 gem 'packetfu'
@@ -56,15 +53,14 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'fakeweb', "~> 1.3", require: false
-  gem 'factory_girl_rails'
+  gem 'webmock', require: false
+  gem 'factory_bot_rails'
   gem 'database_rewinder'
   gem 'capybara'
   gem 'poltergeist'
 end
 
 gem 'cancancan'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'record_tag_helper', '~> 1.0'
 gem 'delayed_job_active_record'
 gem 'daemons'

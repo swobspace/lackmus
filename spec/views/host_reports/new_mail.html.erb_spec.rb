@@ -9,8 +9,8 @@ RSpec.describe "host_reports/new_mail.html.erb", type: :view do
     allow(controller).to receive(:controller_name) { "host_reports" }
     allow(controller).to receive(:action_name) { "new_mail" }
 
-    assign(:signature, FactoryGirl.create(:signature, signature_id: 1234568))
-    @events = FactoryGirl.create_list(:event, 3, 
+    assign(:signature, FactoryBot.create(:signature, signature_id: 1234568))
+    @events = FactoryBot.create_list(:event, 3, 
       sensor: "sentinel",
       event_time: showtime,
       alert_signature_id: 1234568,

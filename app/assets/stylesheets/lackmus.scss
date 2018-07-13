@@ -9,9 +9,10 @@ body {
 
 // --- FOOTER
 div#footer{
-  font-size: small;
+  font-size: 0.9em;
   color: #999;
   margin: 24px 0 0 0;
+  padding: 4px 0 0 0;
   border-top: 1px solid #eee;
 }
 
@@ -51,3 +52,13 @@ html.turbolinks-progress-bar::before {
   background-color: #008000 !important;
   z-index: 2000;
 }
+
+tfoot {
+  display: table-header-group;
+  input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+}
+

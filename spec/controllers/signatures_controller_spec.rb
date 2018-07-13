@@ -25,7 +25,7 @@ RSpec.describe SignaturesController, type: :controller do
   # Signature. As you add validations to Signature, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:signature, signature_id: 55432)
+    FactoryBot.attributes_for(:signature, signature_id: 55432)
   }
 
   let(:invalid_attributes) {
@@ -40,7 +40,7 @@ RSpec.describe SignaturesController, type: :controller do
   describe "GET #index" do
     it "assigns all signatures as @signatures" do
       signature = Signature.create! valid_attributes
-      event = FactoryGirl.create(:event, alert_signature_id: signature.signature_id)
+      event = FactoryBot.create(:event, alert_signature_id: signature.signature_id)
       get :index
       expect(assigns(:signatures)).to eq([signature])
     end
@@ -70,7 +70,7 @@ RSpec.describe SignaturesController, type: :controller do
       get :index, params: {filter: 'ignored'}
     end
     it "with filter :current" do
-      signature = FactoryGirl.create(:signature)
+      signature = FactoryBot.create(:signature)
       expect(Signature).to receive(:active).and_return(Signature.none)
       expect(Signature).not_to receive(:ignored)
       get :index, params: {filter: 'current'}
@@ -99,8 +99,8 @@ RSpec.describe SignaturesController, type: :controller do
 
   describe "GET #pcap" do
     it "downloads corresponding events pcap in one file" do
-      signature = FactoryGirl.create(:signature, signature_id: 5656567)
-      event = FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
+      signature = FactoryBot.create(:signature, signature_id: 5656567)
+      event = FactoryBot.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  alert_signature_id: 5656567, alert_signature: "Exploit")
       get :pcap, params: {:id => event.signature.id.to_param}
@@ -216,8 +216,8 @@ RSpec.describe SignaturesController, type: :controller do
   end
 
   describe "DELETE #destroy_event" do
-    let!(:sig)   { FactoryGirl.create(:signature, signature_id: 5656567) }
-    let!(:event) { FactoryGirl.create(:event, packet: Base64.encode64("abcde"), 
+    let!(:sig)   { FactoryBot.create(:signature, signature_id: 5656567) }
+    let!(:event) { FactoryBot.create(:event, packet: Base64.encode64("abcde"), 
                                  payload: Base64.encode64("brubbelbrutzelplapperfix"),
                                  done: false,
                                  alert_signature_id: 5656567, alert_signature: "Exploit") }

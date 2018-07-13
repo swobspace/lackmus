@@ -26,7 +26,7 @@ RSpec.describe EventsController, type: :controller do
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:event)
+    FactoryBot.attributes_for(:event)
   }
 
   let(:invalid_attributes) {
@@ -46,8 +46,8 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe "#not_done" do
-      let!(:first_event)  { FactoryGirl.create(:event, done: false) }
-      let!(:second_event) { FactoryGirl.create(:event, done: true) }
+      let!(:first_event)  { FactoryBot.create(:event, done: false) }
+      let!(:second_event) { FactoryBot.create(:event, done: true) }
 
       it "get all events" do
         get :index, params: {all: 1}
@@ -61,8 +61,8 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe "filtering networks" do
-      let!(:first_event)  { FactoryGirl.create(:event, src_ip: "192.0.2.1") }
-      let!(:second_event) { FactoryGirl.create(:event, dst_ip: "192.0.2.9") }
+      let!(:first_event)  { FactoryBot.create(:event, src_ip: "192.0.2.1") }
+      let!(:second_event) { FactoryBot.create(:event, dst_ip: "192.0.2.9") }
 
       it "search by ip returns first event" do
         get :index, params: {ip: "192.0.2.1"}
@@ -86,9 +86,9 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe "filtering by event time" do
-      let!(:past_event)   { FactoryGirl.create(:event, event_time: (Time.now - 1.month)) }
-      let!(:last_event)   { FactoryGirl.create(:event, event_time: (Time.now - 1.day)) }
-      let!(:current_event) { FactoryGirl.create(:event, event_time: Time.now) }
+      let!(:past_event)   { FactoryBot.create(:event, event_time: (Time.now - 1.month)) }
+      let!(:last_event)   { FactoryBot.create(:event, event_time: (Time.now - 1.day)) }
+      let!(:current_event) { FactoryBot.create(:event, event_time: Time.now) }
 
       it "get current events" do
         get :index, params: {since: "today"}
@@ -102,8 +102,8 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe "filter by sensor" do
-      let!(:first_event)  { FactoryGirl.create(:event, sensor: "lukcy") }
-      let!(:second_event) { FactoryGirl.create(:event, sensor: "luuke") }
+      let!(:first_event)  { FactoryBot.create(:event, sensor: "lukcy") }
+      let!(:second_event) { FactoryBot.create(:event, sensor: "luuke") }
 
       it "search by sensor returns first event" do
         get :index, params: {sensor: "lukcy"}
@@ -112,8 +112,8 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe "filter by httphost" do
-      let!(:first_event)  { FactoryGirl.create(:event, http_hostname: "castor", has_http: true) }
-      let!(:second_event) { FactoryGirl.create(:event, http_hostname: "pollux", has_http: false) }
+      let!(:first_event)  { FactoryBot.create(:event, http_hostname: "castor", has_http: true) }
+      let!(:second_event) { FactoryBot.create(:event, http_hostname: "pollux", has_http: false) }
 
       it "search by httphost returns first event" do
         get :index, params: {httphost: "castor"}

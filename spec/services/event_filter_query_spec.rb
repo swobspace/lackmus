@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe EventFilterQuery do
   let(:filter) {{ "src_ip" => '192.0.2.1' }}
-  let!(:event1) { FactoryGirl.create(:event, src_ip: "192.0.2.1", sensor: 'abc001') }
-  let!(:event2) { FactoryGirl.create(:event, src_ip: "198.51.100.1", sensor: 'abc002') }
-  let!(:event3) { FactoryGirl.create(:event, src_ip: "192.0.2.7", sensor: 'def001') }
-  let!(:event4) { FactoryGirl.create(:event, src_ip: "198.51.100.8", sensor: 'def002') }
+  let!(:event1) { FactoryBot.create(:event, src_ip: "192.0.2.1", sensor: 'abc001') }
+  let!(:event2) { FactoryBot.create(:event, src_ip: "198.51.100.1", sensor: 'abc002') }
+  let!(:event3) { FactoryBot.create(:event, src_ip: "192.0.2.7", sensor: 'def001') }
+  let!(:event4) { FactoryBot.create(:event, src_ip: "198.51.100.8", sensor: 'def002') }
 
 
   # check for class methods

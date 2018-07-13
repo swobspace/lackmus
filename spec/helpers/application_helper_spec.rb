@@ -5,6 +5,17 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe "#threatcrowd_link" do
     context "with an public ip address" do
       let(:subject) { Capybara.string(helper.threatcrowd_link(ip: '192.0.2.1')) }
+      before(:each) do
+    stub_request(
+      :get, "https://www.threatcrowd.org/searchApi/v2/ip/report/?ip=192.0.2.1").
+        with(
+          headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent'=>'Ruby'
+          }).to_return(status: 200, body: "", headers: {})
+
+      end
 
       it "checks ip_address for special ranges" do
         expect(IpLookup).to receive(:is_special?)
