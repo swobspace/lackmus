@@ -13,8 +13,6 @@ $.datepicker.setDefaults({
       buttonImageOnly: true
 })
 
-Turbolinks.enableProgressBar()
-
 ready = ->
   $('.dataTable tfoot th').each  (idx) ->
     title = $('.dataTable thead th').eq( $(this).index() ).text()
