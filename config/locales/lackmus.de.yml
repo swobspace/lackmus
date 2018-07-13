@@ -57,24 +57,54 @@ de:
     alert_signature: Signatur
     alert_severity: A. Sev.
     category: Kategorie
+    connection: Verbindung
     count: Anzahl
     description: Beschreibung
     displayname: Anzeigename
+    done: erledigt
+    dst_ip: Destination IP
+    dst_port: Destination Port
     event: Ereignis
+    event_time: Zeit
+    filter: Filter
     givenname: Vorname
+    host: Host
+    hosts: Hosts
+    hostname: Hostname
+    http_hostname: HTTP Hostname
+    http_xff: HTTP Forward For
+    http_url: HTTP Url
+    http_user_agent: HTTP Useragent
+    http_content_type: HTTP Content Type
+    http_cookie: HTTP Cookie
+    http_length: HTTP Länge
+    http_status: HTTP Status
+    http_protocol: HTTP Protokoll
+    http_method: HTTP Methode
+    http_refer: HTTP Referer
+    ignore: ignorieren
+    ip: IP
     last_seen: Neuestes Ereignis
+    layout: Layout
     name: Name
     packet: Paket
     payload: Payload
     position: Position
+    proto: Protokoll
     query: Suche
     references: Referenzen
+    sensor: Sensor
     severity: Sev.
+    signature: Signatur
     signature_id: SignaturID
     signature_info: Signatur
     sn: Nachname
+    src_ip: Source IP
+    src_port: Source Port
+    stream: Stream
     username: Username
     when: Wann
+    whois: Whois
 
   controller:
     users: Benutzer
