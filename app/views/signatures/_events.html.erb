@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <%= form_tag(
       destroy_events_signature_path(@signature),
       method: :delete, role: 'form'
