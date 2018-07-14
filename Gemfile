@@ -2,39 +2,32 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.1.0'
 gem 'pg'
-
+gem 'puma'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-# See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
-gem 'jquery-rails'
 gem 'turbolinks', '>= 5.0'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'rails-i18n', '~> 5.0.0'
+
 gem 'jbuilder', '~> 2.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'jquery-ui-rails'
-gem 'simple_form'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
-
-gem 'whois'
-gem 'packetfu'
-gem 'acts_as_list'
-gem 'immutable-struct'
-gem 'whenever', :require => false
-
 group :development do
-  gem 'puma'
+  gem 'capistrano', '~> 3.11', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-passenger'
+  gem 'capistrano3-delayed-job'
+  gem 'capistrano-yarn'
   gem 'guard'
   gem 'guard-livereload', require: false
   gem 'guard-rails'
   gem 'guard-bundler'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-  gem 'capistrano-rails'
-  gem 'capistrano-passenger'
-  gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem "railroady"
   gem "better_errors"
   gem "binding_of_caller"
@@ -59,6 +52,15 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
 end
+
+gem 'simple_form'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
+gem 'whois'
+gem 'packetfu'
+gem 'acts_as_list'
+gem 'immutable-struct'
+gem 'whenever', :require => false
 
 gem 'cancancan'
 gem 'record_tag_helper', '~> 1.0'

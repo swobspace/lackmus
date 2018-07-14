@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '~>3.11'
 
 config = YAML.load_file('config/deploy-config.yml') || {}
 
@@ -59,17 +59,3 @@ namespace :deploy do
     end
   end
 end 
-
-namespace :bower do
-  desc 'Install bower'
-  task :install do
-    on roles(:web) do
-      within release_path do
-        execute :rake, 'bower:install CI=true'
-      end
-    end
-  end
-end
-
-before 'deploy:compile_assets', 'bower:install'
-
