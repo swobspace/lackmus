@@ -1,33 +1,43 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.position')%>:</th>
-    <td><%= @event_rule.position %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.filter')%>:</th>
-    <td><%= @event_rule.filter %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.action')%>:</th>
-    <td><%= @event_rule.action %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.severity')%>:</th>
-    <td><%= @event_rule.severity %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.valid_until')%>:</th>
-    <td><%= @event_rule.valid_until %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @event_rule.description %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('activerecord.models.event_rule') %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.position')%>:</th>
+	<td class="w-100"><%= @event_rule.position %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.filter')%>:</th>
+	<td><%= @event_rule.filter %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.action')%>:</th>
+	<td><%= @event_rule.action %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.severity')%>:</th>
+	<td><%= @event_rule.severity %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.valid_until')%>:</th>
+	<td><%= @event_rule.valid_until %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td><%= @event_rule.description %></td>
+      </tr>
+    </table>
 
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@event_rule) %>
-  <%= delete_link(@event_rule) %>
-  <%= new_link EventRule %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@event_rule) %>
+      <%= delete_link(@event_rule) %>
+      <%= new_link EventRule %>
+    </div>
+  </div>
 </div>
+
