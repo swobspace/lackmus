@@ -58,7 +58,7 @@
 	  <%= show_link event %>
 	  <%= delete_link event %>
 	  <%= link_to image_tag("wireshark.png"), packet_event_path(event), 
-		class: 'btn btn-default', title: "Download pcap file" %>
+		class: 'btn btn-secondary', title: "Download pcap file" %>
           <%= new_rule_from_event(event) %>
 	</td>
       <% end %>
@@ -68,7 +68,7 @@
   </div>
 
   <% if events.any? %>
-  <div class="btn-toolbar" role="toolbar">
+  <div role="toolbar">
     <%= submit_tag(t('actions.marked_done'), class: "btn btn-success",
           data: {confirm: "#{t('lackmus.really')} #{t('actions.marked_done')}?"})%>
     <%= submit_tag(t('actions.all_done'), class: "btn btn-primary",

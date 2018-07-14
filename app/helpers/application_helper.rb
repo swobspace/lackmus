@@ -23,10 +23,10 @@ module ApplicationHelper
                     'btn-info'
                   end
       link_to msg, "https://www.threatcrowd.org/ip.php?ip=#{ip}",
-              target: "_blank", class: "btn #{btncolor} btn-xs"
+              target: "_blank", class: "btn #{btncolor} btn-sm"
     elsif domain = options.fetch(:domain, nil)
       link_to msg, "https://www.threatcrowd.org/domain.php?domain=#{domain}",
-              target: "_blank", class: "btn btn-info btn-xs"
+              target: "_blank", class: "btn btn-info btn-sm"
     end
   end
 
@@ -36,7 +36,7 @@ module ApplicationHelper
     if ip = options.fetch(:ip, nil)
       return "" if IpLookup.is_special?(ip)
       link_to msg, "https://ipintel.io/#{ip}",
-              target: "_blank", class: "btn btn-info btn-xs"
+              target: "_blank", class: "btn btn-info btn-sm"
     end
   end
 end

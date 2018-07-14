@@ -9,7 +9,7 @@ module EventsHelper
   end
 
   def new_rule_from_event(event)
-    button  = %Q[<button type="button" class="btn btn-default">]
+    button  = %Q[<button type="button" class="btn btn-secondary">]
     button += %Q[<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>]
     button += %Q[</button>]
 

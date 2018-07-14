@@ -137,10 +137,10 @@
 <h3><%= t('attributes.payload')%>:</h3>
 <pre><%= @event.payload_printable %></pre>
 
-<div class="btn-toolbar" role="toolbar">
+<div role="toolbar">
   <%= back_link %>
   <%= edit_link(@event) %>
   <%= delete_link(@event) %>
-  <%= link_to "Download PCAP", packet_event_path(@event), class: 'btn btn-default' %>
+  <%= link_to "Download PCAP", packet_event_path(@event), class: 'btn btn-secondary' %>
   <%= new_rule_from_event(@event) %>
 </div>

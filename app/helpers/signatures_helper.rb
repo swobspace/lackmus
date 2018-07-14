@@ -17,7 +17,7 @@ module SignaturesHelper
       link += %Q[<li>#{delete_events_link(sig)}</li>]
     end
     link += %Q[<li>#{link_to image_tag("wireshark.png"), pcap_signature_path(sig),
-                       class: 'btn btn-default', title: "Download pcap file" }</li>]
+                       class: 'btn btn-secondary', title: "Download pcap file" }</li>]
     link += %Q[  </ul>]
     link += %Q[ </div> ]
     link += %Q[</div>]
