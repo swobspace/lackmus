@@ -54,8 +54,10 @@ group :test do
 end
 
 gem 'simple_form'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser.git', branch: 'master'
+gem 'font-awesome-sass', '~> 5.0.13'
 gem 'whois'
 gem 'packetfu'
 gem 'acts_as_list'

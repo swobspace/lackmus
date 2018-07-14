@@ -1,6 +1,16 @@
-$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "v4-shims.min";
+
+$custom: #111;
+$theme-colors: (
+  "custom": $custom
+);
+// allow overwrite with custom color
+// default: symlink to _colors-wobteal.scss
+@import "custom-colors";
+
+@import "bootstrap/scss/bootstrap";
 @import "wobapphelpers/breadcrumbs";
 
 body {
