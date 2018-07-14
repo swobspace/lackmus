@@ -1,0 +1,12 @@
+<% if can? :navigate, :event_rules %>
+  <li class="nav-item dropdown <%= active_class('event_rules') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarEventRulesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.event_rules') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarEventRulesLink">
+
+      <%=link_to t('lackmus.overview'), main_app.event_rules_path, class: 'dropdown-item' %>
+      <%=link_to t('wobapphelpers.controller.new', name: t('activerecord.models.event_rule')), main_app.new_event_rule_path, class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

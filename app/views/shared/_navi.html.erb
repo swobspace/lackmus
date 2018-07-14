@@ -1,60 +1,6 @@
-<ul class="nav navbar-nav">
-  <% if can? :navigate, :signatures %>
-    <li class="dropdown <%= active_class('signatures') %>">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('controller.signatures') %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li> <%=link_to t('lackmus.signatures.current'), main_app.signatures_path(filter: 'current') %></li>
-        <li> <%=link_to t('lackmus.signatures.current48'), main_app.signatures_path(filter: 'current', since: '48') %></li>
-        <li> <%=link_to t('lackmus.signatures.current_week'), main_app.signatures_path(filter: 'current', since: '168') %></li>
-        <li role="separator" class="divider"></li>
-        <li> <%=link_to t('lackmus.signatures.today'), main_app.signatures_path(filter: 'today') %></li>
-        <li> <%=link_to t('lackmus.signatures.yesterday'), main_app.signatures_path(filter: 'yesterday') %></li>
-        <li> <%=link_to t('lackmus.signatures.thisweek'), main_app.signatures_path(filter: 'thisweek') %></li>
-        <li> <%=link_to t('lackmus.signatures.lastweek'), main_app.signatures_path(filter: 'lastweek') %></li>
-        <li role="separator" class="divider"></li>
-        <li> <%=link_to t('lackmus.signatures.active'), main_app.signatures_path %></li>
-        <li> <%=link_to t('lackmus.signatures.unassigned'), main_app.signatures_path(filter: 'unassigned') %></li>
-        <li role="separator" class="divider"></li>
-        <li> <%=link_to t('lackmus.signatures.ignored'), main_app.signatures_path(filter: 'ignored') %></li>
-        <li> <%=link_to t('lackmus.signatures.all'), main_app.signatures_path(filter: 'all') %></li>
-      </ul>
-    </li>
-  <% end %>
-  <% if can? :navigate, :events %>
-    <li class="dropdown <%= active_class('events') %>">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('controller.events') %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li> <%=link_to t('lackmus.overview'), main_app.events_path %></li>
-        <li> <%=link_to t('lackmus.since_today'), main_app.events_path(since: "today") %></li>
-        <li> <%=link_to t('lackmus.since_yesterday'), main_app.events_path(since: "yesterday") %></li>
-        <li role="separator" class="divider"></li>
-        <li> <%=link_to t('lackmus.search'), main_app.new_main_search_path %></li>
-      </ul>
-    </li>
-  <% end %>
-  <% if can? :navigate, :event_rules %>
-    <li class="dropdown <%= active_class('events') %>">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('controller.event_rules') %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li> <%=link_to t('lackmus.overview'), main_app.event_rules_path %></li>
-        <li> <%=link_to t('wobapphelpers.controller.new', name: t('activerecord.models.event_rule')), main_app.new_event_rule_path %></li>
-      </ul>
-    </li>
-  <% end %>
-  <% if can?(:navigate, :configuration) && Lackmus::CONFIGURATION_CONTROLLER.any? %>
-    <li class="dropdown <%= configuration_active_class %>">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('lackmus.configuration') %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <% Lackmus::CONFIGURATION_CONTROLLER.each do |ctrlr| %>
-          <li>
-            <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path")%>
-          </li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
+<ul class="navbar-nav mr-3">
+  <%= render partial: 'shared/navs/signatures' %>
+  <%= render partial: 'shared/navs/events' %>
+  <%= render partial: 'shared/navs/rules' %>
+  <%= render partial: 'shared/navs/config' %>
 </ul>
