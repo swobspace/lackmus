@@ -1,7 +1,4 @@
 # -- GLOBALS
-$.extend $.fn.dataTableExt.oStdClasses,
-  sWrapper: "dataTables_wrapper form-inline"
-
 $.datepicker.setDefaults($.datepicker.regional['de'])
 $.datepicker.setDefaults({
       changeYear: true,
@@ -20,12 +17,13 @@ ready = ->
 
   table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
-    dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
     responsive: true
     buttons: [
       {
         extend: 'copy',
+        className: 'btn-sm btn-outline-secondary',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -33,20 +31,15 @@ ready = ->
       },
       {
         extend: 'excel',
+        className: 'btn-sm btn-outline-secondary',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
         }
       },
-      { 
-        extend: 'csv',
-        exportOptions: {
-          columns: ':visible',
-          search: ':applied'
-        }
-      },
-      { 
+      {
         extend: 'pdf',
+        className: 'btn-sm btn-outline-secondary',
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
@@ -54,17 +47,21 @@ ready = ->
           search: ':applied'
         }
       },
-      'print',
+      { 
+        extend: 'print',
+        className: 'btn-sm btn-outline-secondary',
+      },
       {
         extend: 'colvis',
+        className: 'btn-sm btn-outline-secondary',
         text: "<%= I18n.t('lackmus.change_columns') %>",
         columns: ':gt(0)'
       }
     ]
     columnDefs: [
-      "targets": 'nosort', "orderable": false
+      { "targets": "nosort", "orderable": false },
+      { "targets": "notvisible", "visible": false }
     ]
-
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
   )
