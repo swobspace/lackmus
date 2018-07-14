@@ -1,73 +1,68 @@
-<%= form_tag main_searches_path, role: "form",
-  method: :post,  class: 'form-horizontal well' do |f| %>
-
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-group">
-      <label for="query" class="col-sm-2 control-label">
-        <%= t('attributes.query') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="search_q" name="search[q]">
+<div class="container">
+  <%= form_tag(main_searches_path, role: "form",
+    class: 'form-horizontal card' ) do |f| %>
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+	<label for="query" class="col-sm-2 col-form-label">
+	  <%= t('attributes.query') %>
+	</label>
+	<div class="col-sm-9">
+	  <input type="text" class="form-control" id="search_q" name="search[q]">
+	</div>
+      </div>
+      <div class="form-group row">
+	<label for="ip" class="col-sm-2 col-form-label">
+	  <%= t('attributes.ip') %>
+	</label>
+	<div class="col-sm-9">
+	  <input type="text" class="form-control" id="search_ip" name="search[ip]">
+	</div>
+      </div>
+      <div class="form-group row">
+	<label for="sensor" class="col-sm-2 col-form-label">
+	  <%= t('attributes.sensor') %>
+	</label>
+	<div class="col-sm-9">
+	  <input type="text" class="form-control" id="search_sensor" name="search[sensor]">
+	</div>
+      </div>
+      <div class="form-group row">
+	<label for="signature" class="col-sm-2 col-form-label">
+	  <%= t('attributes.signature') %>
+	</label>
+	<div class="col-sm-9">
+	  <input type="text" class="form-control" id="search_signature" name="search[signature]">
+	</div>
+      </div>
+      <div class="form-group row">
+	<label for="http_hostname" class="col-sm-2 col-form-label">
+	  <%= t('attributes.http_hostname') %>
+	</label>
+	<div class="col-sm-9">
+	  <input type="text" class="form-control" id="search_http_hostname" name="search[http_hostname]">
+	</div>
+      </div>
+      <div class="form-group row">
+	<label for="layout" class="col-sm-2 col-form-label">
+	  <%= t('attributes.layout') %>
+	</label>
+	<div class="col-sm-9">
+	  <%= select_tag "search[layout]", 
+		options_for_select([ "Signatures", "Events" ], "Events"),
+		class: "form-control"
+	  %>
+	</div>
+      </div>
+      <div class="form-group row">
+	<div class="offset-sm-2 col-sm-9">
+	  <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
+	  <%= cancel_button %>
+	</div>
       </div>
     </div>
-
-    <div class="form-group">
-      <label for="ip" class="col-sm-2 control-label">
-        <%= t('attributes.ip') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="search_ip" name="search[ip]">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="sensor" class="col-sm-2 control-label">
-        <%= t('attributes.sensor') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="search_sensor" name="search[sensor]">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="signature" class="col-sm-2 control-label">
-        <%= t('attributes.signature') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="search_signature" name="search[signature]">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="http_hostname" class="col-sm-2 control-label">
-        <%= t('attributes.http_hostname') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="search_http_hostname" name="search[http_hostname]">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="layout" class="col-sm-2 control-label">
-        <%= t('attributes.layout') %>
-      </label>
-      <div class="col-sm-9">
-        <%= select_tag "search[layout]", 
-              options_for_select([ "Signatures", "Events" ], "Events"),
-              class: "form-control"
-        %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
-        <%= cancel_button %>
-      </div>
-    </div>
-
-  </fieldset>
-<% end %>
+  <% end %>
+</div>
 
