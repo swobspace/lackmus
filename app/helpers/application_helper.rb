@@ -14,19 +14,19 @@ module ApplicationHelper
       return "" if IpLookup.is_special?(ip)
       threat = Threatcrowd.by_ip(ip)
       btncolor = if threat.malware_md5.size >= 5
-                    'btn-danger'
+                    'btn-outline-danger'
                   elsif threat.malware_md5.size > 1
-                    'btn-warning'
+                    'btn-outline-warning'
                   elsif threat.malware_md5.size == 1
-                    'btn-primary'
+                    'btn-outline-primary'
                   else
-                    'btn-info'
+                    'btn-outline-info'
                   end
       link_to msg, "https://www.threatcrowd.org/ip.php?ip=#{ip}",
               target: "_blank", class: "btn #{btncolor} btn-sm"
     elsif domain = options.fetch(:domain, nil)
       link_to msg, "https://www.threatcrowd.org/domain.php?domain=#{domain}",
-              target: "_blank", class: "btn btn-info btn-sm"
+              target: "_blank", class: "btn btn-outline-info btn-sm"
     end
   end
 
@@ -36,7 +36,7 @@ module ApplicationHelper
     if ip = options.fetch(:ip, nil)
       return "" if IpLookup.is_special?(ip)
       link_to msg, "https://ipintel.io/#{ip}",
-              target: "_blank", class: "btn btn-info btn-sm"
+              target: "_blank", class: "btn btn-outline-info btn-sm"
     end
   end
 end
