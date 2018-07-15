@@ -57,12 +57,10 @@ div.event_item {
     padding-left: 20px; 
   }
 }
-html.turbolinks-progress-bar::before {
-  height: 5px !important;
-  background-color: #FFFFFF !important;
-  z-index: 2000;
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: white;
 }
-
 
 .table {
   tfoot {
