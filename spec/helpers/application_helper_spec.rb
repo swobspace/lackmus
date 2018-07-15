@@ -22,7 +22,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         subject
       end
       it { expect(subject.find("a")['target']).to match("_blank") }
-      it { expect(subject.find("a")['class']).to match("btn btn-primary btn-xs") }
+      it { expect(subject.find("a")['class']).to match("btn btn-outline-primary btn-sm") }
       it { expect(subject.find("a")['href']).to match("https://www.threatcrowd.org/ip.php?ip=192.0.2.1") }
       it { expect(subject.find("a").text).to match("threatcrowd.org") }
     end
@@ -47,7 +47,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       let(:subject) { Capybara.string(helper.threatcrowd_link(domain: 'www.example.com')) }
 
       it { expect(subject.find("a")['target']).to match("_blank") }
-      it { expect(subject.find("a")['class']).to match("btn btn-info btn-xs") }
+      it { expect(subject.find("a")['class']).to match("btn btn-outline-info btn-sm") }
       it { expect(subject.find("a")['href']).to match("https://www.threatcrowd.org/domain.php?domain=www.example.com") }
       it { expect(subject.find("a").text).to match("threatcrowd.org") }
     end
@@ -62,7 +62,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
 
       it { expect(subject.find("a")['target']).to match("_blank") }
-      it { expect(subject.find("a")['class']).to match("btn btn-info btn-xs") }
+      it { expect(subject.find("a")['class']).to match("btn btn-outline-info btn-sm") }
       it { expect(subject.find("a")['href']).to match("https://ipintel.io/192.0.2.1") }
       it { expect(subject.find("a").text).to match("ipintel.io") }
 

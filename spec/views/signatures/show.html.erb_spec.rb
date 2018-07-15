@@ -13,7 +13,7 @@ RSpec.describe "signatures/show", type: :view do
     @signature = assign(:signature, Signature.create!(
       :signature_id => 23232,
       :signature_info => "Signature Info",
-      :references => "MyText",
+      :references => ["xxx,MyText"],
       :category => "Trojan detected",
       :severity => "99",
       :action => "normal"
@@ -25,7 +25,7 @@ RSpec.describe "signatures/show", type: :view do
     render
     expect(rendered).to match(/23232/)
     expect(rendered).to match(/Signature Info/)
-    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/xxx,MyText/)
     expect(rendered).to match(/Trojan detected/)
     expect(rendered).to match(/99/)
     expect(rendered).to match(/normal/)
