@@ -12,8 +12,8 @@
 
     <table class="table table-hover">
       <tr>
-	<th><%= t('attributes.last_seen')%>:</th>
-	<td><%= @signature.last_seen %></td>
+	<th class="w-25"><%= t('attributes.last_seen')%>:</th>
+	<td class="w-75"><%= @signature.last_seen %></td>
       </tr>
       <tr>
 	<th><%= t('attributes.count')%>:</th>
@@ -21,7 +21,7 @@
       </tr>
       <tr>
 	<th><%= t('attributes.references')%>:</th>
-	<td><%= @signature.references %></td>
+	<td><%= link_references(@signature) %></td>
       </tr>
       <tr>
 	<th><%= t('attributes.action')%>:</th>

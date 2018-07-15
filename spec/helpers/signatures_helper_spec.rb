@@ -20,4 +20,20 @@ RSpec.describe SignaturesHelper, type: :helper do
       expect(helper.signatures_by_ip("192.0.2.1")).to match(/signatures\?ip=192.0.2.1/)
     end
   end
+
+  describe "#link_references" do
+    let(:sig) { FactoryBot.create(:signature, 
+      references: [
+        "url,doc.emergingthreats.net/2003068", 
+        "url,en.wikipedia.org/wiki/Brute_force_attack",
+        "cve,2012-0002"
+      ]
+    )}
+   let(:subject) { Capybara.string(helper.link_references(sig)) }
+   it { expect(subject.all("a")[0]['href']).to match("http://doc.emergingthreats.net/2003068") }
+   it { expect(subject.all("a")[1]['href']).to match("http://en.wikipedia.org/wiki/Brute_force_attack") }
+    it { expect(subject.all("a")[2]['href']).to match("https://www.cvedetails.com/cve/CVE-2012-0002/") }
+
+
+  end
 end

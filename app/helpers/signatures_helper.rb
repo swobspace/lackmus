@@ -51,4 +51,20 @@ module SignaturesHelper
       data: {confirm: "#{t('lackmus.really')} #{t('actions.all_done')}?"},
       class: options.fetch(:class, "dropdown-item")
   end
+
+  def link_references(sig)
+    return if sig.references.blank?
+    sig.references.map {|s| linkedref(s) }.join("<br/>").html_safe
+  end
+
+  def linkedref(string)
+    (type, text) = string.split(/,/)
+    if type.downcase == "url"
+      link_to text, "http://#{text}", target: '_blank'
+    elsif type.downcase == "cve"
+      link_to "CVE #{text}", "https://www.cvedetails.com/cve/CVE-#{text}/", target: '_blank'
+    else
+      string
+    end
+  end
 end

@@ -4,6 +4,7 @@ class Signature < ApplicationRecord
   has_many :events, foreign_key: :alert_signature_id, primary_key: :signature_id
 
   # -- configuration
+  serialize :references, JSON
   ACTIONS = ['drop', 'ignore', 'normal', 'alert']
   # -- validations and callbacks
   validates :signature_id, presence: true, uniqueness: true
