@@ -2,23 +2,21 @@ module SignaturesHelper
  def signature_action_link(sig)
     link  = ""
     link += %Q[<div style="min-width:70px;">]
-    link += %Q[ <div class="btn-group">]
+    link += %Q[ <div class="btn-group" role="group">]
     link +=       show_link(sig)
-    link += %Q[  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">]
-    link += %Q[   <span class="caret"></span>]
-    link += %Q[   <span class="sr-only">Toggle Dropdown</span>]
+    link += %Q[  <button id="SigActionLinkDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">]
     link += %Q[  </button>]
-    link += %Q[  <ul class="dropdown-menu autowidth pull-right" style="min-width:0px;">]
+    link += %Q[  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="SigActionLinkDrop">]
     if can? :edit, sig
-      link += %Q[<li> #{edit_link(sig)}</li>]
+      link += link_to raw("<i class='fas fa-fw fa-pencil-alt'></i> #{t('actions.edit', model: t('activerecord.models.signature'))}"), edit_signature_path(sig), class: 'dropdown-item'
     end
     if can? :destroy, Event.new
-      link += %Q[<li>#{mark_events_done_link(sig)}</li>]
-      link += %Q[<li>#{delete_events_link(sig)}</li>]
+      link += mark_events_done_link(sig)
+      link += delete_events_link(sig)
     end
-    link += %Q[<li>#{link_to image_tag("wireshark.png"), pcap_signature_path(sig),
-                       class: 'btn btn-default', title: "Download pcap file" }</li>]
-    link += %Q[  </ul>]
+    link += link_to raw("#{icon_download} #{t('lackmus.wireshark')}") , pcap_signature_path(sig),
+                    class: 'dropdown-item', title: t('lackmus.wireshark')
+    link += %Q[  </div>]
     link += %Q[ </div> ]
     link += %Q[</div>]
     link.html_safe
@@ -38,19 +36,19 @@ module SignaturesHelper
     host_report_link(ip)
   end
 
-  def delete_events_link(sig)
-    link_to t('actions.destroy_all'),
+  def delete_events_link(sig, options = {})
+    link_to raw("<i class='fas fa-fw fa-trash'></i> #{t('actions.destroy_all')}"),
       destroy_events_signature_path(sig, commit: t('actions.destroy_all')),
       method: :delete,
       data: {confirm: "#{t('lackmus.really')} #{t('actions.destroy_all')}?\n\n#{t('lackmus.truly')}"},
-      class: "btn btn-danger"
+      class: options.fetch(:class, "dropdown-item")
   end
 
-  def mark_events_done_link(sig)
-    link_to t('actions.all_done'),
+  def mark_events_done_link(sig, options = {})
+    link_to raw("<i class='fas fa-fw fa-check'></i> #{t('actions.all_done')}"),
       destroy_events_signature_path(sig, {commit: t('actions.all_done')}),
       method: :delete,
       data: {confirm: "#{t('lackmus.really')} #{t('actions.all_done')}?"},
-      class: "btn btn-warning"
+      class: options.fetch(:class, "dropdown-item")
   end
 end

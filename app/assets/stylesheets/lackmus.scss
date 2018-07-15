@@ -1,10 +1,20 @@
-$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "v4-shims.min";
+
+$custom: #111;
+$theme-colors: (
+  "custom": $custom
+);
+// allow overwrite with custom color
+// default: symlink to _colors-wobteal.scss
+@import "custom-colors";
+
+@import "bootstrap/scss/bootstrap";
 @import "wobapphelpers/breadcrumbs";
 
 body {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 // --- FOOTER
@@ -49,16 +59,27 @@ div.event_item {
 }
 html.turbolinks-progress-bar::before {
   height: 5px !important;
-  background-color: #008000 !important;
+  background-color: #FFFFFF !important;
   z-index: 2000;
 }
 
-tfoot {
-  display: table-header-group;
-  input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
+
+.table {
+  tfoot {
+    display: table-header-group;
+    th {
+      padding: 0.25rem;
+      input[type="text"] {
+        width: 100%;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+      }
+    }
   }
 }
 
+a.btn {
+  margin-bottom: .2em;
+}

@@ -1,40 +1,45 @@
-<div class="signature_header">
-    <%= @signature.signature_id %>
-    <%= @signature.signature_info %>
-</div>
-<div class="signature_subtitle">
-  <%= @signature.category %> / Severity: <%= @signature.severity %>
-</div>
+<div class="card">
+  <div class="card-header">
+    <div class="signature_header">
+      <%= @signature.signature_id %>
+      <%= @signature.signature_info %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="signature_subtitle">
+      <%= @signature.category %> / Severity: <%= @signature.severity %>
+    </div>
 
-<table class="table table-condensed table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.last_seen')%>:</th>
-    <td><%= @signature.last_seen %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.count')%>:</th>
-    <td><%= @signature.events.count %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.references')%>:</th>
-    <td><%= @signature.references %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.action')%>:</th>
-    <td><%= @signature.action %></td>
-  </tr>
-</table>
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.last_seen')%>:</th>
+	<td><%= @signature.last_seen %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.count')%>:</th>
+	<td><%= @signature.events.count %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.references')%>:</th>
+	<td><%= @signature.references %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.action')%>:</th>
+	<td><%= @signature.action %></td>
+      </tr>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@signature) %>
-  <%= delete_link(@signature) %>
-  <%= link_to "Download PCAP", pcap_signature_path(@signature), class: 'btn btn-default' %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@signature) %>
+      <%= delete_link(@signature) %>
+      <%= link_to "Download PCAP", pcap_signature_path(@signature), class: 'btn btn-secondary' %>
+    </div>
+  </div>
 </div>
 
 <% if can? :read, Event %>
   <br />  
-  <h2><%= t('controller.events') %></h2>
+  <h2 class="mb-3"><%= t('controller.events') %></h2>
   <%= render partial: 'events', locals: { events: @signature.events.active.most_current(50) } %>
 <% end %>
-

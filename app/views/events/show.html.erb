@@ -1,146 +1,159 @@
-<div class="signature_header">
-    <%= signature_id_link(@event.alert_signature_id) %>
-    <%= @event.alert_signature %>
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="signature_header">
+      <%= signature_id_link(@event.alert_signature_id) %>
+      <%= @event.alert_signature %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="card-title signature_subtitle">
+      <%= @event.alert_category %> / Severity: <%= @event.alert_severity %>
+    </div>
+
+    <table class="table table-sm table-hover">
+      <tr>
+	<th><%= t('attributes.event_time')%>:</th>
+	<td><%= @event.event_time.to_s(:precision) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.sensor')%>:</th>
+	<td><%= "#{@event.sensor}:#{@event.in_iface}" %></td>
+      </tr>
+
+      <tr>
+	<th><%= t('attributes.connection')%>:</th>
+	<td><%= @event.connection %></td>
+      </tr>
+
+      <tr>
+	<th><%= t('attributes.hosts')%>:</th>
+	<td>
+
+	  <!-- ip addresses -->
+	  <div class="row"> 
+	    <div class="d-inline-flex mx-3">
+	      <%= events_by_ip(@event.src_ip) %> /
+	      <%= IpLookup.hostname(@event.src_ip) %>
+	      <%= threatcrowd_link(ip: @event.src_ip) %>
+	      <%= ipintel_link(ip: @event.src_ip) %>
+	    </div>
+	    <div class="d-inline-flex mx-3">
+            -->
+	    </div>
+	    <div class="d-inline-flex mx-3">
+	      <%= events_by_ip(@event.dst_ip) %> /
+	      <%= IpLookup.hostname(@event.dst_ip) %>
+	      <%= threatcrowd_link(ip: @event.dst_ip) %>
+	      <%= ipintel_link(ip: @event.dst_ip) %>
+	    </div>
+	  </div>
+	</td>
+      </tr>
+
+      <tr>
+	<th><%= t('attributes.whois')%>:</th>
+	<td>
+	  <!-- whois -->
+	  <div class="row"> 
+	    <div class="col-md-6 whois">
+	      <pre><%= clean_whois(IpLookup.whois(@event.src_ip)) %></pre>
+	      
+	    </div>
+	    <div class="col-md-6 whois">
+	      <pre><%= clean_whois(IpLookup.whois(@event.dst_ip)) %></pre>
+	    </div>
+	  </div>
+	</td>
+      </tr>
+
+      <tr>
+	<th><%= t('attributes.alert_signature_id')%>:</th>
+	<td>[<%= @event.alert_gid %>:<%= signature_id_link(@event.alert_signature_id)%>:<%= @event.alert_rev %>]
+	    <%= @event.alert_signature %> / <%= @event.alert_category %> / 
+	    Severity: <%= @event.alert_severity %></td>
+      </tr>
+     <% if @event.has_http %>
+      <tr>
+	<th><%= t('attributes.http_hostname')%>:</th>
+	<td>
+	  <%= link_to @event.http_hostname, events_path(http_host: @event.http_hostname) %>
+	  <%= threatcrowd_link(domain: @event.http_hostname) %>
+	</td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_xff')%>:</th>
+	<td><%= @event.http_xff %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_url')%>:</th>
+	<td><%= @event.http_url %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_user_agent')%>:</th>
+	<td><%= @event.http_user_agent %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_content_type')%>:</th>
+	<td><%= @event.http_content_type %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_cookie')%>:</th>
+	<td><%= @event.http_cookie %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_length')%>:</th>
+	<td><%= @event.http_length %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_status')%>:</th>
+	<td><%= @event.http_status %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_protocol')%>:</th>
+	<td><%= @event.http_protocol %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_method')%>:</th>
+	<td><%= @event.http_method %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.http_refer')%>:</th>
+	<td><%= @event.http_refer %></td>
+      </tr>
+     <% end %>
+      <tr>
+	<th><%= t('attributes.stream')%>:</th>
+	<td><%= @event.stream %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.done')%>:</th>
+	<td><%= @event.done %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ignore')%>:</th>
+	<td><%= @event.ignore %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.severity')%>:</th>
+	<td><%= @event.severity %></td>
+      </tr>
+    </table>
+  </div>
 </div>
-<div class="signature_subtitle">
-  <%= @event.alert_category %> / Severity: <%= @event.alert_severity %>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h3><%= t('attributes.payload')%></h3>
+  </div>
+  <div class="card-body">
+    <pre><%= @event.payload_printable %></pre>
+  </div>
 </div>
 
-
-<table class="table table-bordered table-condensed table-hover">
-  <tr>
-    <th><%= t('attributes.event_time')%>:</th>
-    <td><%= @event.event_time.to_s(:precision) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.sensor')%>:</th>
-    <td><%= "#{@event.sensor}:#{@event.in_iface}" %></td>
-  </tr>
-
-  <tr>
-    <th><%= t('attributes.connection')%>:</th>
-    <td><%= @event.connection %></td>
-  </tr>
-
-  <tr>
-    <th><%= t('attributes.hosts')%>:</th>
-    <td>
-
-      <!-- ip addresses -->
-      <div class="row"> 
-        <div class="col-md-6">
-          <%= events_by_ip(@event.src_ip) %> /
-          <%= IpLookup.hostname(@event.src_ip) %>
-          <%= threatcrowd_link(ip: @event.src_ip) %>
-          <%= ipintel_link(ip: @event.src_ip) %>
-        </div>
-        <div class="col-md-6">
-          <%= events_by_ip(@event.dst_ip) %> /
-          <%= IpLookup.hostname(@event.dst_ip) %>
-          <%= threatcrowd_link(ip: @event.dst_ip) %>
-          <%= ipintel_link(ip: @event.dst_ip) %>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <th><%= t('attributes.whois')%>:</th>
-    <td>
-      <!-- whois -->
-      <div class="row"> 
-        <div class="col-md-6 whois">
-          <pre><%= clean_whois(IpLookup.whois(@event.src_ip)) %></pre>
-          
-        </div>
-        <div class="col-md-6 whois">
-          <pre><%= clean_whois(IpLookup.whois(@event.dst_ip)) %></pre>
-        </div>
-      </div>
-
-    </td>
-  </tr>
-
-  <tr>
-    <th><%= t('attributes.alert_signature_id')%>:</th>
-    <td>[<%= @event.alert_gid %>:<%= signature_id_link(@event.alert_signature_id)%>:<%= @event.alert_rev %>]
-        <%= @event.alert_signature %> / <%= @event.alert_category %> / 
-        Severity: <%= @event.alert_severity %></td>
-  </tr>
- <% if @event.has_http %>
-  <tr>
-    <th><%= t('attributes.http_hostname')%>:</th>
-    <td>
-      <%= link_to @event.http_hostname, events_path(http_host: @event.http_hostname) %>
-      <%= threatcrowd_link(domain: @event.http_hostname) %>
-    </td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_xff')%>:</th>
-    <td><%= @event.http_xff %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_url')%>:</th>
-    <td><%= @event.http_url %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_user_agent')%>:</th>
-    <td><%= @event.http_user_agent %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_content_type')%>:</th>
-    <td><%= @event.http_content_type %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_cookie')%>:</th>
-    <td><%= @event.http_cookie %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_length')%>:</th>
-    <td><%= @event.http_length %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_status')%>:</th>
-    <td><%= @event.http_status %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_protocol')%>:</th>
-    <td><%= @event.http_protocol %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_method')%>:</th>
-    <td><%= @event.http_method %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.http_refer')%>:</th>
-    <td><%= @event.http_refer %></td>
-  </tr>
- <% end %>
-  <tr>
-    <th><%= t('attributes.stream')%>:</th>
-    <td><%= @event.stream %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.done')%>:</th>
-    <td><%= @event.done %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ignore')%>:</th>
-    <td><%= @event.ignore %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.severity')%>:</th>
-    <td><%= @event.severity %></td>
-  </tr>
-</table>
-
-<h3><%= t('attributes.payload')%>:</h3>
-<pre><%= @event.payload_printable %></pre>
-
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@event) %>
-  <%= delete_link(@event) %>
-  <%= link_to "Download PCAP", packet_event_path(@event), class: 'btn btn-default' %>
-  <%= new_rule_from_event(@event) %>
-</div>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@event) %>
+      <%= delete_link(@event) %>
+      <%= link_to "Download PCAP", packet_event_path(@event), class: 'btn btn-secondary' %>
+      <%= new_rule_from_event(@event) %>
+    </div>

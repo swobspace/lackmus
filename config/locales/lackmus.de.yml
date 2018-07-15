@@ -27,6 +27,7 @@ de:
     since_yesterday: seit gestern
     search: Suche
     search_result: Suchergebnis
+    wireshark: pcap-File
 
   actions:
     destroy: Datensatz löschen
@@ -42,6 +43,7 @@ de:
     reset_table: Tabelle zurücksetzen
     submit: absenden
     send_mail: Mail senden
+    edit: "%{model} bearbeiten"
 
   activerecord:
     models:

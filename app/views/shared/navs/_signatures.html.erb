@@ -1,0 +1,29 @@
+<% if can? :navigate, :signatures %>
+  <li class="nav-item dropdown <%= active_class('signatures') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarSignaturesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.signatures') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarSignaturesLink">
+      <%=link_to t('lackmus.signatures.current'), main_app.signatures_path(filter: 'current'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.current48'), main_app.signatures_path(filter: 'current', since: '48'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.current_week'), main_app.signatures_path(filter: 'current', since: '168'), class: 'dropdown-item' %>
+
+      <div class="dropdown-divider"></div>
+
+      <%=link_to t('lackmus.signatures.today'), main_app.signatures_path(filter: 'today'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.yesterday'), main_app.signatures_path(filter: 'yesterday'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.thisweek'), main_app.signatures_path(filter: 'thisweek'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.lastweek'), main_app.signatures_path(filter: 'lastweek'), class: 'dropdown-item' %>
+
+      <div class="dropdown-divider"></div>
+
+      <%=link_to t('lackmus.signatures.active'), main_app.signatures_path, class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.unassigned'), main_app.signatures_path(filter: 'unassigned'), class: 'dropdown-item' %>
+
+      <div class="dropdown-divider"></div>
+
+      <%=link_to t('lackmus.signatures.ignored'), main_app.signatures_path(filter: 'ignored'), class: 'dropdown-item' %>
+      <%=link_to t('lackmus.signatures.all'), main_app.signatures_path(filter: 'all'), class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>
