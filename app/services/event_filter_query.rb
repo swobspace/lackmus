@@ -3,7 +3,7 @@ class EventFilterQuery
 
   def initialize(options = {})
     options.symbolize_keys!
-    @filter   = options.fetch(:filter)
+    @filter   = options.fetch(:filter).symbolize_keys!
     @relation = options.fetch(:relation) { Event.all }
     @query   ||= process_query
     # dirty = true: mark query as complex, meaning a simple compare 

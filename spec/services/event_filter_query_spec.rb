@@ -19,14 +19,14 @@ RSpec.describe EventFilterQuery do
 
   # check for instance methods
   describe "instance methods" do
-    subject { EventFilterQuery.new(filter: filter) }
+    subject { EventFilterQuery.new("filter" => filter) }
     it { expect(subject.respond_to? :all).to be_truthy}
     it { expect(subject.respond_to? :find_each).to be_truthy}
     it { expect(subject.respond_to? :include?).to be_truthy }
   end
 
   context "with filter src_ip: 192.0.2.1" do
-    subject { EventFilterQuery.new(filter: filter) }
+    subject { EventFilterQuery.new("filter" => filter) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event1) }
     end
@@ -47,7 +47,7 @@ RSpec.describe EventFilterQuery do
   end
 
   context "with filter src_ip: '192.0.2.1;192.0.2.7'" do
-    subject { EventFilterQuery.new(filter: {src_ip: "192.0.2.1;192.0.2.7"}) }
+    subject { EventFilterQuery.new(filter: {"src_ip" => "192.0.2.1;192.0.2.7"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event1,event3) }
     end
@@ -71,7 +71,7 @@ RSpec.describe EventFilterQuery do
   end
 
   context "with filter sensor: 'abc001;def002'" do
-    subject { EventFilterQuery.new(filter: {sensor: "abc001;def002"}) }
+    subject { EventFilterQuery.new("filter" => {"sensor" => "abc001;def002"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event1,event4) }
     end
@@ -95,7 +95,7 @@ RSpec.describe EventFilterQuery do
   end
 
   context "with filter src_ip: '192.0.2.1/29'" do
-    subject { EventFilterQuery.new(filter: {src_ip: "192.0.2.0/29"}) }
+    subject { EventFilterQuery.new("filter" => {"src_ip" => "192.0.2.0/29"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event1,event3) }
     end
@@ -119,7 +119,7 @@ RSpec.describe EventFilterQuery do
   end
 
   context "with filter sensor: '*001'" do
-    subject { EventFilterQuery.new(filter: {sensor: "*001"}) }
+    subject { EventFilterQuery.new("filter" => {"sensor" => "*001"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event1,event3) }
     end
@@ -143,7 +143,7 @@ RSpec.describe EventFilterQuery do
   end
 
   context "with filter sensor: 'def*'" do
-    subject { EventFilterQuery.new(filter: {sensor: "def*"}) }
+    subject { EventFilterQuery.new("filter" => {"sensor" => "def*"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(event3,event4) }
     end
