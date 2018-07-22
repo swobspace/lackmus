@@ -3,7 +3,7 @@ class EventFilterQuery
 
   def initialize(options = {})
     options.symbolize_keys!
-    @filter   = options.fetch(:filter)
+    @filter   = options.fetch(:filter).symbolize_keys!
     @relation = options.fetch(:relation) { Event.all }
     @query   ||= process_query
     # dirty = true: mark query as complex, meaning a simple compare 
@@ -31,8 +31,8 @@ private
     q    = relation
     filter.each_pair do |key,value|
       # list of values
-      if value =~ /;/
-        hash[key] = value.split(/;/)
+      if value =~ /[,;|]/
+        hash[key] = value.gsub(/[;,] +/, ";").split(%r{[,;|]+})
         dirty = true
       # ip address
       elsif [:src_ip, :dst_ip].include?(key)

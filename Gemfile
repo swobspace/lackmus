@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.1.0'
 gem 'pg'
 gem 'puma'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'therubyracer', platforms: :ruby
@@ -54,8 +54,10 @@ group :test do
 end
 
 gem 'simple_form'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: '2-0-stable'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
+gem 'wobapphelpers', '~> 3.0'
+gem 'wobauth', '~> 3.4'
+gem 'wobaduser', '~> 1.0'
+gem 'font-awesome-sass', '~> 5.0.13'
 gem 'whois'
 gem 'packetfu'
 gem 'acts_as_list'

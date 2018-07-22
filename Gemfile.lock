@@ -1,32 +1,3 @@
-GIT
-  remote: https://github.com/swobspace/wobapphelpers
-  revision: 451fe30a9eb1e20a33aa175ab32153dffda4927b
-  branch: 2-0-stable
-  specs:
-    wobapphelpers (2.1.0)
-      coffee-rails
-      jquery-rails
-      rails (~> 5.0)
-      record_tag_helper (~> 1.0)
-      responders
-      sass-rails
-
-GIT
-  remote: https://github.com/swobspace/wobauth.git
-  revision: 2a3eedf1fdf6d20ffbb7e84999f161bea92df285
-  branch: 2-0-stable
-  specs:
-    wobauth (2.1.12)
-      cancancan
-      coffee-rails
-      devise
-      jquery-rails
-      rails (>= 5.0, < 5.2)
-      record_tag_helper (~> 1.0)
-      sass-rails
-      simple_form
-      wobapphelpers
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -104,7 +75,7 @@ GEM
     capistrano3-delayed-job (1.7.5)
       capistrano (~> 3.0, >= 3.0.0)
       daemons (~> 1.2.4)
-    capybara (3.3.1)
+    capybara (3.4.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -153,6 +124,8 @@ GEM
       factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
     ffi (1.9.25)
+    font-awesome-sass (5.0.13)
+      sassc (>= 1.11)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -221,6 +194,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     nenv (0.3.0)
+    net-ldap (0.16.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
@@ -314,7 +288,7 @@ GEM
     rspec-support (3.7.1)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
-    sass (3.5.6)
+    sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -325,6 +299,16 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (1.12.1)
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
+    sassc-rails (1.3.0)
+      railties (>= 4.0.0)
+      sass
+      sassc (~> 1.9)
+      sprockets (> 2.11)
+      sprockets-rails
+      tilt
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -380,7 +364,31 @@ GEM
     websocket-extensions (0.1.3)
     whenever (0.10.0)
       chronic (>= 0.6.3)
-    whois (4.0.6)
+    whois (4.0.7)
+    wobaduser (1.0.0)
+      activesupport
+      immutable-struct
+      net-ldap
+    wobapphelpers (3.1.0)
+      coffee-rails
+      font-awesome-sass (>= 4.7, <= 6)
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      responders
+      sassc-rails
+    wobauth (3.4.5)
+      cancancan
+      coffee-rails
+      devise
+      immutable-struct
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      sass-rails
+      simple_form
+      wobaduser (~> 1.0)
+      wobapphelpers (~> 3.0)
     xpath (3.1.0)
       nokogiri (~> 1.8)
 
@@ -405,6 +413,7 @@ DEPENDENCIES
   delayed_job_active_record
   dotenv
   factory_bot_rails
+  font-awesome-sass (~> 5.0.13)
   guard
   guard-bundler
   guard-livereload
@@ -427,7 +436,7 @@ DEPENDENCIES
   rails-i18n (~> 5.0.0)
   record_tag_helper (~> 1.0)
   rspec-rails
-  sass-rails (~> 5.0)
+  sassc-rails
   sdoc (~> 0.4.0)
   shoulda-matchers
   simple_form
@@ -440,8 +449,9 @@ DEPENDENCIES
   webmock
   whenever
   whois
-  wobapphelpers!
-  wobauth!
+  wobaduser (~> 1.0)
+  wobapphelpers (~> 3.0)
+  wobauth (~> 3.4)
 
 BUNDLED WITH
    1.16.1

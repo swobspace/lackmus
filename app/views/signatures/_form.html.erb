@@ -1,17 +1,11 @@
-<%= simple_form_for(@signature,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for(@signature,
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-inputs">
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
       <%= f.input :signature_id
        %>
       <%= f.input :signature_info
@@ -24,11 +18,9 @@
        %>
       <%= f.input :action, collection: Signature::ACTIONS, include_blank: false
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>
