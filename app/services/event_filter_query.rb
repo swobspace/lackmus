@@ -31,8 +31,8 @@ private
     q    = relation
     filter.each_pair do |key,value|
       # list of values
-      if value =~ /;/
-        hash[key] = value.split(/;/)
+      if value =~ /[,;|]/
+        hash[key] = value.gsub(/[;,] +/, ";").split(%r{[,;|]+})
         dirty = true
       # ip address
       elsif [:src_ip, :dst_ip].include?(key)
