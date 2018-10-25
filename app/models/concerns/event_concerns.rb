@@ -74,6 +74,21 @@ module EventConcerns
     @raw_payload ||= Base64.decode64(payload)
   end
 
+  # test if filter matches
+  # 1. reduce all direct matching key/value pairs
+  # 2. check if remaining key/values others than dst_ip, src_ip (-> nomatch)
+  # 3. split filter value and test match via IPAddr#include?
+  #
+  def match_filter(filter = {})
+    # 1. reduce
+    remaining = Hash[rule.filter].reject {|k,v| attributes[k].to_s == v.to_s }
+    if remaining.empty?
+      true
+    else
+      false
+    end
+  end
+
 
 private
 
