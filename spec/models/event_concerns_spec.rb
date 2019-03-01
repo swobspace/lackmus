@@ -22,12 +22,12 @@ RSpec.describe EventConcerns, type: :model do
 
     it "matches identical filter" do
       filter = { 
-        sensor: 'mysensor', 
-        src_ip: '192.0.2.71',
-        src_port: '1234',
-        dst_ip: '198.51.100.33',
-        dst_port: '1704',
-        proto: 'PROTO'
+        'sensor' => 'mysensor', 
+        'src_ip' => '192.0.2.71',
+        'src_port' => '1234',
+        'dst_ip' => '198.51.100.33',
+        'dst_port' => '1704',
+        'proto' => 'PROTO'
       }
 
       expect(event.match_filter(filter)).to be_truthy

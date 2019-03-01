@@ -81,7 +81,7 @@ module EventConcerns
   #
   def match_filter(filter = {})
     # 1. reduce
-    remaining = Hash[rule.filter].reject {|k,v| attributes[k].to_s == v.to_s }
+    remaining = Hash[filter].reject {|k,v| attributes[k].to_s == v.to_s }
     if remaining.empty?
       true
     else
