@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
 gem 'pg'
 gem 'puma'
 gem 'sassc-rails'
@@ -68,4 +68,5 @@ gem 'record_tag_helper', '~> 1.0'
 gem 'delayed_job_active_record'
 gem 'listen'
 gem 'daemons'
+gem 'bootsnap'
 

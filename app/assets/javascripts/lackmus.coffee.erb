@@ -7,6 +7,13 @@ $.datepicker.setDefaults({
       yearRange: '2000:2099',
 })
 
+DataTable = $.fn.dataTable
+$.extend( true, DataTable.Buttons.defaults, {
+  dom:
+    button:
+      className: 'btn btn-outline-secondary btn-sm'
+})
+
 ready = ->
   $('.dataTable tfoot th').each  (idx) ->
     title = $('.dataTable thead th').eq( $(this).index() ).text()
@@ -20,7 +27,6 @@ ready = ->
     buttons: [
       {
         extend: 'copy',
-        className: 'btn-sm btn-outline-secondary',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -28,7 +34,6 @@ ready = ->
       },
       {
         extend: 'excel',
-        className: 'btn-sm btn-outline-secondary',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -36,7 +41,6 @@ ready = ->
       },
       {
         extend: 'pdf',
-        className: 'btn-sm btn-outline-secondary',
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
@@ -46,11 +50,9 @@ ready = ->
       },
       { 
         extend: 'print',
-        className: 'btn-sm btn-outline-secondary',
       },
       {
         extend: 'colvis',
-        className: 'btn-sm btn-outline-secondary',
         text: "<%= I18n.t('lackmus.change_columns') %>",
         columns: ':gt(0)'
       }
