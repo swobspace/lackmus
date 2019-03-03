@@ -26,7 +26,6 @@ group :development do
   gem 'guard-rails'
   gem 'guard-bundler'
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "railroady"
   gem "better_errors"
@@ -57,7 +56,7 @@ gem 'simple_form'
 gem 'wobapphelpers', '~> 3.0'
 gem 'wobauth', '~> 3.4'
 gem 'wobaduser', '~> 1.0'
-gem 'font-awesome-sass', '~> 5.0.13'
+gem 'font-awesome-sass', '~> 5.0'
 gem 'whois'
 gem 'packetfu'
 gem 'acts_as_list'
@@ -67,5 +66,6 @@ gem 'whenever', :require => false
 gem 'cancancan'
 gem 'record_tag_helper', '~> 1.0'
 gem 'delayed_job_active_record'
+gem 'listen'
 gem 'daemons'
 

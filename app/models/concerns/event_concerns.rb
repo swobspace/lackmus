@@ -34,7 +34,7 @@ module EventConcerns
     
     def assign_filter(event_rule, relation)
       # relation.where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
-      EventFilterQuery.new(filter: event_rule.filter, relation: relation).all.update_all(event_rule_id: event_rule.id)
+      EventQuery.new(filter: event_rule.filter, relation: relation).all.update_all(event_rule_id: event_rule.id)
     end
   end
 
@@ -72,6 +72,21 @@ module EventConcerns
 
   def raw_payload
     @raw_payload ||= Base64.decode64(payload)
+  end
+
+  # test if filter matches
+  # 1. reduce all direct matching key/value pairs
+  # 2. check if remaining key/values others than dst_ip, src_ip (-> nomatch)
+  # 3. split filter value and test match via IPAddr#include?
+  #
+  def match_filter(filter = {})
+    # 1. reduce
+    remaining = Hash[filter].reject {|k,v| attributes[k].to_s == v.to_s }
+    if remaining.empty?
+      true
+    else
+      false
+    end
   end
 
 
