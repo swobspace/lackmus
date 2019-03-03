@@ -8,7 +8,7 @@ RSpec.describe Signature, type: :model do
 
   it { is_expected.to validate_uniqueness_of(:signature_id) }
   it { is_expected.to validate_inclusion_of(:action).
-                        in_array(Signature::ACTIONS) }
+                        in_array(Signature::ACTIONS).with_message("Select one of #{Signature::ACTIONS.join(", ")}") }
 
  it "should get plain factory working" do
     f = FactoryBot.create(:signature)

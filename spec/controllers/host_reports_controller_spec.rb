@@ -13,7 +13,7 @@ RSpec.describe HostReportsController, type: :controller do
   describe "GET #show" do
     it "assigns selected events as @events" do
       get :show, params: { ip: host } 
-      expect(assigns(:events)).to eq(events)
+      expect(assigns(:events)).to contain_exactly(*events)
     end
   end
 

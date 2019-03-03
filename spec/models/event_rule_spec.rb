@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe EventRule, type: :model do
   it { is_expected.to have_many(:events) }
 
-  it { pending "bug in shoulda-matchers with rails5"; is_expected.to serialize(:filter) }
+  it { is_expected.to serialize(:filter) }
   it { is_expected.to validate_presence_of(:filter) }
   it "validates action from list" do
     evrule = FactoryBot.build(:event_rule)
-    expect(evrule).to validate_inclusion_of(:action).in_array(EventRule::ACTIONS)
+    expect(evrule).to validate_inclusion_of(:action).in_array(EventRule::ACTIONS).with_message("Select one of #{EventRule::ACTIONS.join(", ")}")
   end
 
   it "should get plain factory working" do
