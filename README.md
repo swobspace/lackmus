@@ -70,7 +70,7 @@ If you like the idea and you have suggestions please send me an email (wob at sw
 Licence
 -------
 
-Lackmus Copyright (C) 2016  Wolfgang Barth
+Lackmus Copyright (C) 2016-2019  Wolfgang Barth
 
 MIT license, see [LICENSE](LICENSE)
 
