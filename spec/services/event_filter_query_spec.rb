@@ -28,11 +28,31 @@ end
 
 RSpec.describe EventQuery do
   let(:filter) {{ "src_ip" => '192.0.2.1' }}
-  let!(:event1) { FactoryBot.create(:event, src_ip: "192.0.2.1", sensor: 'abc001') }
-  let!(:event2) { FactoryBot.create(:event, src_ip: "198.51.100.1", sensor: 'abc002') }
-  let!(:event3) { FactoryBot.create(:event, src_ip: "192.0.2.7", sensor: 'def001') }
-  let!(:event4) { FactoryBot.create(:event, src_ip: "198.51.100.8", sensor: 'def002') }
-  let!(:event5) { FactoryBot.create(:event, src_ip: "192.0.2.99", sensor: 'xyz099') }
+  let!(:event1) { FactoryBot.create(:event, 
+    src_ip: "192.0.2.1", 
+    sensor: 'abc001',
+    alert_signature_id: '1234567',
+  )}
+  let!(:event2) { FactoryBot.create(:event, 
+    src_ip: "198.51.100.1", 
+    sensor: 'abc002',
+    alert_signature_id: '1234568',
+  )}
+  let!(:event3) { FactoryBot.create(:event, 
+    src_ip: "192.0.2.7", 
+    sensor: 'def001',
+    alert_signature_id: '1234569',
+  )}
+  let!(:event4) { FactoryBot.create(:event, 
+    src_ip: "198.51.100.8", 
+    sensor: 'def002',
+    alert_signature_id: '1234570',
+  )}
+  let!(:event5) { FactoryBot.create(:event, 
+    src_ip: "198.51.100.99", 
+    sensor: 'xyz099',
+    alert_signature_id: '1234571',
+  )}
 
 
   # check for class methods
@@ -74,12 +94,29 @@ RSpec.describe EventQuery do
       it_behaves_like "an event query"
     end
 
+    context "with filter src_ip: 192.0.2.0/29#{sep}198.51.100.8#{sep}198.51.100.64/26" do
+      subject { EventQuery.new(filter: {"src_ip" => "192.0.2.0/29#{sep}198.51.100.8#{sep}198.51.100.64/26"}) }
+      before(:each) do
+        @matching = [event1, event3, event4, event5]
+        @nonmatching = [event2]
+      end
+      it_behaves_like "an event query"
+    end
 
     context "with filter sensor: abc001#{sep}def002" do
       subject { EventQuery.new("filter" => {"sensor" => "abc001#{sep}def002"}) }
       before(:each) do
         @matching = [event1, event4]
         @nonmatching = [event2, event3, event5]
+      end
+      it_behaves_like "an event query"
+    end
+
+    context "with filter sensor: abc001#{sep}def*" do
+      subject { EventQuery.new("filter" => {"sensor" => "abc001#{sep}def*"}) }
+      before(:each) do
+        @matching = [event1, event3, event4]
+        @nonmatching = [event2, event5]
       end
       it_behaves_like "an event query"
     end
@@ -108,6 +145,15 @@ RSpec.describe EventQuery do
     before(:each) do
       @matching = [event3, event4]
       @nonmatching = [event1, event2, event5]
+    end
+    it_behaves_like "an event query"
+  end
+
+  context "with combined filter" do
+    subject { EventQuery.new("filter" => {"sensor" => "*001", "alert_signature_id" => '1234569', src_ip: '192.0.2.0/29'}) }
+    before(:each) do
+      @matching = [event3]
+      @nonmatching = [event1, event2, event4, event5]
     end
     it_behaves_like "an event query"
   end
