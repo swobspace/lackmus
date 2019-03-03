@@ -1,4 +1,4 @@
-class EventFilterQuery
+class EventQuery
   attr_reader :dirty
 
   def initialize(options = {})

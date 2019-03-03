@@ -34,7 +34,7 @@ module EventConcerns
     
     def assign_filter(event_rule, relation)
       # relation.where(event_rule.ar_filter).update_all(event_rule_id: event_rule.id)
-      EventFilterQuery.new(filter: event_rule.filter, relation: relation).all.update_all(event_rule_id: event_rule.id)
+      EventQuery.new(filter: event_rule.filter, relation: relation).all.update_all(event_rule_id: event_rule.id)
     end
   end
 
