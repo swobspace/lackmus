@@ -69,4 +69,6 @@ gem 'delayed_job_active_record'
 gem 'listen'
 gem 'daemons'
 gem 'bootsnap'
+gem 'exception_notification'
+
 
