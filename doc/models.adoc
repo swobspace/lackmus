@@ -1,10 +1,9 @@
-Models for lackmus
-=================
+= Models for lackmus
 
-Event:
-------
+== Event
 
-```
+[source]
+----
 bin/rails g scaffold Event \
   'sensor:string' \
   'event_time:datetime{6}' \
@@ -42,12 +41,14 @@ bin/rails g scaffold Event \
   'has_http:boolean' \
   'severity:integer{1}' \
   'event_rule:references'
-```
 
-Signature:
----------
+# bin/rails g migration AddIndexesToEvents
+----
 
-```
+== Signature:
+
+[source]
+----
 bin/rails g scaffold Signature \
   signature_id:integer:index \
   signature_info:string \
@@ -56,12 +57,12 @@ bin/rails g scaffold Signature \
   events_count:integer \
   category:string \
   severity:integer{1}
-```
+----
 
-EventRule:
-------
+== EventRule
 
-```
+[source]
+----
 bin/rails g scaffold EventRule \
   'position:integer:index' \
   'filter:text' \
@@ -69,4 +70,4 @@ bin/rails g scaffold EventRule \
   'severity:integer{1}' \
   'valid_until:datetime' \
   'description:text'
-```
+----
