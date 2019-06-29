@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180714094320) do
+ActiveRecord::Schema.define(version: 2019_06_29_114500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,7 +82,11 @@ ActiveRecord::Schema.define(version: 20180714094320) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_rule_id"
+    t.index ["alert_signature_id"], name: "index_events_on_alert_signature_id"
+    t.index ["done"], name: "index_events_on_done"
     t.index ["event_rule_id"], name: "index_events_on_event_rule_id"
+    t.index ["ignore"], name: "index_events_on_ignore"
+    t.index ["sensor"], name: "index_events_on_sensor"
   end
 
   create_table "signatures", id: :serial, force: :cascade do |t|

@@ -1,4 +1,4 @@
 module Lackmus
-  VERSION     = "0.5.0".freeze
-  RELEASEDATE = "2019-03-03".freeze
+  VERSION     = "0.5.1".freeze
+  RELEASEDATE = "2019-06-29".freeze
 end

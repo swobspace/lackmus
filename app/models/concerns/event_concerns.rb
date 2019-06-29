@@ -27,7 +27,9 @@ module EventConcerns
 
   class_methods do
     def assign_filters
-      EventRule.all.each do |event_rule|
+      EventRule.order(:position).each do |event_rule|
+        # assign_filter(event_rule, Event.joins(:event_rule)
+        #                                .where("event_rules.position > ?", event_rule.position)
         assign_filter(event_rule, Event.unassigned)
       end
     end
