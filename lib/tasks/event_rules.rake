@@ -4,7 +4,7 @@ namespace :lackmus do
     desc "assign and process event rules"
     task :process => :environment do
       Event.assign_filters
-      x = Event.joins(:event_rule).where(event_rules: {action: 'drop'}).destroy_all
+      x = Event.joins(:event_rule).where(event_rules: {action: 'drop'}).in_batches.destroy_all
       puts "Event rule drops: #{x.count} destroyed"
 
       count = Event.joins(:event_rule).where(event_rules: {action: 'ignore'}).update_all(ignore: true)
