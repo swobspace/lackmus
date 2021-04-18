@@ -31,7 +31,7 @@ private
     query = relation
     filter.each_pair do |key,value|
       # list of values? ensure Array
-      values = Array(value.gsub(/[;,] +/, ";").split(%r{[,;|]+}))
+      values = Array(value.gsub(/[;,] +/, ";").split(%r{[,; |]+}))
 
       # ip address
       if [:src_ip, :dst_ip].include?(key)
