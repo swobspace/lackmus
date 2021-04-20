@@ -13,7 +13,6 @@ gem 'jquery-ui-rails'
 gem 'rails-i18n', '~> 5.0.0'
 
 gem 'jbuilder', '~> 2.5'
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
   gem 'capistrano', '~> 3.11', require: false
